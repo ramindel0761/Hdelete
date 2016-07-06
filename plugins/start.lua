@@ -114,7 +114,7 @@ if query == 'buygroup' then
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
-            local text = [[📍*Hi And Welcome*
+            local text = [[📍*Welcome Back To Home*
 Sphero Official 🔥
 🔧Use One By One🔧]]
             local keyboard = do_keyboard_private()
