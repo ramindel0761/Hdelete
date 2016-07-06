@@ -14,7 +14,7 @@ local function do_keyboard_robot()
     }
     return keyboard
 end
-local function do_keyboard_buygroup()
+local function do_keyboard_training()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
@@ -128,7 +128,7 @@ end
 return {
 	action = action,
 	triggers = {
-	    '^/(start)@BeatBotTeamBot$',
+	    '^/(start)@Sphero_Bot$',
 	    '^/(start)$',
 	    '^/(help)$',
 	    '^###cb:!(home)',
