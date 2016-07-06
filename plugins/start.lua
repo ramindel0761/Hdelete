@@ -5,24 +5,11 @@ local function do_keyboard_robot()
     					{text = 'Share Sphero Number', callback_data = '!share'},
     					},
     					{
-    		    		{text = 'Free Groups', callback_data = '!chat'},
+    		    		{text = 'Free Groups', callback_data = '/chat'},
     		    		{text = 'Support Sphero', url = 'https://telegram.me/joinchat/C67c0D-5QEEIerZWKv1G9g'},
 	    },
 	    {
 	    {text = 'Back to Home', callback_data = '!home'}
-        }
-    }
-    return keyboard
-end
-local function do_keyboard_training()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-{
-    		    		{text = 'AntiSpam Tr', url = 'http://telegram.me/create_antispam_bot'},
-    		    		{text = 'Spheroes Tr o ch', url = 'https://telegram.me/spheroch'},
-	    },
-	    {
-	    {text = '🔙Back', callback_data = '!robot'}
         }
     }
     return keyboard
@@ -63,8 +50,6 @@ local function do_keyboard_channel()
     	{
     		{text = 'Fa / En Channel 🇬🇧🇮🇷', url = 'https://telegram.me/spheroch'},
 	    },
-	{
-	        		{text = 'Special Training', callback_data = '!training'},
 
     },
 		{
@@ -107,11 +92,6 @@ if query == 'robot' then
             local keyboard = do_keyboard_robot()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
-if query == 'training' then
-            local text = [[اموزش ویژه به صورت مجانی برای شما *free Special training for you*]]
-            local keyboard = do_keyboard_training()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
 if query == 'home' then
             local text = [[*📍Welcome Back*
 *Use Cmds*]]
@@ -132,7 +112,6 @@ return {
 	    '^/(start)$',
 	    '^/(help)$',
 	    '^###cb:!(home)',
-		'^###cb:!(training)',
 	    '^###cb:!(channel)',
 	    '^###cb:!(robot)',
 	    '^###cb:!(share)',
