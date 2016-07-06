@@ -6,7 +6,7 @@ local function do_keyboard_robot()
     					},
     					{
     		    		{text = 'Best Antispam Ch', callback_data = '!buygroup'},
-text = 'FreeGroup📦🔮', callback_data = '/chat'},
+{text = 'FreeGroup📦🔮', callback_data = '/chat'},
     		    		{text = 'Sphero Support', url = 'https://telegram.me/joinchat/C67c0D-5QEEIerZWKv1G9g'},
 	    },
 	    {
