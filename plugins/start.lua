@@ -31,6 +31,8 @@ local function do_keyboard_private()    local keyboard = {}
     keyboard.inline_keyboard = {
     	{
     		{text = 'Spheroes Dev', url = 'http://telegram.me/mrblacklife'},
+},
+		{
     		{text = 'کانال و اموزش - ch and training', callback_data = '!channel'},
 	    },
 		{
@@ -107,7 +109,7 @@ if query == 'robot' then
 end
 if query == 'training' then
             local text = [[اموزش ویژه به صورت مجانی برای شما *free Special training for you*]]
-            local keyboard = do_keyboard_buygroup()
+            local keyboard = do_keyboard_training()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
