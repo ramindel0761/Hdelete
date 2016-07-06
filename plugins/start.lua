@@ -38,10 +38,10 @@ local function do_keyboard_private()
 	        {text = '🔩پیام رسان - Private🔥', callback_data = '/chat'},
         },
 		{
-	        {text = '🔮About - درباره', callback_data = '!aboutus'},
+	        {text = '🔮About - درباره📼', callback_data = '!aboutus'},
         },
 	    {
-	        {text = '🔮Sphero Ab - درباره اسفرو', callback_data = '!robot'},
+	        {text = '🔮Sphero Ab🔨', callback_data = '!robot'},
         }
     }
     return keyboard
