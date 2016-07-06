@@ -2,14 +2,14 @@ local function do_keyboard_robot()
     local keyboard = {}
     keyboard.inline_keyboard = {
 		{
-    					{text = 'Share Robot Contact 🤖🤘🏾', callback_data = '!share'},
+    					{text = 'Share Sphero Number', callback_data = '!share'},
     					},
     					{
-    		    		{text = 'Buy Group 💸', callback_data = '!buygroup'},
-    		    		{text = 'Support 👥', url = 'https://telegram.me/joinchat/BvytAD9KL7J2PE2u0ek3ZA'},
+    		    		{text = 'Free Groups', callback_data = '!chat'},
+    		    		{text = 'Support Sphero', url = 'https://telegram.me/joinchat/C67c0D-5QEEIerZWKv1G9g'},
 	    },
 	    {
-	    {text = '🔙', callback_data = '!home'}
+	    {text = 'Back to Home', callback_data = '!home'}
         }
     }
     return keyboard
@@ -18,30 +18,29 @@ local function do_keyboard_buygroup()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
-    		    		{text = 'Iranians', url = 'http://salam.im/buy/ecgvlup3ld'},
-    		    		{text = 'Other countries', url = 'https://telegram.me/joinchat/BvytAD9KL7J2PE2u0ek3ZA'},
+    		    		{text = 'AntiSpam Tr', url = 'http://telegram.me/create_antispam_bot'},
+    		    		{text = 'Spheroes Tr o ch', url = 'https://telegram.me/spheroch'},
 	    },
 	    {
-	    {text = '🔙', callback_data = '!robot'}
+	    {text = '🔙Back', callback_data = '!robot'}
         }
     }
     return keyboard
 end
-local function do_keyboard_private()
-    local keyboard = {}
+local function do_keyboard_private()    local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = '🌐 Site', url = 'http://beatbot.ir'},
-    		{text = '📡 Channels', callback_data = '!channel'},
+    		{text = 'Spheroes Dev', url = 'http://telegram.me/mrblacklife'},
+    		{text = 'کانال و اموزش - ch and training', callback_data = '!channel'},
 	    },
 		{
-	        {text = '📥 Contact Us 📤', callback_data = '/chat'},
+	        {text = ' پیام رسانی - Private', callback_data = '/chat'},
         },
 		{
-	        {text = 'About Us 👥', callback_data = '!aboutus'},
+	        {text = 'درباره ما - about us', callback_data = '!aboutus'},
         },
 	    {
-	        {text = '🔸BeatBotTG🔹', callback_data = '!robot'},
+	        {text = 'اطلاعاتی در مورد اسفرو - more information Sphero', callback_data = '!robot'},
         }
     }
     return keyboard
@@ -51,7 +50,7 @@ local function do_keyboard_startme()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = '🙃👉 Click here ! 👈🙃', url = 'https://telegram.me/'..bot.username}
+    		{text = 'Click👑', url = 'https://telegram.me/'..bot.username}
 	    }
     }
     return keyboard
@@ -60,17 +59,14 @@ local function do_keyboard_channel()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'Persian Channel 🇮🇷', url = 'https://telegram.me/BeatBot_team'},
+    		{text = 'Fa / En Channel 🇬🇧🇮🇷', url = 'https://telegram.me/spheroch'},
 	    },
 	{
-	        		{text = 'English Channel 🇬🇧', url = 'https://telegram.me/BeatBotTeam'},
+	        		{text = 'Special Training', callback_data = '!training'},
 
     },
 		{
-					{text = 'News Channel 🗣', url = 'https://telegram.me/BeatBot_News'},
-		},
-		{
-	    {text = '🔙', callback_data = '!home'},
+	    {text = '🔙Back to Home', callback_data = '!home'},
         }
     
     }
@@ -82,14 +78,13 @@ local action = function(msg, blocks, ln)
         db:hset('bot:users', msg.from.id, 'xx')
         db:hincrby('bot:general', 'users', 1)
         if msg.chat.type == 'private' then
-            local message = [[📍 *Welcome BeatBotTeam Official Bot*  📍
--------------------------------------------------------------
-🗣 `Please select an option ...`]]
+            local message = [[_Hi_ *And* _Welcome _
+*Please Use one by one :D*]]
             local keyboard = do_keyboard_private()
             api.sendKeyboard(msg.from.id, message, keyboard, true)
             end
 			if msg.chat.type == 'group' or msg.chat.type == 'supergroup' then
-          api.sendKeyboard(msg.chat.id, 'Hey 👋 Please `start` me in *PV* 🖐😄👇' ,do_keyboard_startme(), true)
+          api.sendKeyboard(msg.chat.id, 'Start Me To Private For Help You :D📧' ,do_keyboard_startme(), true)
         end
         return
     end
@@ -99,31 +94,30 @@ local action = function(msg, blocks, ln)
         local msg_id = msg.message_id
         local text
         if query == 'channel' then
-            local text = '📡 *BeatBotTeam Channels :*'
+            local text = '*Channel And Training*'
             local keyboard = do_keyboard_channel()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'robot' then
-            local text = [[🔸*BeatBotTG*🔹
-🚩 _An advanced robot for entertainment group manager and anti-spam_]]
+            local text = [[اسفرو رباتی امن برای مدیریت گروه شما است 
+که ما به صورت اینلاین کیبورد بعضی از امکانات و راه های ارتباط رو به شما معرفی کردیم
+موفق باشید]]
             local keyboard = do_keyboard_robot()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
-if query == 'buygroup' then
-            local text = [[_Please wait after payment_ 
-_We will be call to you_]]
+if query == 'training' then
+            local text = [[اموزش ویژه به صورت مجانی برای شما *free Special training for you*]]
             local keyboard = do_keyboard_buygroup()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
-            local text = [[📍 *Welcome BeatBotTeam Official Bot*  📍
--------------------------------------------------------------
-🗣 `Please select an option ...`]]
+            local text = [[*📍Welcome Back*
+*Use Cmds*]]
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
         if query == 'share' then
-     api.sendContact(msg.from.id, '+639380063518', '🔸ßελτ ßΘτ🔹 [ Use ! ]')
+     api.sendContact(msg.from.id, '+639080452513', '🔸Sphero AntiSpam ]')
 end
     end
 
@@ -136,7 +130,7 @@ return {
 	    '^/(start)$',
 	    '^/(help)$',
 	    '^###cb:!(home)',
-		'^###cb:!(buygroup)',
+		'^###cb:!(training)',
 	    '^###cb:!(channel)',
 	    '^###cb:!(robot)',
 	    '^###cb:!(share)',
