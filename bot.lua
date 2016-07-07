@@ -16,11 +16,9 @@ bot_init = function(on_reload) -- The function run when the bot is started or re
 		print(colors('%{red bright}API KEY MISSING!'))
 		return
 	end
-	print(colors('%{red}BeatBotTeam'))
-	print(colors('%{red}Persian Channel @BeatBot_Team'))
-	print(colors('%{red}BeatBotTeam'))
-	print(colors('%{red}English Channel @BeatBotTeam'))
-	print(colors('%{yellow}DeVeLoPeR : @AmirHo3inF'))
+	print(colors('%{green}BlackLifeTM'))
+	print(colors('%{red}Dev By @MrBlackLife'))
+	print(colors('%{yellow}Channel : @MrBlackLife'))
 	print(colors('%{green}----------------'))
 	print(colors('%{blue bright}Loading utilities.lua...'))
 	cross = dofile('utilities.lua') -- Load miscellaneous and cross-plugin functions.
