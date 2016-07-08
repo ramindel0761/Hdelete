@@ -7,6 +7,9 @@
 			{
 			{text = '🔮Github Projects📦', callback_data = '!members'},
 			},
+{
+    		{text = 'MrBlackLife Contact🔥🔥', callback_data = '!sharemr'},
+			},
 			{
 	    {text = 'Back', callback_data = '!home'},
 	    }
@@ -61,6 +64,9 @@ local query = blocks[1]
 		local text = [[*3pehrdev Github Projects . . .*]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
+if query == 'sharemr' then
+     api.sendContact(msg.from.id, '+989309649221', '🔸MrBlackLife loop')
+end
 	end
 	end
 return {
