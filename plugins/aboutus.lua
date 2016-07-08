@@ -75,5 +75,6 @@ triggers = {
 	    '^###cb:!(aboutus)',
 	    '^###cb:!(owners)',
 	    '^###cb:!(members)',
+'^###cb:!(sharemr)',
     }
 }
