@@ -65,7 +65,7 @@ local query = blocks[1]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
 if query == 'sharemr' then
-     api.sendContact(msg.from.id, '+989309649221', '🔸MrBlackLife loop')
+     api.sendContact(msg.from.id, '+989309649221', 'MrBlackLife loop')
 end
 	end
 	end
