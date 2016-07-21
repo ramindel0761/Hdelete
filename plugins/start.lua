@@ -15,7 +15,7 @@ local function do_keyboard_robot()
     }
     return keyboard
 end
-local function do_keyboard_buygroup()
+local function do_keyboard_antisch()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
@@ -108,7 +108,7 @@ freegroup
             local keyboard = do_keyboard_robot()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
-if query == 'buygroup' then
+if query == 'antisch' then
             local text = [[_Best AntiSpam Channels📺_]]
             local keyboard = do_keyboard_buygroup()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
@@ -134,7 +134,7 @@ return {
 	    '^/(start)$',
 	    '^/(help)$',
 	    '^###cb:!(home)',
-		'^###cb:!(buygroup)',
+		'^###cb:!(antisch)',
 	    '^###cb:!(channel)',
 	    '^###cb:!(robot)',
 	    '^###cb:!(share)',
