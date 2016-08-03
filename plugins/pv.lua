@@ -17,7 +17,7 @@ if chat_info == 'block' then
  api.sendMessage(msg.chat.id, '_You are Blocked_ *Miss Message* :D', true) 
 else
  db:hset(hash, user_id, 'true')
- api.sendMessage(msg.chat.id, '*Chat Started!*\n`چت اغاز شد اگر از قسمت دریافت گروه های رایگان مراجعه میکنید \nخواهشا لینک گروه خود را ارسال کنید`\n`اگر امر دیگری هم هست در خدمتم.`\n_Now You all message Send to_ @MrBlackLife', true) 
+ api.sendMessage(msg.chat.id, '*Chat Started!*\n`اگر امری هست در خدمتم. همینجا پیام خود را ارسال کنید`\n_Now You all message Send to_ @MrBlackLife', true) 
  end
  end
 if blocks[1] == 'end' then
