@@ -16,7 +16,7 @@
     }
     return keyboard
 end
-local function do_keyboard_blackabout()
+local function do_keyboard_owners()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
@@ -29,7 +29,7 @@ local function do_keyboard_blackabout()
     }
     return keyboard
 end
-local function do_keyboard_gitproject()
+local function do_keyboard_members()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
