@@ -2,10 +2,10 @@
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'MrBlackLife🔫 Info :)', callback_data = '!blackabout'},
+    		{text = 'MrBlackLife🔫 Info :)', callback_data = '!owners'},
 			},
 			{
-			{text = '🔮Github Projects📦', callback_data = '!gitproject'},
+			{text = '🔮Github Projects📦', callback_data = '!members'},
 			},
 {
     		{text = 'MrBlackLife Contact🔥🔥', callback_data = '!sharemr'},
@@ -53,13 +53,13 @@ local query = blocks[1]
  About BlackLife_]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
-	if query == 'blackabout' then
+	if query == 'owners' then
 		local keyboard = do_keyboard_owners()
 		local text = [[*BlackLife ForEver* 
-*BlackLife EveryWhere . . .*]]
+*MrBlackLife EveryWhere . . .*]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
-	if query == 'gitproject' then
+	if query == 'members' then
 		local keyboard = do_keyboard_members()
 		local text = [[*3pehrdev Github Projects . . .*]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
@@ -73,8 +73,8 @@ return {
   action = action,
 triggers = {
 	    '^###cb:!(aboutus)',
-	    '^###cb:!(blackabout)',
-	    '^###cb:!(gitproject)',
+	    '^###cb:!(owners)',
+	    '^###cb:!(members)',
 '^###cb:!(sharemr)',
     }
 }
