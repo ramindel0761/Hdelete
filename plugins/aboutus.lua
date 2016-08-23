@@ -2,16 +2,13 @@
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'MrBlackLife🔫 Info :)', callback_data = '!owners'},
+    		{text = 'MrBlackLife🔫 - اطلاعات شخص :)', callback_data = '!owners'},
 			},
 			{
-			{text = '🔮Github Projects📦', callback_data = '!members'},
-			},
-{
-    		{text = 'MrBlackLife Contact🔥🔥', callback_data = '!sharemr'},
+			{text = '🔮@MrBlackLife اوپن شده توسط📦', callback_data = '!members'},
 			},
 			{
-	    {text = 'Back', callback_data = '!home'},
+	    {text = 'Back - بازگشت', callback_data = '!home'},
 	    }
     }
     return keyboard
@@ -49,13 +46,13 @@ local query = blocks[1]
     if msg.cb then
 	if query == 'aboutus' then
 		local keyboard = do_keyboard_aboutus()
-		local text = [[_Use One ...
- About BlackLife_]]
+		local text = [[*Welcome To This Page*
+*Select one Inline key*]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
 	if query == 'owners' then
 		local keyboard = do_keyboard_owners()
-		local text = [[*BlackLife ForEver* 
+		local text = [[*BlackLife📍*
 *MrBlackLife EveryWhere . . .*]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
@@ -64,9 +61,6 @@ local query = blocks[1]
 		local text = [[*3pehrdev Github Projects . . .*]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
-if query == 'sharemr' then
-     api.sendContact(msg.from.id, '+989309649221', 'MrBlackLife loop')
-end
 	end
 	end
 return {
