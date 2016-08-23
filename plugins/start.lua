@@ -2,15 +2,19 @@ local function do_keyboard_robot()
     local keyboard = {}
     keyboard.inline_keyboard = {
 		{
-    					{text = 'Sphero Number(c)', callback_data = '!share'},
+    					{text = 'شماره ربات برای ادمینی', callback_data = '!share'},
     					},
     					{
-    		    		{text = 'Best Antispam Ch', callback_data = '!buygroup'},
-{text = 'FreeGroup📦🔮', callback_data = '/chat'},
-    		    		{text = 'Sphero Support', url = 'https://telegram.me/joinchat/C67c0D-5QEEIerZWKv1G9g'},
+    		    		{text = 'چند کانال خوب', callback_data = '!buygroup'},
+},
+    					{
+{text = 'تمدید گروه📦🔮', callback_data = '/chat'},
+},
+    					{
+    		    		{text = 'گروه پشتیبانی', url = 'https://telegram.me/joinchat/C67c0D-5QEEgslXuJEeg2w'},
 	    },
 	    {
-	    {text = '🔙Back', callback_data = '!home'}
+	    {text = '🔙بازگشت به منوی اصلی', callback_data = '!home'}
         }
     }
     return keyboard
@@ -19,12 +23,12 @@ local function do_keyboard_antisch()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
-    		    		{text = 'AntiSpam Training📦', url = 'http://telegram.me/create_antispam_bot'},
-    		    		{text = 'More training', url = 'https://telegram.me/spheroch'},
+    		    		{text = 'اموزش های انتی اسپم📦', url = 'http://telegram.me/create_antispam_bot'},
+    		    		{text = 'اموزش های بیشتر', url = 'https://telegram.me/spheroch'},
 	    },
 	    {
-	    {text = '🔙Back', callback_data = '!robot'}
-        }
+	    {text = '🔙بازگشت', callback_data = '!robot'}
+       
     }
     return keyboard
 end
@@ -32,16 +36,16 @@ local function do_keyboard_private()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'Bl/Sp Channel - کانال', callback_data = '!channel'},
+    		{text = '📍Channels - کانال ها📍', callback_data = '!channel'},
 	    },
 		{
-	        {text = '🔩پیام رسان - Private🔥', callback_data = '/chat'},
+	        {text = '📍پیام رسان - @MrBlackLife📍', callback_data = '/chat'},
         },
 		{
-	        {text = '🔮About - درباره📼', callback_data = '!aboutus'},
+	        {text = '📍we About - درباره ما📍', callback_data = '!aboutus'},
         },
 	    {
-	        {text = '🔮Sphero Ab🔨', callback_data = '!robot'},
+	        {text = '📍امور ربات اسفرو📍', callback_data = '!robot'},
         }
     }
     return keyboard
@@ -51,7 +55,7 @@ local function do_keyboard_startme()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = '📥click', url = 'https://telegram.me/'..bot.username}
+    		{text = '📥click For Start Me', url = 'https://telegram.me/'..bot.username}
 	    }
     }
     return keyboard
@@ -60,14 +64,14 @@ local function do_keyboard_channel()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'Fa/En Sp Channel 🇬🇧🇮🇷', url = 'https://telegram.me/SpheroCh'},
+    		{text = 'Fa/En Sphero Channel 🇬🇧🇮🇷', url = 'https://telegram.me/SpheroCh'},
 	    },
 	{
 	        		{text = 'BlackLife Channel ', url = 'https://telegram.me/BlackLifeCh'},
 
     },
 		{
-	    {text = '🔙Back', callback_data = '!home'},
+	    {text = '🔙بازگشت به منوی اصلی', callback_data = '!home'},
         }
     
     }
@@ -79,8 +83,8 @@ local action = function(msg, blocks, ln)
         db:hset('bot:users', msg.from.id, 'xx')
         db:hincrby('bot:general', 'users', 1)
         if msg.chat.type == 'private' then
-            local message = [[*📍Hi and Welcome*
-_Use one_ :D]]
+            local message = [[*📍Hi and Welcome*📍
+*Can i Help You??👇👇*]]
             local keyboard = do_keyboard_private()
             api.sendKeyboard(msg.from.id, message, keyboard, true)
             end
@@ -95,33 +99,32 @@ _Use one_ :D]]
         local msg_id = msg.message_id
         local text
         if query == 'channel' then
-            local text = '*Sphero/Bl Channel*'
+            local text = '📍*Sphero And BlackLife Channel📍*'
             local keyboard = do_keyboard_channel()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'robot' then
             local text = [[اسفرو رباتی امن برای گروه های شما است
-بصورت کاملا رایگان فقط کافیست از همین بخش گزینه
-freegroup
-را لمس کرده و لینک گروه خود را بفرستید
-دیگر امکانات ربات👇]]
+خدمات ۷ روز اول کاملا رایگان
+تمدید فقط با پنج هزار تومن ب صورت دائمی!!!!
+تمدید گپ و دیگر امکانات👇]]
             local keyboard = do_keyboard_robot()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'antisch' then
-            local text = [[_Best AntiSpam Channels📺_]]
+            local text = [[📌_BeSt Training and Antispam Channel📍_]]
             local keyboard = do_keyboard_buygroup()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
-            local text = [[📍*Welcome Back To Home*
-Sphero Official 🔥
-🔧Use One By One🔧]]
+            local text = [[📍Welcome back📍
+📌Use One🔥
+@SpheroCh]]
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
         if query == 'share' then
-     api.sendContact(msg.from.id, '+639080452513', '🔸Sphero')
+     api.sendContact(msg.from.id, '+639080452513', '📍Sphero')
 end
     end
 
