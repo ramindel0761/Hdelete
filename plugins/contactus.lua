@@ -2,7 +2,7 @@
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = '🔚End Chat', callback_data = '/end'}
+    		{text = '🔚(پایان مکالمه(پیام های شما', callback_data = '/end'}
 	    }
     }
     return keyboard
@@ -17,7 +17,7 @@ if chat_info == 'block' then
  api.sendMessage(msg.chat.id, '_You are Blocked_ *Miss Message* :D', true) 
 else
  db:hset(hash, user_id, 'true')
- api.sendMessage(msg.chat.id, '*Chat Started!*\n`اگر امری هست در خدمتم. همینجا پیام خود را ارسال کنید`\n_Now You all message Send to_ @MrBlackLife', true) 
+ api.sendMessage(msg.chat.id, '*Chat Started!*\n`اگر امری هست در خدمتم. همینجا پیام خود را ارسال کنید`\nاگر برای تمدید مراجعه کردید توجه کنید برای تمدید گروه  مبلغ پنج هزار  تومن لازم است!\n_Now You all message Send to_ @MrBlackLife', true) 
  end
  end
 if blocks[1] == 'end' then
@@ -25,13 +25,13 @@ if chat_info == 'block' or chat_info == 'false' then
 return nil 
 else
  db:hset(hash, user_id, 'false')
-api.sendMessage(msg.chat.id, '*Chat Was Ended*\n`Welcome Back To Home`', true) 
+api.sendMessage(msg.chat.id, '- *Chat Was Ended*\n*Send me* /start *if you need me again*', true) 
 end
 end
 if msg.chat.type == 'private' and chat_info == 'true' then
 if blocks[1] == 'end' or blocks[1] == 'chat' then return nil end
 api.forwardMessage('-133931992', msg.chat.id, msg_id) 
-api.sendKeyboard(msg.chat.id, '`Your Message Succefulli Recieved!`\nWait For Answer.\n`پیام شما رسید`\n`منتظر جواب باشید`'  ,do_keyboard_endchat(), true)
+api.sendKeyboard(msg.chat.id, '`منتظر باشید.` @MrBlackLife `برای دریافت جواب از`'  ,do_keyboard_endchat(), true)
 end
 if blocks[1] == 'block' then
 if msg.reply and msg.reply.forward_from and msg.chat.type == 'group' and msg.chat.id == -133931992 and not blocks[2] then
@@ -71,7 +71,7 @@ end
    msg = msg.reply_to_message
     local receiver = msg.forward_from.id
     local input = blocks[1]
-      api.sendMessage(receiver, 'پاسخ/Response : \n'..input, false)
+      api.sendMessage(receiver, 'جواب/response : '..input, false)
 end
 end
 return {
