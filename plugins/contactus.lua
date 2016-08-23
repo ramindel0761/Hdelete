@@ -2,7 +2,7 @@
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = '🔚(پایان مکالمه(پیام های شما', callback_data = '/end'}
+    		{text = '🔚پایان مکالمه(پیام های شما)', callback_data = '/end'}
 	    }
     }
     return keyboard
@@ -31,7 +31,7 @@ end
 if msg.chat.type == 'private' and chat_info == 'true' then
 if blocks[1] == 'end' or blocks[1] == 'chat' then return nil end
 api.forwardMessage('-133931992', msg.chat.id, msg_id) 
-api.sendKeyboard(msg.chat.id, '`منتظر باشید.` @MrBlackLife `برای دریافت جواب از`'  ,do_keyboard_endchat(), true)
+api.sendKeyboard(msg.chat.id, '`برای دریافت جواب از` @MrBlackLife `منتظر باشید`'  ,do_keyboard_endchat(), true)
 end
 if blocks[1] == 'block' then
 if msg.reply and msg.reply.forward_from and msg.chat.type == 'group' and msg.chat.id == -133931992 and not blocks[2] then
@@ -71,7 +71,7 @@ end
    msg = msg.reply_to_message
     local receiver = msg.forward_from.id
     local input = blocks[1]
-      api.sendMessage(receiver, 'جواب/response : '..input, false)
+      api.sendMessage(receiver, 'جواب : '..input, false)
 end
 end
 return {
