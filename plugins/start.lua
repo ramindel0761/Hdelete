@@ -85,7 +85,8 @@ local action = function(msg, blocks, ln)
         db:hincrby('bot:general', 'users', 1)
         if msg.chat.type == 'private' then
             local message = [[*📍Hi and Welcome*📍
-*Can i Help You??👇👇*]]
+*Can i Help You??👇👇*]
+[join my channel](https:/telegram.me/sphero_ch)]
             local keyboard = do_keyboard_private()
             api.sendKeyboard(msg.from.id, message, keyboard, true)
             end
