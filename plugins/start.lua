@@ -32,11 +32,7 @@ local function do_keyboard_antisch()
     }
     return keyboard
 end
-local function make_menu()
-local rw1_texts = {'test version'}
-local rows ={kmakerow(rw1_texts)}
-return kmake(rows)
-end
+
 local function do_keyboard_private()
     local keyboard = {}
     keyboard.inline_keyboard = {
@@ -98,10 +94,6 @@ local action = function(msg, blocks, ln)
         end
         return
     end
-if blocks[1] == 'ver' then
-local text_start = "*1.3 test*"
-api.sendMessage(msg.chat.id,text_start, true, true, nil, true, make_menu(), true)
-end
     if msg.cb then
         local query = blocks[1]
         local msg_id = msg.message_id
@@ -112,10 +104,10 @@ end
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'robot' then
-            local text = [[اسفرو رباتی امن برای گروه های شما است
-خدمات ۷ روز اول کاملا رایگان
-تمدید فقط با پنج هزار تومن ب صورت دائمی!!!!
-تمدید گپ و دیگر امکانات👇]]
+            local text = [[*sphero behtarin robot zed link baraye shoma
+            khadamat 7 rooz aval kamelan rayegan 
+            sharzh gp et tamom shode?
+            dokme tamdid gp !*]]
             local keyboard = do_keyboard_robot()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
@@ -127,7 +119,7 @@ end
 if query == 'home' then
             local text = [[📍Welcome back📍
 📌Use One🔥
-@SpheroCh]]
+@Sphero_Ch]]
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
