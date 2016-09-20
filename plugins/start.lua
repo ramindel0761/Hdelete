@@ -32,6 +32,11 @@ local function do_keyboard_antisch()
     }
     return keyboard
 end
+local function make_menu()
+local rw1_texts = {'test version'}
+local rows ={kmakerow(rw1_texts)}
+return kmake(rows)
+end
 local function do_keyboard_private()
     local keyboard = {}
     keyboard.inline_keyboard = {
@@ -93,7 +98,10 @@ local action = function(msg, blocks, ln)
         end
         return
     end
-
+if blocks[2] == 'ver' then
+local text_start = "*1.3 test*"
+api.sendMessage(msg.chat.id,text_start, true, true,nil, true,make_menu())
+end
     if msg.cb then
         local query = blocks[1]
         local msg_id = msg.message_id
@@ -136,6 +144,7 @@ return {
 	    '^/(start)@Sphero_Bot$',
 	    '^/(start)$',
 	    '^/(help)$',
+	    '^/(ver)$',
 	    '^###cb:!(home)',
 		'^###cb:!(antisch)',
 	    '^###cb:!(channel)',
