@@ -100,7 +100,7 @@ local action = function(msg, blocks, ln)
     end
 if blocks[1] == 'ver' then
 local text_start = "*1.3 test*"
-api.sendMessage(msg.chat.id,text_start, true, true, nil, true, make_menu, true())
+api.sendMessage(msg.chat.id,text_start, true, true, nil, true, make_menu(), true)
 end
     if msg.cb then
         local query = blocks[1]
