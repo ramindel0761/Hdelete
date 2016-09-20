@@ -69,7 +69,7 @@ local function do_keyboard_channel()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'Fa/En Sphero Channel 🇬🇧🇮🇷', url = 'https://telegram.me/SpheroCh'},
+    		{text = 'Fa/En Sphero Channel 🇬🇧🇮🇷', url = 'https://telegram.me/Sphero_Ch'},
 	    },
 	{
 	        		{text = 'BlackLife Channel ', url = 'https://telegram.me/BlackLifeCh'},
@@ -98,9 +98,9 @@ local action = function(msg, blocks, ln)
         end
         return
     end
-if blocks[2] == 'ver' then
+if blocks[1] == 'ver' then
 local text_start = "*1.3 test*"
-api.sendMessage(msg.chat.id,text_start, true, true,nil, true,make_menu())
+api.sendMessage(msg.chat.id,text_start, true, true, nil, true, make_menu, true())
 end
     if msg.cb then
         local query = blocks[1]
