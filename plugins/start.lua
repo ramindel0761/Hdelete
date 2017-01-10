@@ -100,7 +100,7 @@ local function do_keyboard_channel()
     		{text = 'Fa/En کانال ربات 🇬🇧🇮🇷', url = 'https://telegram.me/Sphero_Ch'},
 	    },
 	{
-	        		{text = 'BlackLife Channel ', url = 'https://telegram.me/BlackLifeCh'},
+	        		{text = 'BlackLife Channel ', url = 'https://telegram.me/BlackLife_TM'},
 
     },
 		{
@@ -122,7 +122,7 @@ local action = function(msg, blocks, ln)
             api.sendKeyboard(msg.from.id, message, keyboard, true)
             end
 			if msg.chat.type == 'group' or msg.chat.type == 'supergroup' then
-          api.sendKeyboard(msg.chat.id, '_Hi _*Send Me Start To Private Message*' ,do_keyboard_startme(), true)
+          api.sendKeyboard(msg.chat.id, 'سلام منو با زدن دکمه زیر در پیوی استارت کنید و لذت ببرید' ,do_keyboard_startme(), true)
         end
         return
     end
@@ -268,8 +268,8 @@ end
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
-            local text = [[📍Welcome back📍
-📌Use One🔥
+            local text = [[📍شما به صفحه اول برگشتید📍
+📌یک دکمه را انتخاب کنید🔥
 ]]
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
