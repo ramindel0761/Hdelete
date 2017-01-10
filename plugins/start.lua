@@ -234,6 +234,11 @@ end
             local keyboard = do_keyboard_shop()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
+		if query == 'commands' then
+            local text = [[`با دستورات به راحتی اشنا بشید.`]]
+            local keyboard = do_keyboard_robot()
+        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
+end
 if query == 'home' then
             local text = [[📍Welcome back📍
 📌Use One🔥
@@ -256,8 +261,9 @@ return {
 	    '^/(help)$',
 	    '^/(ver)$',
 	    '^###cb:!(home)',
-		'^###cb:!(antisch)',
+	    '^###cb:!(commands)',
 	    '^###cb:!(channel)',
+	    '^###cb:!(cmds1)',
 	    '^###cb:!(robot)',
             '^###cb:!(shop)',
 	    '^###cb:!(share)',
