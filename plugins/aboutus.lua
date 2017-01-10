@@ -1,11 +1,11 @@
-﻿local function do_keyboard_aboutus()
+local function do_keyboard_aboutus()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'MrBlackLife🔫 - اطلاعات شخص :)', callback_data = '!owners'},
+    		{text = 'اکانت های MrBlackLife', callback_data = '!accounts'},
 			},
 			{
-			{text = '🔮@MrBlackLife اوپن شده توسط📦', callback_data = '!members'},
+			{text = '🔮اطلاعات شخصی MrBlackLife📦', callback_data = '!about'},
 			},
 			{
 	    {text = 'Back - بازگشت', callback_data = '!home'},
@@ -13,28 +13,24 @@
     }
     return keyboard
 end
-local function do_keyboard_owners()
+local function do_keyboard_accounts()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'Official Github Page', url = 'http://github.com/3pehrdev'},},
-			{{text = 'Official instagram Page', url = 'http://instagram.com/mrblacklife'},},
-			{{text = 'Official Telegram Acc', url = 'http://telegram.me/MrBlackLife'},},
-			{{text = 'Official Bl Channel', url = 'http://telegram.me/BlackLifeCh'},},
-			{{text = 'Back', callback_data = '!aboutus'},
+    		{text = 'صفحه گیتهاب اختصاصی', url = 'http://github.com/3pehrdev'},},
+			{{text = 'صفحه اینستاگرام اصلی', url = 'http://instagram.com/mrblacklife'},},
+			{{text = 'اکانت اصلی تلگرام', url = 'http://telegram.me/MrBlackLife'},},
+			{{text = 'کانال تیم من', url = 'http://telegram.me/BlackLife_TM'},},
+			{{text = 'بازگشت', callback_data = '!aboutus'},
 	    }
     }
     return keyboard
 end
-local function do_keyboard_members()
+local function do_keyboard_about()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-			{text = 'SpammerBot' , url = 'http://github.com/3pehrdev/spammer-bot'},
-			{text = 'Sphero Normal Group', url = 'http://github.com/3pehrdev/Sphero'},
-			},
-			{
-	    {text = 'Back', callback_data = '!aboutus'},
+	    {text = 'بازگشت', callback_data = '!aboutus'},
         }
     }
     return keyboard
@@ -46,19 +42,23 @@ local query = blocks[1]
     if msg.cb then
 	if query == 'aboutus' then
 		local keyboard = do_keyboard_aboutus()
-		local text = [[*Welcome To This Page*
-*Select one Inline key*]]
+		local text = [[خوش اومدید اینجا میتونید اطلاعاتی در مورد
+			@MrBlackLife
+			بدست بیارید و اونو بیشتر بشناسید]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
-	if query == 'owners' then
-		local keyboard = do_keyboard_owners()
-		local text = [[*BlackLife📍*
-*MrBlackLife EveryWhere . . .*]]
+	if query == 'accounts' then
+		local keyboard = do_keyboard_accounts()
+		local text = [[اکانت های شخصی من]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
-	if query == 'members' then
-		local keyboard = do_keyboard_members()
-		local text = [[*3pehrdev Github Projects . . .*]]
+	if query == 'about' then
+		local keyboard = do_keyboard_about()
+		local text = [[سپهر صالحی 21 ساله از اهواز
+			تحصیل در رشته حقوق
+			علاقه مند به برنامه نویسی
+			شماره : 09309649221
+			ایدی تلگرام : @MrBlackLife]]
 		api.editMessageText(chat, msg_id, text, keyboard, true)
     end
 	end
@@ -67,8 +67,7 @@ return {
   action = action,
 triggers = {
 	    '^###cb:!(aboutus)',
-	    '^###cb:!(owners)',
-	    '^###cb:!(members)',
-'^###cb:!(sharemr)',
+	    '^###cb:!(accounts)',
+	    '^###cb:!(about)',
     }
 }
