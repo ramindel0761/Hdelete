@@ -1,10 +1,10 @@
 return {
 	bot_api_key = '237278277:AAFmZXfwtnSajZFqu6y3py30u2Hnn1rydAs',
 	admin = 255317894, 
-	channel = '@spheroch', --channel username with the '@'
+	channel = '@sphero_ch', --channel username with the '@'
 
 	plugins = {
-		'start.lua','aboutus.lua','contactus.lua','test.lua',
+		'start.lua','about.lua','pv_block_unblock.lua','test.lua',
 	},
 	api_errors = {
 		[101] = 'Not enough rights to kick participant', --SUPERGROUP: bot is not admin
