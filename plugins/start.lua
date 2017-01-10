@@ -129,8 +129,8 @@ if query == 'robot' then
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'cmds1' then
-            local text = [[📌بهترین مرجع اموزش دستورات ربات ضدلینک📍_
-			!filter کلمه
+            local text = [[_📌بهترین مرجع اموزش دستورات ربات ضدلینک📍_
+			!filter کلمه`
 
 اگر کسی داخل گروه سلام بده
 
@@ -185,7 +185,7 @@ M = دقیقه
 S = ثانیه
 مثلا برای هشت ساعت و نیم باید از دستور زیر استفاده کنید
 !muteall 8h 30m 1s
-ثانیه دیگ چون مهم نیست توضیح ندادم بعد از هشت ساعت و نیم گروه ب صورت خودکار باز میشه و مردم دوباره میتونن پست بزارن]]
+`ثانیه دیگ چون مهم نیست توضیح ندادم بعد از هشت ساعت و نیم گروه ب صورت خودکار باز میشه و مردم دوباره میتونن پست بزارن]]
             local keyboard = do_keyboard_cmds1()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
