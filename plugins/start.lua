@@ -26,6 +26,9 @@ local function do_keyboard_commands()
     		    		{text = 'دستورات پرکاربرد کلی', callback_data = '!cmds1'},
     		    		{text = 'اموزش های بیشتر', url = 'https://telegram.me/sphero_ch'},
 	    },
+		{
+	    {text = 'اموزش ادمین کردن در ربات', callback_data = '!cmds2'},
+ },      
 	    {
 	    {text = '🔙بازگشت', callback_data = '!robot'}
  }      
@@ -42,6 +45,15 @@ local function do_keyboard_shop()
     return keyboard
 end
 local function do_keyboard_cmds1()
+    local keyboard = {}
+    keyboard.inline_keyboard = {
+{
+	    {text = '🔙بازگشت', callback_data = '!home'},
+ }      
+    }
+    return keyboard
+end
+local function do_keyboard_cmds2()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
@@ -189,6 +201,22 @@ S = ثانیه
             local keyboard = do_keyboard_cmds1()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
+		if query == 'cmds2' then
+            local text = [[خب اول باید یوزرنیم ادمینتون رو داشته باشید
+دستور همونجور که داخل دستورات کلی اموزش داده شده 
+/promote @یوزرنیم
+هست.
+یعنی اگر یوزرنیم ادمین شما
+@abcde
+هست اینجوری ادمین ربات بکنیدش
+/promote @abcde
+به همین راحتی توجه کنید که دستور باید در گروه فرستاده شود 
+آین دستور گاهی وقتا با ریپلی هم کار میده یعنی روی پیام ادمینتون ریپلی کنید و
+/promote
+بزنید تا بتونید به ربات بشناسونیدش سوالی بود داخل قسمت ارسال پیام همین ربات در خدمتم]]
+            local keyboard = do_keyboard_cmds2()
+        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
+end
 		if query == 'shop' then
             local text = [[⚜✅ربات ضدلینک⚜✅
 رباتی هست که تبلیغات و فحش های داخل گروه شمارو پاک میکنه🔰 گروه رو به دلخواه شما و به مدت زمانی که دوست دارید تعطیل میکنه تا هیچ پستی نباشه🔰 کلمه ای که میخواین رو ممنوع میکنه🔰 پیام هارو فقط با فرستادن یک دستور به تعداد دلخواه پاک میکنه🔰 و.....
@@ -264,6 +292,7 @@ return {
 	    '^###cb:!(commands)',
 	    '^###cb:!(channel)',
 	    '^###cb:!(cmds1)',
+	    '^###cb:!(cmds2)',
 	    '^###cb:!(robot)',
             '^###cb:!(shop)',
 	    '^###cb:!(share)',
