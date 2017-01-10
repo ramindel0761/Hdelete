@@ -3,11 +3,7 @@ local function do_keyboard_robot()
     keyboard.inline_keyboard = {
 		{
     					{text = 'شماره ربات برای ادمینی', callback_data = '!share'},
-    					},
-    					{
     		    		{text = 'اموزش دستورات', callback_data = '!commands'},
-},
-    					{
 {text = 'تمدید گروه📦🔮', callback_data = '/chat'},
 },
     					{
@@ -48,7 +44,7 @@ local function do_keyboard_cmds1()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
-	    {text = '🔙بازگشت', callback_data = '!home'},
+	    {text = '🔙بازگشت', callback_data = '!commands'},
  }      
     }
     return keyboard
@@ -57,7 +53,7 @@ local function do_keyboard_cmds2()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
-	    {text = '🔙بازگشت', callback_data = '!home'},
+	    {text = '🔙بازگشت', callback_data = '!commands'},
  }      
     }
     return keyboard
