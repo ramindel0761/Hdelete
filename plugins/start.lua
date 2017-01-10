@@ -236,7 +236,7 @@ end
 end
 		if query == 'commands' then
             local text = [[`با دستورات به راحتی اشنا بشید.`]]
-            local keyboard = do_keyboard_robot()
+            local keyboard = do_keyboard_commands()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
