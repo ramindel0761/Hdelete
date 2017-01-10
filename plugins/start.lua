@@ -36,7 +36,7 @@ local function do_keyboard_shop()
     local keyboard = {}
     keyboard.inline_keyboard = {
 {
-	    {text = '🔙بازگشت', callback_data = '!robot'},
+	    {text = '🔙بازگشت', callback_data = '!home'},
  }      
     }
     return keyboard
