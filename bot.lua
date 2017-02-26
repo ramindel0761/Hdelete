@@ -2257,15 +2257,15 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	          .."|*Expire* > `"..exp_dat.."`\n"
 	          .."________________________\n"
 	          .."|*Mute All* > `"..mute_all.."`\n"
-	          .."|*Mute Text's* > `"..mute_text.."`\n"
-	          .."|*Mute Photo's* > `"..mute_photo.."`\n"
-	          .."|*Mute Video's* > `"..mute_video.."`\n"
-	          .."|*Mute Gif's* > `"..mute_gifs.."`\n"
+	          .."|*Mute Texts* > `"..mute_text.."`\n"
+	          .."|*Mute Photos* > `"..mute_photo.."`\n"
+	          .."|*Mute Videos* > `"..mute_video.."`\n"
+	          .."|*Mute Gifs* > `"..mute_gifs.."`\n"
 	          .."|*Mute Music|Audio* > `"..mute_music.."`\n"
 	          .."|*Mute Voice* > `"..mute_voice.."`\n"
 		  .."________________________\n"
 	          .."|*Version > 4.0*\n"
-	          .."|Dev : @MrBlackLife|"
+	          .."|Dev : @MrBlackLife|\n"
          send(msg.chat_id_, msg.id_, 1, TXT, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
