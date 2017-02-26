@@ -1627,7 +1627,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	local user_info = database:hgetall('user:'..v)
 		if user_info and user_info.username then
 			local username = user_info.username
-			text = `|text..k.."|` - @"..username.." ["..v.."]\n"
+			text = text..k.." - @"..username.." ["..v.."]\n"
 		else
 			text = text..k.." - "..v.."\n"
 		end
@@ -1648,7 +1648,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 			local username = user_info.username
 			text = text..k.." - @"..username.." ["..v.."]\n"
 		else
-			text = `|text..k.."|` - "..v.."\n"
+			text = text..k.." - "..v.."\n"
 		end
 	end
 	if #list == 0 then
@@ -1667,7 +1667,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 			local username = user_info.username
 			text = text..k.." - @"..username.." ["..v.."]\n"
 		else
-			text = `|text..k.."|` - "..v.."\n"
+			text = text..k.." - "..v.."\n"
 		end
 	end
 	if #list == 0 then
@@ -1686,7 +1686,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 			local username = user_info.username
 			text = text..k.." - @"..username.." ["..v.."]\n"
 		else
-			text = `|text..k.."|` - "..v.."\n"
+			text = text..k.." - "..v.."\n"
 		end
 	end
 	if #list == 0 then
@@ -1705,7 +1705,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 			local username = user_info.username
 			text = text..k.." - @"..username.." ["..v.."]\n"
 		else
-			text = `|text..k.."|` - "..v.."\n"
+			text = text..k.."` - "..v.."\n"
 		end
 	end
 	if #list == 0 then
