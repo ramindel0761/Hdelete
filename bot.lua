@@ -2065,25 +2065,25 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	-----------------------------------------------------------------------------------------------
   	if text:match("^[#!/]settings$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	if database:get('bot:muteall'..msg.chat_id_) then
-	mute_all = '🔸قفل'
+	mute_all = 'Locked'
 	else
 	mute_all = 'Allowed'
 	end
 	------------
 	if database:get('bot:text:mute'..msg.chat_id_) then
-	mute_text = '🔸قفل'
+	mute_text = 'Locked'
 	else
 	mute_text = 'Allowed'
 	end
 	------------
 	if database:get('bot:photo:mute'..msg.chat_id_) then
-	mute_photo = '🔸قفل'
+	mute_photo = 'Locked'
 	else
 	mute_photo = 'Allowed'
 	end
 	------------
 	if database:get('bot:video:mute'..msg.chat_id_) then
-	mute_video = '🔸قفل'
+	mute_video = 'Locked'
 	else
 	mute_video = 'Allowed'
 	end
@@ -2097,7 +2097,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	if database:get('anti-flood:'..msg.chat_id_) then
 	mute_flood = 'Allowed'
 	else
-	mute_flood = '🔸قفل'
+	mute_flood = 'Locked'
 	end
 	------------
 	if not database:get('flood:max:'..msg.chat_id_) then
@@ -2215,7 +2215,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	end
 	------------
     if database:get('bot:forward:mute'..msg.chat_id_) then
-	lock_forward = 'Lock'
+	lock_forward = 'Locked'
 	else
 	lock_forward = 'Allowed'
 	end
@@ -2228,7 +2228,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	------------
 	local ex = database:ttl("bot:charge:"..msg.chat_id_)
                 if ex == -1 then
-				exp_dat = '*Infinity!*'
+				exp_dat = 'Infinity!'
 				else
 				exp_dat = math.floor(ex / 86400) + 1
 			    end
@@ -2239,7 +2239,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	          .."|*TgService* > `"..lock_tgservice.."`\n"
 	          .."|*Links* > `"..mute_links.."`\n"
 	          .."|*Site Addres* > `"..lock_wp.."`\n"
-	          .."|Username > `"..lock_tag.."`\n"
+	          .."|*Username* > `"..lock_tag.."`\n"
 	          .."|*[#] Status* > `"..lock_htag.."`\n"
 	          .."|*Contacts* > `"..lock_contact.."`\n"
 	          .."|*English* > `"..lock_english.."`\n"
