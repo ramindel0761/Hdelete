@@ -1154,7 +1154,7 @@ elseif msg_type == 'MSG:Text' then
       local hash = "bot:group:link"..msg.chat_id_
                database:set(hash,glink)
 			  send(msg.chat_id_, msg.id_, 1, '*New Link Seted!*', 'md')
-			  send(msg.chat_id_, 0, 1, '*NewLink : *\n'..glink..'\n*HyperLink :*\n['..msg.to.title..']('..glink..')\n-------------------\n[Sphero|Channel](https://t.me/sphero_ch), 1, 'md')
+			  send(msg.chat_id_, 0, 1, '*NewLink : *\n'..glink..'\n*HyperLink :*\n['..msg.to.title..']('..glink..')\n-------------------\n[Sphero|Channel](https://t.me/sphero_ch)', 1, 'md')
       end
    end
     function check_username(extra,result,success)
