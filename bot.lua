@@ -2125,7 +2125,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	end
 	------------
 	if database:get('bot:inline:mute'..msg.chat_id_) then
-	mute_in = Locked'
+	mute_in = 'Locked'
 	else
 	mute_in = 'Allowed'
 	end
