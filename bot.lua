@@ -2089,7 +2089,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	end
 	------------
 	if database:get('bot:gifs:mute'..msg.chat_id_) then
-	mute_gifs = '🔸قفل'
+	mute_gifs = 'Locked'
 	else
 	mute_gifs = 'Allowed'
 	end
@@ -2234,7 +2234,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 			    end
  	------------
 	local TXT = "☘_تنظیمات گروه:_\n\n"
-	          .."_خوش آمدگویی_ => `"..send_welcome.."`\n"
+	          .."*|Welcome* > `"..send_welcome.."`\n"
 	          .."_استیکر_ => `"..lock_sticker.."`\n"
 	          .."_اعلان_ => `"..lock_tgservice.."`\n"
 	          .."_لینک_ => `"..mute_links.."`\n"
