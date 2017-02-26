@@ -2233,7 +2233,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 				exp_dat = math.floor(ex / 86400) + 1
 			    end
  	------------
-	local TXT = "*>Settings:*\n"
+	local TXT = "*>Settings:*\n\n"
 	          .."|*Welcome* > "..send_welcome.."`\n"
 	          .."|*Sticker* > `"..lock_sticker.."`\n"
 	          .."|*TgService* > `"..lock_tgservice.."`\n"
@@ -2245,10 +2245,10 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	          .."|*English* > `"..lock_english.."`\n"
 	          .."|*Location* > `"..lock_location.."`\n"
 	          .."|*Add Bots* > `"..mute_bots.."`\n"
-	          .."|*Inline Msg's* > `"..mute_in.."`\n"
+	          .."|*Inline Msgs* > `"..mute_in.."`\n"
 	          .."|*Persian* > `"..lock_arabic.."`\n"
 	          .."|*Fwd Status* > `"..lock_forward.."`\n"
-	          .."|*Edit Msg's* > `"..mute_edit.."`\n"
+	          .."|*Edit Msgs* > `"..mute_edit.."`\n"
 	          .."|*Pin Message* > `"..lock_pin.."`\n"
 	          .."|*Flood* > `"..mute_flood.."`\n"
 	          .."|*Flood sensitivity* > `"..flood_m.."`\n"
