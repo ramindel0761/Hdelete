@@ -2277,7 +2277,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
   	if text:match("^[#!/]setrules (._)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local txt = {string.match(text, "^[#/!](setrules) (._)$")}
 	database:set('bot:rules'..msg.chat_id_, txt[2])
-         send(msg.chat_id_, msg.id_, 1, '☘_قوانین گروه بروز رسانی شد..._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*Group Rules Set!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
   	if text:match("^[#!/]rules$") then
@@ -2285,10 +2285,10 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
          send(msg.chat_id_, msg.id_, 1, rules, 1, nil)
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]rename (._)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-	local txt = {string.match(text, "^[#/!](rename) (._)$")} 
+	if text:match("^[#!/]setname (._)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+	local txt = {string.match(text, "^[#/!](setname) (._)$")} 
 	     changetitle(msg.chat_id_, txt[2])
-         send(msg.chat_id_, msg.id_, 1, '☘_اسم گروه بروزرسانی شد!_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*Group Name Updated!*_', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]getme$") then
@@ -2299,19 +2299,19 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setphoto$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '_عکس جدید را برای من بفرستید!_☘', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*Now, You Send Me new Group Photo!*', 1, 'md')
 		 database:set('bot:setphoto'..msg.chat_id_..':'..msg.sender_user_id_,true)
     end
 	-----------------------------------------------------------------------------------------------
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]reload$") and is_sudo(msg) then
-         send(msg.chat_id_, msg.id_, 1, '☘_آپدیت شد_', 1, 'md') -- wtf
+         send(msg.chat_id_, msg.id_, 1, 'ReloaDed!', 1, 'md') -- wtf
     end
 	-----------------------------------------------------------------------------------------------
   	if text:match("^[#!/]rmsg (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
        local delnumb = {string.match(text, "^[#/!](rmsg) (%d+)$")} 
 	   if tonumber(delnumb[2]) > 100 then
-			send(msg.chat_id_, msg.id_, 1, '☘خطا\nاز /del [1-100] استفاده کنید', 1, 'md')
+			send(msg.chat_id_, msg.id_, 1, '*Error.* \n*Your Number so Big!!!*\n`Allowed:` *[1-100]*', 1, 'md')
 else
        local id = msg.id_ - 1
         for i= id - delnumb[2] , id do 
@@ -2323,15 +2323,15 @@ else
 	-----------------------------------------------------------------------------------------------
    if text:match("^[#!/]me$") then
       if is_sudo(msg) then
-	  t = '_سودو_'
+	  t = '`Sudo`'
       elseif is_admin(msg.sender_user_id_) then
-	  t = '_ادمین ژوپیتر_'
+	  t = '`Bot Admin`'
       elseif is_owner(msg.sender_user_id_, msg.chat_id_) then
-	  t = '_مالک گروه_'
+	  t = '`Group Owner`'
       elseif is_mod(msg.sender_user_id_, msg.chat_id_) then
-	  t = '_مدیر_'
+	  t = '`Moderator`'
       else
-	  t = '_عضو_'
+	  t = '`Member`'
 	  end
          send(msg.chat_id_, msg.id_, 1, '*Your ID: *'..msg.sender_user_id_..'_\n~*Your Rank: *'..t, 1, 'md')
     end
@@ -2350,111 +2350,120 @@ else
    -----------------------------------------------------------------------------------------------
    if text:match("^[#!/]help$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
    
-   local text = [[_راهنمای ربات
+   local text = [[`راهنمای ربات
 
-برای قفل کردن
+برای قفل کردن و باز کردن تنظیمات:
 
-/mute [links/webpage/sticker/service/tag/hashtag/contact/english/arabic/forward/all/photo/video/gifs/music/voice/text]
-
+/lock |links|webpage|sticker|service|username|tag|contact|english|arabic|forward|
+/mute |all|photo|video|gifs|music|voice|text|
 /lock [edit/pin]
----------
-نکاتی درباره ی قفل های بالا
+----------------------------------------
+چند نکته لازم:
 
-برای مثال درصورتیکه قصد دارید ارسال لینک قفل شود از دستور
-/mute links
-استفاده کنید.
-
-هنگامی که از دستور 
+مثال :
+برای قفل لینک از 
+/lock links
+استفاده کنید بقیه هم همینطور
+----------------------------------------
 /lock edit 
-استفاده کنید وقتی اعضای گروه پیامی را ادیت کنند پیامشان پاک میشوذ
-در صورتی که دوست دارید بفهمید متن قبل از ادیت کردن پیام چه چیزی بوده میتوانید از دستور 
-/show edit 
-استفاده کنید.
-
-برای درست کار کردن دستور
+این دستور برای وقتیه که میخواین اگه کسی پیامشو ادیت کرد پاک بشه
+----------------------------------------
+/show edit
+اگه کسی پیامشو ادیت کرده و دوس دارید بدونید قبل اون چی نوشته بوده از این دستور استفاده کنید
+----------------------------------------
 /lock pin
-باید ابتدا پیام مورد نظر را ارسال کرده و سپس با ریپلی کردن روی آن پیام و ارسال دستور 
+و
 /pin
-و سپس ارسال دستور 
+توجه کنید شما میخواید ی پیامو پین کنید و ادمیناتون نتونن تغییرش بدن 
+اول با دستور 
+/pin
+و ریپلی روی متن مورد نظر اون رو پین میکنید بعد
 /lock pin
-میتوانید دسترسی پین کردن پیام را از ادمین های گروه بگیرید و در صورت پین کردن پیامی توسط ادمین های دیگر ربات دوباره پیام شما را پین میکند
-
-
-/unmute [links/webpage/sticker/service/tag/hashtag/contact/english/arabic/forward/all/photo/video/gifs/music/voice/text]
-/unlock [edit/pin]
-برای باز کردن قفل موارد بالا
-
+میزنید
+و ربات اینطور میشه ک اگه ادمیناتون بخوان متنی رو پین کنن ربات برش میگردونه سر متنی ک شما پین کردید :)
+----------------------------------------
+/unlock |links|webpage|sticker|service|username|tag|contact|english|arabic|forward|
+/unmute |all|photo|video|gifs|music|voice|text|
+/lock [edit|pin]
+رای باز کردن اون موارد بالا ک گفتم
+----------------------------------------
 /welcome on
 فعال کردن پیام خوشامد گویی
-
+----------------------------------------
 /welcome off
 غیر فعال کردن پیام خوشامد گویی
-
+----------------------------------------
 /get welcome متن مورد نظر
 تنظیم کردن متن دلخواه به عنوان متن خوشامد گویی
+----------------------------------------
+اگه میخواید اسم و ایدی فردی ک میاد تو گروه نشون داده بشه از دستور زیر استفاده کنید
 
-برای نشان دادن ایدی و اسم از مثال زیر استفاده کنید.
-
-#set welcome Salam {username} 
-esmet {firstname}
-familit {lastname}
-
-
+/set welcome Salam {username} 
+اسم = {firstname}
+فامیل = {lastname}
+----------------------------------------
 /get welcome
-حذف کردن پیام خوشامد گویی
-
+مشاهده متن خوشامد گویی
+----------------------------------------
 /del welcome
 حذف کردن پیام خوشامد گویی
-
-/ban [فقط با ریپلی]
-اخراج دایمی کاربر
-/unban [فقط با ریپلی]
-حذف کاربر از لیست افراد محروم
+----------------------------------------
+/ban |با ریپلی|
+اخراج همیشگی کاربر از گروه
+----------------------------------------
+/unban |با ریپلی|
+حذف کاربر از لیست بن 
+----------------------------------------
 /banlist
-لیست افراد محروم شده
-
-/muteuser [فقط با ریپلی]
+لیست افراد بن شده
+----------------------------------------
+/muteuser |با ریپلی|
 اضافه کردن کاربر به لیست افراد میوت شده
-/unmuteuser [فقط با ریپلی]
-حذف کردن کاربر به لیست افراد میوت شده
+----------------------------------------
+/unmuteuser |با ریپلی|
+حذف کردن کاربر از لیست افراد میوت شده
+----------------------------------------
 /mutelist
 لیست افراد میوت شده
-
-/promote [فقط با ریپلی]
-ارتقا دادن کاربر
-/demote [فقط با ریپلی]
-خلع مقام کردن کاربر
+----------------------------------------
+/promote |با ریپلی|
+ادمین کردن فرد مورد نظر
+----------------------------------------
+/demote |با ریپلی|
+دراوردن از ادمینی فرد مورد نظر
+----------------------------------------
 /modlist
 لیست ادمین های ربات در گروه
-
+----------------------------------------
 /getpro [1-10]
 دریافت عکس پروفایل شما
 مثال
 /getpro 2
-
+----------------------------------------
 /setlink
 تنظیم لینک برای گروه
-
+----------------------------------------
 /setrules قوانین
 تنظیم متن قوانین گروه
-
+----------------------------------------
 /rules
 دریافت قوانین
-
+----------------------------------------
 /settings
 دریافت تنظیمات گروه
-
+----------------------------------------
 /clean [banlist/mutelist/modlist]
 حذف کردن لیست افراد بن/میوت/پروموت شده
-
+----------------------------------------
 /del عدد
 پاک کردن پیام های اخیر گروه
 مثال
-/del 100
-برای پاک کردن 100 پیام آخر
+/del 42
+برای پاک 42 پیام آخر گروه
+----------------------------------------`
 
+*Full Help COmming Soon...*
 
-راهنما بزودی کامل میشود!!!_
 ]]
                 send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
    end
