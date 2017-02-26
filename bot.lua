@@ -1389,11 +1389,11 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	function unban_by_username(extra, result, success)
 	if result.id_ then
          database:srem('bot:banned:'..msg.chat_id_, result.id_)
-            text = '☘ <i>کاربر </i><code>'..result.id_..'</code> <i>انبن شد.!</i>'
+            text = '*User* `|'..result.id_..'|` *Unbanned!*'
             else 
-            text = '<code»کاربر پیدا نشد!</code>'
+            text = '*User InCorrect'
     end
-	         send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+	         send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	      resolve_username(ap[2],unban_by_username)
     end
@@ -1401,20 +1401,20 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	if text:match("^[#!/]unban (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](unban) (%d+)$")} 	
 	        database:srem('bot:banned:'..msg.chat_id_, ap[2])
-	send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..ap[2]..'_ _انبن شد._', 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Unbanned!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]muteuser$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function mute_by_reply(extra, result, success)
 	local hash = 'bot:muted:'..msg.chat_id_
 	if is_mod(result.sender_user_id_, result.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _شما نمیتوانید مدیران را [ساکت] کنید!!_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*You Cant Mute Admins!*', 1, 'md')
     else
     if database:sismember(hash, result.sender_user_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _ازقبل ساکت شده است._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Is Already Muted!*', 1, 'md')
 	else
          database:sadd(hash, result.sender_user_id_)
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _ساکت شد._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Has Been Muted!*', 1, 'md')
 	end
     end
 	end
@@ -1426,16 +1426,16 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	function mute_by_username(extra, result, success)
 	if result.id_ then
 	if is_mod(result.id_, msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _شما نمیتوانید مدیران را [ساکت] کنید!!_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*You Cant Mute Admins!*', 1, 'md')
     else
 	        database:sadd('bot:muted:'..msg.chat_id_, result.id_)
-            texts = '☘<i>کاربر </i><code>'..result.id_..'</code> <i>ساکت شد.!</i>'
+            texts = '*User* `|'..result.id_..'|` *Muted!*'
 		 chat_kick(msg.chat_id_, result.id_)
 	end
             else 
-            texts = '<code»کاربر پیدا نشد!</code>'
+            texts = '*UserName InCorrect!*'
     end
-	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
+	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
     end
 	      resolve_username(ap[2],mute_by_username)
     end
@@ -2067,35 +2067,35 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	if database:get('bot:muteall'..msg.chat_id_) then
 	mute_all = '🔸قفل'
 	else
-	mute_all = '🔹آزاد'
+	mute_all = 'Allowed'
 	end
 	------------
 	if database:get('bot:text:mute'..msg.chat_id_) then
 	mute_text = '🔸قفل'
 	else
-	mute_text = '🔹آزاد'
+	mute_text = 'Allowed'
 	end
 	------------
 	if database:get('bot:photo:mute'..msg.chat_id_) then
 	mute_photo = '🔸قفل'
 	else
-	mute_photo = '🔹آزاد'
+	mute_photo = 'Allowed'
 	end
 	------------
 	if database:get('bot:video:mute'..msg.chat_id_) then
 	mute_video = '🔸قفل'
 	else
-	mute_video = '🔹آزاد'
+	mute_video = 'Allowed'
 	end
 	------------
 	if database:get('bot:gifs:mute'..msg.chat_id_) then
 	mute_gifs = '🔸قفل'
 	else
-	mute_gifs = '🔹آزاد'
+	mute_gifs = 'Allowed'
 	end
 	------------
 	if database:get('anti-flood:'..msg.chat_id_) then
-	mute_flood = '🔹آزاد'
+	mute_flood = 'Allowed'
 	else
 	mute_flood = '🔸قفل'
 	end
@@ -2113,162 +2113,159 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	end
 	------------
 	if database:get('bot:music:mute'..msg.chat_id_) then
-	mute_music = '🔸قفل'
+	mute_music = 'Locked'
 	else
-	mute_music = '🔹آزاد'
+	mute_music = 'Allowed'
 	end
 	------------
 	if database:get('bot:bots:mute'..msg.chat_id_) then
-	mute_bots = '🔸قفل'
+	mute_bots = 'Locked'
 	else
-	mute_bots = '🔹آزاد'
+	mute_bots = 'Allowed'
 	end
 	------------
 	if database:get('bot:inline:mute'..msg.chat_id_) then
-	mute_in = '🔸قفل'
+	mute_in = Locked'
 	else
-	mute_in = '🔹آزاد'
+	mute_in = 'Allowed'
 	end
 	------------
 	if database:get('bot:cmds'..msg.chat_id_) then
-	mute_cmd = '🔹غیرفعال'
+	mute_cmd = 'Off'
 	else
-	mute_cmd = '🔸فعال'
+	mute_cmd = 'On'
 	end
 	------------
 	if database:get('bot:voice:mute'..msg.chat_id_) then
-	mute_voice = '🔸قفل'
+	mute_voice = 'Locked'
 	else
-	mute_voice = '🔹آزاد'
+	mute_voice = 'Allowed'
 	end
 	------------
 	if database:get('editmsg'..msg.chat_id_) then
-	mute_edit = '🔸قفل'
+	mute_edit = 'Locked'
 	else
-	mute_edit = '🔹آزاد'
+	mute_edit = 'Allowed'
 	end
     ------------
 	if database:get('bot:links:mute'..msg.chat_id_) then
-	mute_links = '🔸قفل'
+	mute_links = 'Locked'
 	else
-	mute_links = '🔹آزاد'
+	mute_links = 'Allowed'
 	end
     ------------
 	if database:get('bot:pin:mute'..msg.chat_id_) then
-	lock_pin = '🔸قفل'
+	lock_pin = 'Locked'
 	else
-	lock_pin = '🔹آزاد'
+	lock_pin = 'Allowed'
 	end 
     ------------
 	if database:get('bot:sticker:mute'..msg.chat_id_) then
-	lock_sticker = '🔸قفل'
+	lock_sticker = 'Locked'
 	else
-	lock_sticker = '🔹آزاد'
+	lock_sticker = 'Allowed'
 	end
 	------------
     if database:get('bot:tgservice:mute'..msg.chat_id_) then
-	lock_tgservice = '🔸قفل'
+	lock_tgservice = 'Locked'
 	else
-	lock_tgservice = '🔹آزاد'
+	lock_tgservice = 'Allowed'
 	end
 	------------
     if database:get('bot:webpage:mute'..msg.chat_id_) then
-	lock_wp = '🔸قفل'
+	lock_wp = 'Locked'
 	else
-	lock_wp = '🔹آزاد'
+	lock_wp = 'Allowed'
 	end
 	------------
     if database:get('bot:hashtag:mute'..msg.chat_id_) then
-	lock_htag = '🔸قفل'
+	lock_htag = 'Locked'
 	else
-	lock_htag = '🔹آزاد'
+	lock_htag = 'Allowed'
 	end
 	------------
     if database:get('bot:tag:mute'..msg.chat_id_) then
-	lock_tag = '🔸قفل'
+	lock_tag = 'Locked'
 	else
-	lock_tag = '🔹آزاد'
+	lock_tag = 'Allowed'
 	end
 	------------
     if database:get('bot:location:mute'..msg.chat_id_) then
-	lock_location = '🔸قفل'
+	lock_location = 'Locked'
 	else
-	lock_location = '🔹آزاد'
+	lock_location = 'Allowed'
 	end
 	------------
     if database:get('bot:contact:mute'..msg.chat_id_) then
-	lock_contact = '🔸قفل'
+	lock_contact = 'Locked'
 	else
-	lock_contact = '🔹آزاد'
+	lock_contact = 'Allowed'
 	end
 	------------
     if database:get('bot:english:mute'..msg.chat_id_) then
-	lock_english = '🔸قفل'
+	lock_english = 'Locked'
 	else
-	lock_english = '🔹آزاد'
+	lock_english = 'Allowed'
 	end
 	------------
     if database:get('bot:arabic:mute'..msg.chat_id_) then
-	lock_arabic = '🔸قفل'
+	lock_arabic = 'Locked'
 	else
-	lock_arabic = '🔹آزاد'
+	lock_arabic = 'Allowed'
 	end
 	------------
     if database:get('bot:forward:mute'..msg.chat_id_) then
-	lock_forward = '🔸قفل'
+	lock_forward = 'Lock'
 	else
-	lock_forward = '🔹آزاد'
+	lock_forward = 'Allowed'
 	end
 	------------
 	if database:get("bot:welcome"..msg.chat_id_) then
 	send_welcome = 'Enable'
 	else
-	send_welcome = '🔹غیرفعال'
+	send_welcome = 'Disable'
 	end
 	------------
 	local ex = database:ttl("bot:charge:"..msg.chat_id_)
                 if ex == -1 then
-				exp_dat = 'نامحدود'
+				exp_dat = '*Infinity!*'
 				else
 				exp_dat = math.floor(ex / 86400) + 1
 			    end
  	------------
-	local TXT = "☘_تنظیمات گروه:_\n\n"
-	          .."_خوش آمدگویی_ => `"..send_welcome.."`\n"
-	          .."_استیکر_ => `"..lock_sticker.."`\n"
-	          .."_اعلان_ => `"..lock_tgservice.."`\n"
-	          .."_لینک_ => `"..mute_links.."`\n"
-	          .."_وب لینک_ => `"..lock_wp.."`\n"
-	          .."_تگ{@}_ => `"..lock_tag.."`\n"
-	          .."_هشتگ{#}_ ~> `"..lock_htag.."`\n"
-	          .."_مخاطب_ => `"..lock_contact.."`\n"
-	          .."_انگلیسی_ => `"..lock_english.."`\n"
-	          .."_موقعیت_ => `"..lock_location.."`\n"
-	          .."_ربات_ => `"..mute_bots.."`\n"
-	          .."_اینلاین_ => `"..mute_in.."`\n"
-	          .."_فارسی_ => `"..lock_arabic.."`\n"
-	          .."_فروارد_ => `"..lock_forward.."`\n"
-	          .."_ویرایش_ => `"..mute_edit.."`\n"
-	          .."_سنجاق_ => `"..lock_pin.."`\n"
-	          .."_حساسیت_ => `"..mute_flood.."`\n"
-	          .."_تعداد حساسیت_ => `"..flood_m.."`\n"
-	          .."_زمان حساسیت_ => `"..flood_t.."`\n"
+	local TXT = "*>Settings:*\n"
+	          .."|*Welcome* > "..send_welcome.."`\n"
+	          .."|*Sticker* > `"..lock_sticker.."`\n"
+	          .."|*TgService* > `"..lock_tgservice.."`\n"
+	          .."|*Links* > `"..mute_links.."`\n"
+	          .."|*Site Addres* > `"..lock_wp.."`\n"
+	          .."|Username > `"..lock_tag.."`\n"
+	          .."|*[#] Status* > `"..lock_htag.."`\n"
+	          .."|*Contacts* > `"..lock_contact.."`\n"
+	          .."|*English* > `"..lock_english.."`\n"
+	          .."|*Location* > `"..lock_location.."`\n"
+	          .."|*Add Bots* > `"..mute_bots.."`\n"
+	          .."|*Inline Msg's* > `"..mute_in.."`\n"
+	          .."|*Persian* > `"..lock_arabic.."`\n"
+	          .."|*Fwd Status* > `"..lock_forward.."`\n"
+	          .."|*Edit Msg's* > `"..mute_edit.."`\n"
+	          .."|*Pin Message* > `"..lock_pin.."`\n"
+	          .."|*Flood* > `"..mute_flood.."`\n"
+	          .."|*Flood sensitivity* > `"..flood_m.."`\n"
+	          .."|*Flood Time* > `"..flood_t.."`\n"
+		  .."|*Cmd Status* > `"..mute_cmd.."`\n"
+	          .."|*Expire* > `"..exp_dat.."`\n"
 	          .."________________________\n"
-	          .."_ممنوعیت همه_ => `"..mute_all.."`\n"
-	          .."_متن_ => `"..mute_text.."`\n"
-	          .."_عکس_ => `"..mute_photo.."`\n"
-	          .."_فیلم_ => `"..mute_video.."`\n"
-	          .."_گیف_ => `"..mute_gifs.."`\n"
-	          .."_اهنگ_ => `"..mute_music.."`\n"
-	          .."_صدا_ => `"..mute_voice.."`\n"
-	          .."________________________\n"
-	          .."_دستورات ربات_ => `"..mute_cmd.."`\n"
-	          .."_زبان گروه_ => _EN_\n"
-	          .."_تاریخ انقضا_ => `"..exp_dat.."`\n"
+	          .."|*Mute All* > `"..mute_all.."`\n"
+	          .."|*Mute Text's* > `"..mute_text.."`\n"
+	          .."|*Mute Photo's* > `"..mute_photo.."`\n"
+	          .."|*Mute Video's* > `"..mute_video.."`\n"
+	          .."|*Mute Gif's* > `"..mute_gifs.."`\n"
+	          .."|*Mute Music|Audio* > `"..mute_music.."`\n"
+	          .."|*Mute Voice* > `"..mute_voice.."`\n"
 		  .."________________________\n"
-	          .."_نام ربات_ => `ژوپیتر`\n"
-	          .."_ورژن_ => _8.5_\n"
-	          .."_کانال_ => @JoveTeam\n"
+	          .."|*Version > 4.0*\n"
+	          .."|[Join US.]|(https://t.me/Sphero_ch)"
          send(msg.chat_id_, msg.id_, 1, TXT, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
@@ -2336,7 +2333,7 @@ else
       else
 	  t = '_عضو_'
 	  end
-         send(msg.chat_id_, msg.id_, 1, '☘ _شناسه کاربری شما >_ _'..msg.sender_user_id_..'_\n☘ _مقام شما:_ '..t, 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*Your ID: *'..msg.sender_user_id_..'_\n~*Your Rank: *'..t, 1, 'md')
     end
    -----------------------------------------------------------------------------------------------
    if text:match("^[#!/]pin$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -2348,7 +2345,7 @@ else
    -----------------------------------------------------------------------------------------------
    if text:match("^[#!/]unpin$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
          unpinmsg(msg.chat_id_)
-         send(msg.chat_id_, msg.id_, 1, '☘پیام سنجاق حذف شد', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*Message Unpinned!*', 1, 'md')
    end
    -----------------------------------------------------------------------------------------------
    if text:match("^[#!/]help$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
