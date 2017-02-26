@@ -1850,7 +1850,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
   	if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local unlockpt = {string.match(text, "^[#/!](unlock) (.*)$")} 
       if unlockpt[2] == "edit" then
-       send(msg.chat_id_, msg.id_, 1, '☘قفل همه _غیرفعال شد_', 1, 'md')
+       send(msg.chat_id_, msg.id_, 1, '*Now, Members Allowed to Edit Msgs!*', 1, 'md')
          database:del('editmsg'..msg.chat_id_)
       end
 	  if unlockpt[2] == "cmds" then
