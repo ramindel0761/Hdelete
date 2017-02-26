@@ -1291,10 +1291,10 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	function demote_by_reply(extra, result, success)
 	local hash = 'bot:mods:'..msg.chat_id_
 	if not database:sismember(hash, result.sender_user_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _مدیر نیست._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Has Been Demoted!*', 1, 'md')
 	else
          database:srem(hash, result.sender_user_id_)
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _عزل شد._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Has Been Demoted!*', 1, 'md')
 	end
     end
 	      getMessage(msg.chat_id_, msg.reply_to_message_id_,demote_by_reply)
@@ -1306,11 +1306,11 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	function demote_by_username(extra, result, success)
 	if result.id_ then
          database:srem(hash, result.id_)
-            texts = '<i»کاربر </i><code>'..result.id_..'</code> <i>عزل شد</i>'
+            texts = '*User* `|'..result.id_..'|` *Has Been Demoted!*'
             else 
-            texts = '<code»کاربر پیدا نشد!</code>'
+            texts = '*UserName InCorrect!*'
     end
-	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
+	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
     end
 	      resolve_username(ap[2],demote_by_username)
     end
@@ -1319,21 +1319,21 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	local hash = 'bot:mods:'..msg.chat_id_
 	local ap = {string.match(text, "^[#/!](demote) (%d+)$")} 	
          database:srem(hash, ap[2])
-	send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..ap[2]..'_ _عزل شد._', 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Demoted!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]ban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function ban_by_reply(extra, result, success)
 	local hash = 'bot:banned:'..msg.chat_id_
 	if is_mod(result.sender_user_id_, result.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _شما نمیتوانید مدیران را [اخراج/بن] کنید!!_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*You Cant Ban|Kick Admins!*', 1, 'md')
     else
     if database:sismember(hash, result.sender_user_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _ازقبل بن است._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Is Already Banned!*', 1, 'md')
 		 chat_kick(result.chat_id_, result.sender_user_id_)
 	else
          database:sadd(hash, result.sender_user_id_)
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _بن شد_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Banned!*', 1, 'md')
 		 chat_kick(result.chat_id_, result.sender_user_id_)
 	end
     end
@@ -1346,16 +1346,16 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	function ban_by_username(extra, result, success)
 	if result.id_ then
 	if is_mod(result.id_, msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _شما نمیتوانید مدیران را [اخراج/بن] کنید!!_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*You Cant Ban|Kick Admins!*', 1, 'md')
     else
 	        database:sadd('bot:banned:'..msg.chat_id_, result.id_)
-            texts = '<i» کاربر </i><code>'..result.id_..'</code> <i>بن شد.!</i>'
+            texts = '*User* `|'..result.id_..'|` *Banned!*'
 		 chat_kick(msg.chat_id_, result.id_)
 	end
             else 
-            texts = '<code»کاربرپیدا نشد!</code>'
+            texts = '*UserName InCorrect!*'
     end
-	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
+	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
     end
 	      resolve_username(ap[2],ban_by_username)
     end
@@ -1363,11 +1363,11 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	if text:match("^[#!/]ban (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](ban) (%d+)$")}
 	if is_mod(ap[2], msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _شما نمیتوانید مدیران را [اخراج/بن] کنید!!_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*You Cant Ban|Kick Admins!*', 1, 'md')
     else
 	        database:sadd('bot:banned:'..msg.chat_id_, ap[2])
 		 chat_kick(msg.chat_id_, ap[2])
-	send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..ap[2]..'_ _بن شد._', 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` Banned!', 1, 'md')
 	end
     end
 	-----------------------------------------------------------------------------------------------
@@ -1375,10 +1375,10 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	function unban_by_reply(extra, result, success)
 	local hash = 'bot:banned:'..msg.chat_id_
 	if not database:sismember(hash, result.sender_user_id_) then
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _بن نیست._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Is Already Unbanned!*', 1, 'md')
 	else
          database:srem(hash, result.sender_user_id_)
-         send(msg.chat_id_, msg.id_, 1, '☘ _کاربر_ _'..result.sender_user_id_..'_ _انبن شد._', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Unbanned!*', 1, 'md')
 	end
     end
 	      getMessage(msg.chat_id_, msg.reply_to_message_id_,unban_by_reply)
