@@ -2473,7 +2473,7 @@ else
    end
   end
   -----------------------------------------------------------------------------------------------
-if text:match("^[#!/]spherotc$")
+if text:match("^[#!/]spherotc$") then
 	 send(msg.chat_id_, msg.id_, 1, '*Sphero-TC* _V4_\n`Dev And Managed By :` @MrBlackLife\n*Source For Shop!*\n*Read Channel :* @SpheroTcShop', 1, 'md')
 				end
  end
