@@ -2265,7 +2265,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 	          .."|*Mute Voice* > `"..mute_voice.."`\n"
 		  .."________________________\n"
 	          .."|*Version > 4.0*\n"
-	          .."|@Sphero_Ch|"
+	          .."|Dev : @MrBlackLife|"
          send(msg.chat_id_, msg.id_, 1, TXT, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
