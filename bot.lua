@@ -2233,12 +2233,12 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 				exp_dat = math.floor(ex / 86400) + 1
 			    end
  	------------
-	local TXT = "☘_تنظیمات گروه:_\n\n"
-	          .."_خوش آمدگویی_ => `"..send_welcome.."`\n"
-	          .."_استیکر_ => `"..lock_sticker.."`\n"
-	          .."_اعلان_ => `"..lock_tgservice.."`\n"
-	          .."_لینک_ => `"..mute_links.."`\n"
-	          .."_وب لینک_ => `"..lock_wp.."`\n"
+	local TXT = ">*Settings:*\n\n"
+	          .."|*Welcome*> `"..send_welcome.."`\n"
+	          .."|*Sticker* > `"..lock_sticker.."`\n"
+	          .."|*Tgservice* > `"..lock_tgservice.."`\n"
+	          .."|*Links* > `"..mute_links.."`\n"
+	          .."|*Site Addres* > `"..lock_wp.."`\n"
 	          .."_تگ{@}_ => `"..lock_tag.."`\n"
 	          .."_هشتگ{#}_ ~> `"..lock_htag.."`\n"
 	          .."_مخاطب_ => `"..lock_contact.."`\n"
