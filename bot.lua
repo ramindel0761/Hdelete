@@ -2,7 +2,7 @@ serpent = (loadfile "serpent.lua")()
 redis = (loadfile "lua-redis.lua")()
 database = Redis.connect('127.0.0.1', 6379)
 chats = {}
-day = 99999
+day = 86400
 bot_id = 323370170 -- Your Bot USER_ID
 sudo_users = {   255317894,
     253756305,
