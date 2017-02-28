@@ -2493,7 +2493,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	      database:del('bot:banned:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '_> Banlist has been_ *Cleaned*', 1, 'md')
        end
-	   if txt[2] == 'bots' then
+	   if txt[2] == 'bots' and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	  local function g_bots(extra,result,success)
       local bots = result.members_
       for i=0 , #bots do
@@ -2507,19 +2507,19 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	      database:del('bot:mods:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> Modlist has been* *Cleaned*', 1, 'md')
        end
-	  if txt[2] == 'banlist' is_owner(msg.sender_user_id_, msg.chat_id_) then
+	  if txt[2] == 'banlist' and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	      database:del('bot:banned'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> BanList has been* *Cleaned*', 1, 'md')
        end
-	  if txt[2] == 'gbanlist' is_sudo(msg) then
+	  if txt[2] == 'gbanlist' and is_sudo(msg) then
 	      database:del('bot:gbanned'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> GBanList has been* *Cleaned*', 1, 'md')
        end
-	   if txt[2] == 'filterlist' is_mod(msg.sender_user_id_, msg.chat_id_) then
+	   if txt[2] == 'filterlist' and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	      database:del('bot:filters:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> Filterlist has been* *Cleaned*', 1, 'md')
        end
-	   if txt[2] == 'mutelist' is_mod(msg.sender_user_id_, msg.chat_id_) then
+	   if txt[2] == 'mutelist' and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	      database:del('bot:muted:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> Mutelist has been* *Cleaned*', 1, 'md')
        end
