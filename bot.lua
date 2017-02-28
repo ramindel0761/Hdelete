@@ -1546,7 +1546,8 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
               else
                 database:sadd('bot:gbanned:',ap[2])
                 send(msg.chat_id_, msg.id_, 1, '👤 کاربر با شناسه : '..ap[2]..' به صورت کلی مسدود گردید !', 1, 'md')
-              end
+                chat_kick(msg.chat_id_, result.id_)
+					end
             end
 	-----------------------------------------------------------------------------------------------
 				if text:match("^[#!/]unsuperban$") and is_sudo(msg) and msg.reply_to_message_id_ then
