@@ -1500,7 +1500,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	end
     end
 	-----------------------------------------------------------------------------------------------
-			     if text:match("^[Bb]anall$") and is_sudo(msg) and msg.reply_to_message_id_ then
+		--[[	     if text:match("^[Bb]anall$") and is_sudo(msg) and msg.reply_to_message_id_ then
               function ban_by_reply(extra, result, success)
                 local hash = 'bot:gbanned:'
                 if is_mod(result.sender_user_id_, result.chat_id_) then
@@ -1582,7 +1582,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	        database:srem('bot:gbanned:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Globally Unbanned!*', 1, 'md')
     end
-	-----------------------------------------------------------------------------------------------			
+	-----------------------------------------------------------------------------------------------	]]		
 	if text:match("^[#!/]delall$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function delall_by_reply(extra, result, success)
 	if is_mod(result.sender_user_id_, result.chat_id_) then
@@ -2485,7 +2485,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
     end
 	-----------------------------------------------------------------------------------------------
   	if text:match("^[#!/]user$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	          send(msg.chat_id_, msg.id_, 1, '*'..from_username(msg)..'*', 1, 'md')
+	          send(msg.chat_id_, msg.id_, 1, '*'..msg.from.username..'*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
   	if text:match("^[#!/]clean (.*)$") then
