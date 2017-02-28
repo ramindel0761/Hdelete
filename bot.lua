@@ -1501,7 +1501,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 				 if text:match("^[#!/]superban$") and is_sudo(msg) and msg.reply_to_message_id_ then
-              function ban_by_reply(extra, result, success)
+              function banall_by_reply(extra, result, success)
                 local hash = 'bot:gbanned:'
                 if is_mod(result.sender_user_id_, result.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '*You Cant Superban Admins!*', 1, 'md')
@@ -1516,12 +1516,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                   end
                 end
               end
-              getMessage(msg.chat_id_, msg.reply_to_message_id_,ban_by_reply)
+              getMessage(msg.chat_id_, msg.reply_to_message_id_,banall_by_reply)
             end
             -----------------------------------------------------------------------------------------------
             if text:match("^[#!/]superban @(.*)$") and is_sudo(msg) then
               local ap = {string.match(text, "^[#!/]superban @(.*)$")}
-              function ban_by_username(extra, result, success)
+              function banall_by_username(extra, result, success)
                 if result.id_ then
                   if is_mod(result.id_, msg.chat_id_) then
                     send(msg.chat_id_, msg.id_, 1, '*You Cant Superban Admins!*', 1, 'md')
@@ -1536,7 +1536,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                 end
                 send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
               end
-              resolve_username(ap[2],ban_by_username)
+              resolve_username(ap[2],banall_by_username)
             end
             -----------------------------------------------------------------------------------------------
             if text:match("^[#!/]superban (%d+)$") and is_sudo(msg) then
