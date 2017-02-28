@@ -1550,7 +1550,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
             end
 	-----------------------------------------------------------------------------------------------
 				if text:match("^[#!/]unsuperban$") and is_sudo(msg) and msg.reply_to_message_id_ then
-	function unbanall_by_reply(extra, result, success)
+	function unban_by_reply(extra, result, success)
 	local hash = 'bot:gbanned:'..msg.chat_id_
 	if not database:sismember(hash, result.sender_user_id_) then
          send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Not Find In The SuperBan List!*', 1, 'md')
@@ -1564,7 +1564,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]unsuperban @(.*)$") and is_sudo(msg) then
 	local ap = {string.match(text, "^[#/!](unsuperban) @(.*)$")} 
-	function unbanall_by_username(extra, result, success)
+	function unban_by_username(extra, result, success)
 	if result.id_ then
          database:srem('bot:gbanned:'..msg.chat_id_, result.id_)
             text = '*User* `|'..result.id_..'|` *Globally Unbanned!*'
