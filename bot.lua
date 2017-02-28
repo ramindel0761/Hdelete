@@ -2677,7 +2677,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 		send(msg.chat_id_, msg.id_, 1, '*Infinity!*', 1, 'md')
        else
         local d = math.floor(ex / day ) + 1
-	   		send(msg.chat_id_, msg.id_, 1, "`"..d.."` *Later!*, 1, 'md')
+	   		send(msg.chat_id_, msg.id_, 1, "`"..d.."` *Later!*", 1, 'md')
        end
     end
 	-----------------------------------------------------------------------------------------------
