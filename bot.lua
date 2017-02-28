@@ -1534,7 +1534,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                 else
                   texts = '*UserName InCorrect!*'
                 end
-                send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
               end
               resolve_username(ap[2],ban_by_username)
             end
