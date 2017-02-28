@@ -1540,7 +1540,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
             end
             -----------------------------------------------------------------------------------------------
             if text:match("^[#!/]superban (%d+)$") and is_sudo(msg) then
-              local ap = {string.match(text, "^[#!/]superban (%d+) (%d+)$")}
+              local ap = {string.match(text, "^[#!/]superban (%d+)$")}
               if is_mod(ap[2], msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '*You Cant Superban Admins!*', 1, 'md')
               else
@@ -1549,7 +1549,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
               end
             end
 	-----------------------------------------------------------------------------------------------
-				if text:match("^[#!/]unsuperban$") and is_sudo and msg.reply_to_message_id_ then
+				if text:match("^[#!/]unsuperban$") and is_sudo(msg) and msg.reply_to_message_id_ then
 	function unbanall_by_reply(extra, result, success)
 	local hash = 'bot:gbanned:'..msg.chat_id_
 	if not database:sismember(hash, result.sender_user_id_) then
@@ -1562,7 +1562,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	      getMessage(msg.chat_id_, msg.reply_to_message_id_,unban_by_reply)
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]unsuperban @(.*)$") and is_sudo then
+	if text:match("^[#!/]unsuperban @(.*)$") and is_sudo(msg) then
 	local ap = {string.match(text, "^[#/!](unsuperban) @(.*)$")} 
 	function unbanall_by_username(extra, result, success)
 	if result.id_ then
@@ -1576,7 +1576,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	      resolve_username(ap[2],unban_by_username)
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]unsuperban (%d+)$") and is_sudo then
+	if text:match("^[#!/]unsuperban (%d+)$") and is_sudo(msg) then
 	local ap = {string.match(text, "^[#/!](unsuperban) (%d+)$")} 	
 	        database:srem('bot:gbanned:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Globally Unbanned!*', 1, 'md')
@@ -2487,7 +2487,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	          send(msg.chat_id_, msg.id_, 1, '*'..from_username(msg)..'*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-  	if text:match("^[#!/]clean (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+  	if text:match("^[#!/]clean (.*)$") then
 	local txt = {string.match(text, "^[#/!](clean) (.*)$")} 
        if txt[2] == 'banlist' then
 	      database:del('bot:banned:'..msg.chat_id_)
@@ -2503,15 +2503,23 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
     channel_get_bots(msg.chat_id_,g_bots)
 	          send(msg.chat_id_, msg.id_, 1, '*> All bots* *kicked!*', 1, 'md')
 	end
-	   if txt[2] == 'modlist' then
+	   if txt[2] == 'modlist' and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	      database:del('bot:mods:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> Modlist has been* *Cleaned*', 1, 'md')
        end
-	   if txt[2] == 'filterlist' then
+	  if txt[2] == 'banlist' is_owner(msg.sender_user_id_, msg.chat_id_) then
+	      database:del('bot:banned'..msg.chat_id_)
+          send(msg.chat_id_, msg.id_, 1, '*> BanList has been* *Cleaned*', 1, 'md')
+       end
+	  if txt[2] == 'gbanlist' is_sudo(msg) then
+	      database:del('bot:gbanned'..msg.chat_id_)
+          send(msg.chat_id_, msg.id_, 1, '*> GBanList has been* *Cleaned*', 1, 'md')
+       end
+	   if txt[2] == 'filterlist' is_mod(msg.sender_user_id_, msg.chat_id_) then
 	      database:del('bot:filters:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> Filterlist has been* *Cleaned*', 1, 'md')
        end
-	   if txt[2] == 'mutelist' then
+	   if txt[2] == 'mutelist' is_mod(msg.sender_user_id_, msg.chat_id_) then
 	      database:del('bot:muted:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '*> Mutelist has been* *Cleaned*', 1, 'md')
        end
