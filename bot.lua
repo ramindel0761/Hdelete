@@ -1530,9 +1530,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                     chat_kick(msg.chat_id_, result.id_)
                     texts = '*User* `|'..result.id_..'|` *Globally Banned!* `[#Hammered]`'
                     chat_kick(msg.chat_id_, result.id_)
-                  end
-                else
-                  texts = '*UserName InCorrect!*'
+                end
                 end
                 send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
               end
@@ -1946,7 +1944,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-				if text:match("^[#!/]gbanlist$") and is_sudo then
+				if text:match("^[#!/]gbanlist$") and is_sudo(msg) then
     local hash =  'bot:gbanned:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*Globall Banlist*\n\n"
