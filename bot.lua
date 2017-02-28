@@ -2373,10 +2373,6 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, '*Arabic Has Been Locked!*', 1, 'md')
 						database:set('bot:arabic:mute'..msg.chat_id_,true)
       end
-	if unmutept[2] == "edit" then
-         send(msg.chat_id_, msg.id_, 1, '*Edit Has Been Locked!*', 1, 'md')
-         database:set('editmsg'..msg.chat_id_,true)
-      end
 	  if mutept[2] == "english" then
          send(msg.chat_id_, msg.id_, 1, '*English Has Been Locked!*', 1, 'md')
 						database:set('bot:english:mute'..msg.chat_id_,true)
@@ -2428,10 +2424,6 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	  if unmutept[2] == "voice" then
          send(msg.chat_id_, msg.id_, 1, '*Voice Record Has Been Allowed!*', 1, 'md')
          database:del('bot:voice:mute'..msg.chat_id_)
-      end
-	if unmutept[2] == "edit" then
-         send(msg.chat_id_, msg.id_, 1, '*Edit Has Been Allowed!*', 1, 'md')
-         database:del('editmsg'..msg.chat_id_)
       end
 	  if unmutept[2] == "links" then
          send(msg.chat_id_, msg.id_, 1, '*Link Send Has Been Allowed!*', 1, 'md')
