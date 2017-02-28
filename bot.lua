@@ -1500,6 +1500,88 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	end
     end
 	-----------------------------------------------------------------------------------------------
+				 if text:match("^[#!/]superban$") and is_sudo(msg) and msg.reply_to_message_id_ then
+              function ban_by_reply(extra, result, success)
+                local hash = 'bot:gbanned:'
+                if is_mod(result.sender_user_id_, result.chat_id_) then
+                  send(msg.chat_id_, msg.id_, 1, '*You Cant Superban Admins!*', 1, 'md')
+                else
+                  if database:sismember(hash, result.sender_user_id_) then
+                     send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Is Already in Globally Banned!*', 1, 'md')
+                    chat_kick(result.chat_id_, result.sender_user_id_)
+                  else
+                    database:sadd(hash, result.sender_user_id_)
+                    send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Globally Banned!* `[#Hammered]`', 1, 'md')
+                    chat_kick(result.chat_id_, result.sender_user_id_)
+                  end
+                end
+              end
+              getMessage(msg.chat_id_, msg.reply_to_message_id_,ban_by_reply)
+            end
+            -----------------------------------------------------------------------------------------------
+            if text:match("^[#!/]superban @(.*)$") and is_sudo(msg) then
+              local ap = {string.match(text, "^[#!/]superban @(.*)$")}
+              function ban_by_username(extra, result, success)
+                if result.id_ then
+                  if is_mod(result.id_, msg.chat_id_) then
+                    send(msg.chat_id_, msg.id_, 1, '*You Cant Superban Admins!*', 1, 'md')
+                  else
+                    database:sadd('bot:gbanned:',result.id_)
+                    chat_kick(msg.chat_id_, result.id_)
+                    texts = '*User* `|'..result.id_..'|` *Globally Banned!* `[#Hammered]`'
+                    chat_kick(msg.chat_id_, result.id_)
+                  end
+                else
+                  texts = '*UserName InCorrect!*'
+                end
+                send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
+              end
+              resolve_username(ap[2],ban_by_username)
+            end
+            -----------------------------------------------------------------------------------------------
+            if text:match("^[#!/]superban (%d+)$") and is_sudo(msg) then
+              local ap = {string.match(text, "^[#!/]superban (%d+) (%d+)$")}
+              if is_mod(ap[2], msg.chat_id_) then
+                send(msg.chat_id_, msg.id_, 1, '*You Cant Superban Admins!*', 1, 'md')
+              else
+                database:sadd('bot:gbanned:',ap[2])
+                send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Globally Banned!* `[#HammereD]`', 1, 'md')
+              end
+            end
+	-----------------------------------------------------------------------------------------------
+				if text:match("^[#!/]unsuperban$") and is_sudo and msg.reply_to_message_id_ then
+	function unbanall_by_reply(extra, result, success)
+	local hash = 'bot:gbanned:'..msg.chat_id_
+	if not database:sismember(hash, result.sender_user_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Not Find In The SuperBan List!*', 1, 'md')
+	else
+         database:srem(hash, result.sender_user_id_)
+         send(msg.chat_id_, msg.id_, 1, '*User* `|'..result.sender_user_id_..'|` *Globally Unbanned!*', 1, 'md')
+	end
+    end
+	      getMessage(msg.chat_id_, msg.reply_to_message_id_,unban_by_reply)
+    end
+	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]unsuperban @(.*)$") and is_sudo then
+	local ap = {string.match(text, "^[#/!](unsuperban) @(.*)$")} 
+	function unbanall_by_username(extra, result, success)
+	if result.id_ then
+         database:srem('bot:gbanned:'..msg.chat_id_, result.id_)
+            text = '*User* `|'..result.id_..'|` *Globally Unbanned!*'
+            else 
+            text = '*UserName InCorrect!*'
+    end
+	         send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
+    end
+	      resolve_username(ap[2],unban_by_username)
+    end
+	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]unsuperban (%d+)$") and is_sudo then
+	local ap = {string.match(text, "^[#/!](unsuperban) (%d+)$")} 	
+	        database:srem('bot:gbanned:'..msg.chat_id_, ap[2])
+	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Globally Unbanned!*', 1, 'md')
+    end
+	-----------------------------------------------------------------------------------------------			
 	if text:match("^[#!/]delall$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function delall_by_reply(extra, result, success)
 	if is_mod(result.sender_user_id_, result.chat_id_) then
@@ -1860,6 +1942,25 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	end
 	if #list == 0 then
        text = "Ban List is *Empty*"
+    end
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
+    end
+	-----------------------------------------------------------------------------------------------
+				if text:match("^[#!/]gbanlist$") and is_sudo then
+    local hash =  'bot:gbanned:'..msg.chat_id_
+	local list = database:smembers(hash)
+	local text = "*Globall Banlist*\n\n"
+	for k,v in pairs(list) do
+	local user_info = database:hgetall('user:'..v)
+		if user_info and user_info.username then
+			local username = user_info.username
+			text = text..k.." - @"..username.." ["..v.."]\n"
+		else
+			text = text..k.." - "..v.."\n"
+		end
+	end
+	if #list == 0 then
+       text = "GloballBan List is *Empty*"
     end
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
