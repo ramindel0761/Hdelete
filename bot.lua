@@ -2863,12 +2863,12 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-   if text:match('^[Dd]el (%d+)$') and is_mod(msg.sender_user_id_, msg.chat_id_) then
-                local matches = {string.match(text, "^([Dd]el) (%d+)$")}
+   if text:match('^[/!#]rmsg (%d+)$') and is_mod(msg.sender_user_id_, msg.chat_id_) then
+                local matches = {string.match(text, "^[/!#]rmsg (%d+)$")}
                 if msg.chat_id_:match("^-100") then
                   if tonumber(matches[2]) > 100 or tonumber(matches[2]) < 1 then
                     pm = '*Error!*\n_Use Number ~>_ *[1-100]*'
-                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
+                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'md')
                   else
                     tdcli_function ({
                       ID = "GetChatHistory",
@@ -2878,10 +2878,10 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
                       limit_ = tonumber(matches[2])
                     }, delmsg, nil)
                     pm ='> `'..matches[2]..'` *Message Deleted!*'
-                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
+                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'md')
                   end
                 else pm ='> در گروه معمولی این امکان وجود ندارد !'
-                  send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
+                  send(msg.chat_id_, msg.id_, 1, pm, 1, 'md')
                 end
               end
 	-----------------------------------------------------------------------------------------------
