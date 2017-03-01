@@ -2863,18 +2863,27 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-  	if text:match("^[#!/]rmsg (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-       local delnumb = {string.match(text, "^[#/!](rmsg) (%d+)$")} 
-	   if tonumber(delnumb[2]) > 100 then
-			send(msg.chat_id_, msg.id_, 1, '*Error.* \n*Your Number so Big!!!*\n`Allowed:` *[1-100]*', 1, 'md')
-else
-       local id = msg.id_ - 1
-        for i= id - delnumb[2] , id do 
-        delete_msg(msg.chat_id_,{[0] = i})
-        end
-			send(msg.chat_id_, msg.id_, 1, '»'..delnumb[2]..' پیام حذف شد.', 1, 'md')
-    end
-	end
+   if text:match('^[Dd]el (%d+)$') and is_mod(msg.sender_user_id_, msg.chat_id_) then
+                local matches = {string.match(text, "^([Dd]el) (%d+)$")}
+                if msg.chat_id_:match("^-100") then
+                  if tonumber(matches[2]) > 100 or tonumber(matches[2]) < 1 then
+                    pm = '*Error!*\n_Use Number ~>_ *[1-100]*'
+                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
+                  else
+                    tdcli_function ({
+                      ID = "GetChatHistory",
+                      chat_id_ = msg.chat_id_,
+                      from_message_id_ = 0,
+                      offset_ = 0,
+                      limit_ = tonumber(matches[2])
+                    }, delmsg, nil)
+                    pm ='> `'..matches[2]..'` *Message Deleted!*'
+                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
+                  end
+                else pm ='> در گروه معمولی این امکان وجود ندارد !'
+                  send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
+                end
+              end
 	-----------------------------------------------------------------------------------------------
    if text:match("^[#!/]me$") then
       if is_sudo(msg) then
