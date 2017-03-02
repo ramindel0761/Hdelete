@@ -612,12 +612,12 @@ function tdcli_update_callback(data)
 		print("TEXT MSG DETECTED!!")
 	msg_type = 'MSG:Text'
 	-------------------------
-	elseif msg.content_.ID == "MessagePhoto" then
+	--[[elseif msg.content_.ID == "MessagePhoto" then
 	print("PHOTO DETECTED!!")
 	if msg.content_.caption_ then
 	caption_text = msg.content_.caption_
 	end
-	msg_type = 'MSG:Photo'
+	msg_type = 'MSG:Photo']]
 	-------------------------
 	elseif msg.content_.ID == "MessageChatAddMembers" then
 	print("NEW ADD DETECTED!!")
@@ -772,7 +772,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
    if caption_text then
       check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") then
    if database:get('bot:links:mute'..msg.chat_id_) then
     local id = msg.id_
         local msgs = {[0] = id}
@@ -935,7 +935,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
    if caption_text then
       check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") then
    if database:get('bot:links:mute'..msg.chat_id_) then
     local id = msg.id_
         local msgs = {[0] = id}
@@ -1006,7 +1006,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
    if caption_text then
       check_filter_words(msg, caption_text)
-  if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+  if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") then
    if database:get('bot:links:mute'..msg.chat_id_) then
     local id = msg.id_
         local msgs = {[0] = id}
@@ -1077,7 +1077,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
    if caption_text then
       check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") then
    if database:get('bot:links:mute'..msg.chat_id_) then
     local id = msg.id_
         local msgs = {[0] = id}
@@ -1148,7 +1148,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
    if caption_text then
       check_filter_words(msg, caption_text)
-  if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+  if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") then
    if database:get('bot:links:mute'..msg.chat_id_) then
     local id = msg.id_
         local msgs = {[0] = id}
@@ -1219,7 +1219,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
    if caption_text then
    check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") then
    if database:get('bot:links:mute'..msg.chat_id_) then
     local id = msg.id_
         local msgs = {[0] = id}
@@ -1271,7 +1271,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
 elseif msg_type == 'MSG:Text' then
  --vardump(msg)
-    if database:get("bot:group:link"..msg.chat_id_) == '*PLease Send Me your Group Link!*' and is_mod(msg.sender_user_id_, msg.chat_id_) then
+    if database:get("bot:group:link"..msg.chat_id_) == 'waiting' and is_mod(msg.sender_user_id_, msg.chat_id_) then
       if text:match("(https://telegram.me/joinchat/%S+)") then
 	  local glink = text:match("(https://telegram.me/joinchat/%S+)")
       local hash = "bot:group:link"..msg.chat_id_
@@ -1298,7 +1298,7 @@ elseif msg_type == 'MSG:Text' then
    database:set('bot:editid'.. msg.id_,msg.content_.text_)
    if not is_mod(msg.sender_user_id_, msg.chat_id_) then
     check_filter_words(msg, text)
-	if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+	if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt].[Mm][Ee]") then
      if database:get('bot:links:mute'..msg.chat_id_) then
      local id = msg.id_
         local msgs = {[0] = id}
@@ -2754,7 +2754,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setphoto$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '_Please send a photo noew!_', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '_Please send a photo now!_', 1, 'md')
 		 database:set('bot:setphoto'..msg.chat_id_..':'..msg.sender_user_id_,true)
     end
 	-----------------------------------------------------------------------------------------------
