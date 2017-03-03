@@ -1287,17 +1287,6 @@ elseif msg_type == 'MSG:Text' then
 	if username then
       database:hset(svuser, 'username', username)
     end
-	if database:get('editmsg'..msg.chat_id_) == 'delmsg' then
-        local id = msg.message_id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-              delete_msg(chat,msgs)
-	elseif database:get('editmsg'..msg.chat_id_) == 'didam' then
-	if database:get('bot:editid'..msg.message_id_) then
-		local old_text = database:get('bot:editid'..msg.message_id_)
-	    send(msg.chat_id_, msg.message_id_, 1, '_چرا ادیت میکنی😠\nمن دیدم که گفتی:_\n\n*'..old_text..'*', 1, 'md')
-	end
-	end
 	if username and username:match("[Bb][Oo][Tt]$") then
       if database:get('bot:bots:mute'..msg.chat_id_) and not is_mod(result.id_, msg.chat_id_) then
 		 chat_kick(msg.chat_id_, result.id_)
@@ -3151,7 +3140,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 	elseif database:get('editmsg'..msg.chat_id_) == 'didam' then
 	if database:get('bot:editid'..msg.message_id_) then
 		local old_text = database:get('bot:editid'..msg.message_id_)
-	    send(msg.chat_id_, msg.message_id_, 1, '_چرا ادیت میکنی😠\nمن دیدم که گفتی:_\n\n*'..old_text..'*', 1, 'md')
+	    send(msg.chat_id_, msg.message_id_, 1, 'Dont Edit!\n*I See You What Say :D*:\n\n*'..old_text..'*', 1, 'md')
 	end
 	end
     getMessage(msg.chat_id_, msg.message_id_,get_msg_contact)
