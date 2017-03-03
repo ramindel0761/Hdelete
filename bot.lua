@@ -2172,10 +2172,15 @@ if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_
          send(msg.chat_id_, msg.id_, 1, '> *Flood Time Set to :* `'..floodt[2]..'`.', 1, 'md')
 	end
 	end
-	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]show edit$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '*Done*', 1, 'md')
+	-----------------------------------------------[Lock - Edit]------------------------------------------------
+	if text:match("^[#!/]lock edit$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*Edit Has Been Locked!*', 1, 'md')
          database:set('editmsg'..msg.chat_id_,'didam')
+	end
+	------------------------------------------[Unlock - Edit]-----------------------------------------------------
+	if text:match("^[#!/]unlock edit$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*Edit Has Been UnLocked!*', 1, 'md')
+         database:del('editmsg'..msg.chat_id_,'didam')
 	end
 	-----------------------------------------------------------------------------------------------
 if text:match("^[#!/]setlink$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -2283,10 +2288,10 @@ if text:match("^[#!/]stats$") and is_admin(msg.sender_user_id_, msg.chat_id_) th
 	-----------------------------------------------------------------------------------------------
 if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local unlockpt = {string.match(text, "^[#/!](unlock) (.*)$")} 
-      if unlockpt[2] == "edit" then
+  --[[    if unlockpt[2] == "edit" then
        send(msg.chat_id_, msg.id_, 1, '*Now, Members Allowed to Edit Msgs!*', 1, 'md')
          database:del('editmsg'..msg.chat_id_)
-      end
+      end]]
 	  if unlockpt[2] == "cmds" then
          send(msg.chat_id_, msg.id_, 1, '*Bots Cmd Allowed For Members!*', 1, 'md')
          database:del('bot:cmds'..msg.chat_id_)
@@ -3140,7 +3145,11 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 	elseif database:get('editmsg'..msg.chat_id_) == 'didam' then
 	if database:get('bot:editid'..msg.message_id_) then
 		local old_text = database:get('bot:editid'..msg.message_id_)
-	    send(msg.chat_id_, msg.message_id_, 1, 'Dont Edit!\n*I See You What Say :D*:\n\n*'..old_text..'*', 1, 'md')
+	    send(msg.chat_id_, msg.message_id_, 1, 'Dont Edit!\n*I See You What Say :D*:\n*Edit Was Locked!*\n*I"ll Delete Your Message*\n_Your Say: _*'..old_text..'*', 1, 'md')
+     local id = msg.id_
+        local msgs = {[0] = id}
+        local chat = msg.chat_id_
+        delete_msg(chat,msgs)				
 	end
 	end
     getMessage(msg.chat_id_, msg.message_id_,get_msg_contact)
