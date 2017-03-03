@@ -3137,7 +3137,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
    end
     end
 	end
-	if database:get('editmsg'..msg.chat_id_) == 'delmsg' then
+	if database:get('editmsg'..msg.chat_id_) == 'delmsg' and is_mod(msg.sender_user_id_, msg.chat_id_) then
         local id = msg.message_id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
