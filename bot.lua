@@ -2131,10 +2131,10 @@ local function gpro(extra, result, success)
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]lock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local lockpt = {string.match(text, "^[#/!](lock) (.*)$")} 
-      if lockpt[2] == "edit" then
+    --[[  if lockpt[2] == "edit" then
          send(msg.chat_id_, msg.id_, 1, '*Now, Members Cant Edit Messages!*', 1, 'md')
          database:set('editmsg'..msg.chat_id_,'delmsg')
-	  end
+	  end]]
 	  if lockpt[2] == "cmds" then
          send(msg.chat_id_, msg.id_, 1, '> *Bot Cmds Locked!*\n', 1, 'md')
          database:set('bot:cmds'..msg.chat_id_,true)
