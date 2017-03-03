@@ -3137,7 +3137,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
    end
     end
 	end
-	if database:get('editmsg'..msg.chat_id_) == 'delmsg' and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if database:get('editmsg'..msg.chat_id_) == 'delmsg' and then
         local id = msg.message_id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
@@ -3145,8 +3145,8 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 	elseif database:get('editmsg'..msg.chat_id_) == 'didam' then
 	if database:get('bot:editid'..msg.message_id_) then
 		local old_text = database:get('bot:editid'..msg.message_id_)
-	if is_mod(result.sender_user_id_, result.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '*You Are My Admin!!!!!*\n*I Cant Show You What Edit :DDD*', 1, 'md')
+	if is_mod(result.sender_user_id_, msg.chat_id_) then
+         send(msg.chat_id_, msg.message_id_, 1, '*You Are My Admin!!!!!*\n*I Cant Show You What Edit :DDD*', 1, 'md')
     else
 	    send(msg.chat_id_, msg.message_id_, 1, 'Dont Edit!\n*I See You What Say :D*:\n*Edit Was Locked!*\n*I"ll Delete Your Message*\n_Your Say: _*'..old_text..'*', 1, 'md')				
 	end
