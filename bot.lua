@@ -3146,9 +3146,6 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 	if database:get('bot:editid'..msg.message_id_) then
 		local old_text = database:get('bot:editid'..msg.message_id_)
 	    send(msg.chat_id_, msg.message_id_, 1, 'Dont Edit!\n*I See You What Say :D*:\n*Edit Was Locked!*\n*I"ll Delete Your Message*\n_Your Say: _*'..old_text..'*', 1, 'md')
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
         delete_msg(chat,msgs)				
 	end
 	end
