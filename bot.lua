@@ -575,7 +575,7 @@ function tdcli_update_callback(data)
 						user_id = msg.sender_user_id_
 						local bhash =  'bot:banned:'..msg.chat_id_
                         database:sadd(bhash, user_id)
-                           send(msg.chat_id_, msg.id_, 1, '> *User*  `|'..msg.sender_user_id_..'|`\n*Banned For Spamming!*`', 1, 'md')
+                           send(msg.chat_id_, msg.id_, 1, '> *User*  `|'..msg.sender_user_id_..'|`\n*Banned For Spamming!*', 1, 'md')
 					  end
                     end
                     database:setex(hash, floodTime, msgs+1)
@@ -1271,13 +1271,13 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
    end
 elseif msg_type == 'MSG:Text' then
  --vardump(msg)
-    if database:get("bot:group:link"..msg.chat_id_) == 'waiting' and is_mod(msg.sender_user_id_, msg.chat_id_) then
+    if database:get("bot:group:link"..msg.chat_id_) == 'Waiting For Link!\nPlease Send Group Link.' and is_mod(msg.sender_user_id_, msg.chat_id_) then
       if text:match("(https://telegram.me/joinchat/%S+)") then
 	  local glink = text:match("(https://telegram.me/joinchat/%S+)")
       local hash = "bot:group:link"..msg.chat_id_
                database:set(hash,glink)
 			  send(msg.chat_id_, msg.id_, 1, '*New link Set!*', 1, 'md')
-			  send(msg.chat_id_, 0, 1, '*NewLink : *\n'..glink..'\n', 1, 'md')
+			  send(msg.chat_id_, 0, 1, '<b>Newlink:</b>\n'..glink, 1, 'html')
       end
    end
     function check_username(extra,result,success)
@@ -1287,6 +1287,17 @@ elseif msg_type == 'MSG:Text' then
 	if username then
       database:hset(svuser, 'username', username)
     end
+	if database:get('editmsg'..msg.chat_id_) == 'delmsg' then
+        local id = msg.message_id_
+        local msgs = {[0] = id}
+        local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+	elseif database:get('editmsg'..msg.chat_id_) == 'didam' then
+	if database:get('bot:editid'..msg.message_id_) then
+		local old_text = database:get('bot:editid'..msg.message_id_)
+	    send(msg.chat_id_, msg.message_id_, 1, '_چرا ادیت میکنی😠\nمن دیدم که گفتی:_\n\n*'..old_text..'*', 1, 'md')
+	end
+	end
 	if username and username:match("[Bb][Oo][Tt]$") then
       if database:get('bot:bots:mute'..msg.chat_id_) and not is_mod(result.id_, msg.chat_id_) then
 		 chat_kick(msg.chat_id_, result.id_)
@@ -2736,7 +2747,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, rules, 1, nil)
     end
 	-----------------------------------------------------------------------------------------------
-  	if text:match("^[#!/]share$") and is_sudo(msg) then
+  	if text:match("^[#!/]share$") and is_mod(msg) then
        sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 14433047824, 'SpheroTc', 'Update!', 323370170)
     end
 	-----------------------------------------------------------------------------------------------
@@ -3094,7 +3105,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 	end
   if not is_mod(result.sender_user_id_, result.chat_id_) then
    check_filter_words(result, text)
-   if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") then
+   if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt].[Mm][Ee]") then
    if database:get('bot:links:mute'..result.chat_id_) then
     local msgs = {[0] = data.message_id_}
        delete_msg(msg.chat_id_,msgs)
@@ -3132,7 +3143,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
    end
     end
 	end
-	--[[if database:get('editmsg'..msg.chat_id_) == 'delmsg' then
+	if database:get('editmsg'..msg.chat_id_) == 'delmsg' then
         local id = msg.message_id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
@@ -3142,7 +3153,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 		local old_text = database:get('bot:editid'..msg.message_id_)
 	    send(msg.chat_id_, msg.message_id_, 1, '_چرا ادیت میکنی😠\nمن دیدم که گفتی:_\n\n*'..old_text..'*', 1, 'md')
 	end
-	end]]
+	end
     getMessage(msg.chat_id_, msg.message_id_,get_msg_contact)
   -----------------------------------------------------------------------------------------------
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
