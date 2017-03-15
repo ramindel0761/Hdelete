@@ -1,5 +1,6 @@
 serpent = require("serpent")
 redis = require('redis')
+lgi = require ('lgi')
 database = Redis.connect('127.0.0.1', 6379)
 notify = lgi.require('Notify')
 notify.init ("Telegram updates")
