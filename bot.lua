@@ -1,6 +1,9 @@
-serpent = (loadfile "serpent.lua")()
-redis = (loadfile "lua-redis.lua")()
+serpent = require("serpent")
+lgi = require ('lgi')
+redis = require('redis')
 database = Redis.connect('127.0.0.1', 6379)
+notify = lgi.require('Notify')
+notify.init ("Telegram updates")
 chats = {}
 day = 86400
 bot_id = 323370170 -- Your Bot ID
