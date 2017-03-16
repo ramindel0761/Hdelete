@@ -2015,8 +2015,8 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	  t = 'Moderator'
       else
 	  t = 'Member'
+	end
       send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`\n>Rank : `"..t.."`", 1, 'md')
-   end	
 	end
 	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]getpro (%d+)$") and msg.reply_to_message_id_ == 0  then
