@@ -1809,10 +1809,10 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
  if text:match("^[#!/]setrank$") then
-  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
-  redis:incr(hash)
+  local hash = 'usecommands:'..msg.sender_user_id_..':'..msg.chat_id_
+  database:incr(hash)
   if not is_sudo(msg) then
-    return "Only for Sudo"
+ send(msg.chat_id_, msg.id_, 1, '*Only For Sudo*', 1, 'md')
   end
   local receiver = get_receiver(msg)
   local Reply = msg.reply_id
@@ -1824,7 +1824,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
   local value = string.sub(matches[3], 1, 1000)
   local text = setrank(msg, name, value)
 
-  return text
+send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
   end
   end
 				
