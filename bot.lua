@@ -2834,7 +2834,6 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
             send(v, 0, 1,'> همکار '..result.first_name_..' با شناسه : '..msg.sender_user_id_..' گروه با نام '..chat.title_..' را به صورت نامحدود شارژ کرد !', 1, 'md')
             database:set("bot:charge:"..msg.chat_id_,true)
             database:set("bot:enable:"..msg.chat_id_,true)
-           end
           getUser(msg.sender_user_id_,unit)
         end
 	-----------------------------------------------------------------------------------------------
@@ -2850,6 +2849,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
                 local d = math.floor(ex / day ) + 1
                   send(msg.chat_id_, msg.id_, 1, "> Group have Charge For "..d.." day", 1, 'md')
             end
+	end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]charge stats (%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 	local txt = {string.match(text, "^[#/!](charge stats) (%d+)$")} 
@@ -3150,7 +3150,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
    end
   end
   -----------------------------------------------------------------------------------------------
- end
+end
   -----------------------------------------------------------------------------------------------
                                        -- end code --
   -----------------------------------------------------------------------------------------------
