@@ -1807,27 +1807,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	      resolve_username(ap[2],addadmin_by_username)
     end
-	-----------------------------------------------------------------------------------------------
- if text:match("^[#!/]setrank$") then
-  local hash = 'usecommands:'..msg.sender_user_id_..':'..msg.chat_id_
-  database:incr(hash)
-  if not is_sudo(msg) then
- send(msg.chat_id_, msg.id_, 1, '*Only For Sudo*', 1, 'md')
-  end
-  local receiver = get_receiver(msg)
-  local Reply = msg.reply_id
-  if msg.reply_id then
-  local value = string.sub(matches[2], 1, 1000)
-    msgr = get_message(msg.reply_id, action_by_reply2, {receiver=receiver, Reply=Reply, value=value})
-  else
-  local name = string.sub(matches[2], 1, 50)
-  local value = string.sub(matches[3], 1, 1000)
-  local text = setrank(msg, name, value)
-
-send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
-  end
-  end
-				
+	-----------------------------------------------------------------------------------------------		
 	if text:match("^[#!/]addadmin (%d+)$") and is_sudo(msg) then
 	local ap = {string.match(text, "^[#/!](addadmin) (%d+)$")} 	
 	        database:sadd('bot:admins:', ap[2])
@@ -2774,6 +2754,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 		 database:set("bot:enable:"..msg.chat_id_,true)
     end
 	-----------------------------------------------------------------------------------------------
+
 	if text:match("^[#!/]charge stats") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local ex = database:ttl("bot:charge:"..msg.chat_id_)
        if ex == -1 then
@@ -2871,27 +2852,32 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-   if text:match('^[/!#]rmsg (%d+)$') and is_mod(msg.sender_user_id_, msg.chat_id_) then
-                local matches = {string.match(text, "^[/!#]rmsg (%d+)$")}
-                if msg.chat_id_:match("^-100") then
-                  if tonumber(matches[2]) > 100 or tonumber(matches[2]) < 1 then
-                    pm = '*Error!*\n_Use Number ~>_ *[1-100]*'
-                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'md')
-                  else
-                    tdcli_function ({
-                      ID = "GetChatHistory",
-                      chat_id_ = msg.chat_id_,
-                      from_message_id_ = 0,
-                      offset_ = 0,
-                      limit_ = tonumber(matches[2])
-                    }, delmsg, nil)
-                    pm ='> `'..matches[2]..'` *Message Deleted!*'
-                    send(msg.chat_id_, msg.id_, 1, pm, 1, 'md')
-                  end
-                else pm ='> در گروه معمولی این امکان وجود ندارد !'
-                  send(msg.chat_id_, msg.id_, 1, pm, 1, 'md')
+ if is_momod(msg.sender_user_id_, msg.chat_id_) then
+          if text:match('^[Dd]el (%d+)$') then
+            local matches = {string.match(text, "^([Dd]el) (%d+)$")}
+            if msg.chat_id_:match("^-100") then
+              if tonumber(matches[2]) > 100 or tonumber(matches[2]) < 1 then
+                  pm = '> Please use a number greater than 1 and less than 100 !'
                 end
+                send(msg.chat_id_,0, 1, pm, 1, 'html')
+              else
+                tdcli_function ({
+                  ID = "GetChatHistory",
+                  chat_id_ = msg.chat_id_,
+                  from_message_id_ = 0,
+                  offset_ = 0,
+                  limit_ = tonumber(matches[2])
+                }, delmsg, nil)
+                if database:get('lang:gp:'..msg.chat_id_) then
+                  pm ='> *'..matches[2]..' recent message removed*!'
+                end
+                send(msg.chat_id_,0, 1, pm, 1, 'html')
               end
+            else
+                pm ='> This is not possible in the conventional group !'
+              send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
+            end
+          end
 	-----------------------------------------------------------------------------------------------
    if text:match("^[#!/]me$") then
       if is_sudo(msg) then
