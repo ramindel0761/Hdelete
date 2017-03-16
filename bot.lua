@@ -2875,8 +2875,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
   end
   end
    -----------------------------------------------------------------------------------------------
-  if is_sudo(msg) then
-          if text:match("^[!/#][Aa]utoleave (.*)$") then
+          if text:match("^[!/#][Aa]utoleave (.*)$") and is_sudo(msg) then
             local status = {string.match(text, "^([!/#][Aa]utoleave) (.*)$")}
             if status[2] == "yes" then
               if database:get('autoleave') == "yes" then
@@ -2895,8 +2894,6 @@ else
                 end
                 database:set('autoleave','no')
               end
-            end
-	end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]reload$") and is_sudo(msg) then
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
