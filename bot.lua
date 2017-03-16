@@ -1569,9 +1569,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                 end
                 database:srem(hash, result.id_)
               else
-                if database:get('lang:gp:'..msg.chat_id_) then
                   text = '*UserName InCorrect!*'
-                end
               end
               send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
             end
