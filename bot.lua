@@ -2003,9 +2003,20 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
    getMessage(msg.chat_id_, msg.reply_to_message_id_,inv_reply)
     end
 	-----------------------------------------------------------------------------------------------
-    if text:match("^[#!/]id$") then
+    if text:match("^[#!/]id$") and msg.reply_to_message_id_ == 0  then
     local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
-      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n> *Total Messages*: `"..user_msgs.."`", 1, 'md')
+	if is_sudo(msg) then
+	  t = 'Sudo'
+      elseif is_admin(msg) then
+	  t = 'Global Admin'
+      elseif is_owner(msg.sender_user_id_, msg.chat_id_) then
+	  t = 'Group Owner'
+      elseif is_mod(msg.sender_user_id_, msg.chat_id_) then
+	  t = 'Moderator'
+      else
+	  t = 'Member'
+	end
+      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n> *Total Messages*: `"..user_msgs.."`\n>Rank : `"..t.."`", 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]getpro (%d+)$") and msg.reply_to_message_id_ == 0  then
