@@ -1591,6 +1591,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                   text = '*User* `|'..result.id_..'|` *Globally Unbanned!*'
                 end
                 database:srem(hash, result.id_)
+	end
               else
                   text = '*UserName InCorrect!*'
                 end
