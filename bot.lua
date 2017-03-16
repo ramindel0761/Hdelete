@@ -2005,7 +2005,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]id$") then
     local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
-      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`", 1, 'md')
+      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n> *Total Messages*: `"..user_msgs.."`", 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]getpro (%d+)$") and msg.reply_to_message_id_ == 0  then
