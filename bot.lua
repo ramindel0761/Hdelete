@@ -546,7 +546,7 @@ function tdcli_update_callback(data)
 	   chat_leave(msg.chat_id_, bot_id)
       end
     end
-    --------- ANTI FLOOD -------------------
+    --------- ANTI FLOOD & AutoLeave -------------------
 	local hash = 'flood:max:'..msg.chat_id_
     if not database:get(hash) then
         floodMax = 5
@@ -593,6 +593,29 @@ function tdcli_update_callback(data)
                 end
         end
 	end
+ if database:get("autoleave") == "yes" then
+      if not database:get("bot:enable:"..msg.chat_id_) then
+        if not database:get("bot:autoleave:"..msg.chat_id_) then
+          database:setex("bot:autoleave:"..msg.chat_id_,1250,true)
+        end
+      end
+      local autoleavetime = tonumber(database:ttl("bot:autoleave:"..msg.chat_id_))
+      local time = 50
+      if (autoleavetime) < tonumber(time) then
+        database:set("lefting"..msg.chat_id_,true)
+      end
+      local id = tostring(msg.chat_id_)
+      if id:match("-100(%d+)") then
+        if database:get("lefting"..msg.chat_id_) then
+          if not database:get("bot:enable:"..msg.chat_id_) then
+            chat_leave(msg.chat_id_, bot_id)
+            database:del("lefting"..msg.chat_id_)
+            local v = tonumber(bot_owner)
+            send(v, 0, 1,"Bot Leaved From This Group!\nName : "..chat.title_.."\nID : "..msg.chat_id_, 1, 'html')
+          end
+        end
+      end
+    end
 	-------------------------------------------
 	database:incr("bot:allmsgs")
 	if msg.chat_id_ then
@@ -2713,11 +2736,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, txt[2], 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-     if is_admin(msg.sender_user_id_, msg.chat_id_) then
-          if text:match("^[!/#][Ll]eave$") then
+          if text:match("^[!/#][Ll]eave$") and is_sudo(msg) then
             chat_leave(msg.chat_id_, bot_id)
             database:srem("bot:groups",msg.chat_id_)
-          end
         end
  	-----------------------------------------------------------------------------------------------
     	if text:match("^[#!/]setrules (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -2852,8 +2873,31 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	   send(txt[2], 0, 1, '*Admin Joined!🌚*', 1, 'md')
 	   add_user(txt[2], msg.sender_user_id_, 10)
   end
-   -----------------------------------------------------------------------------------------------
   end
+   -----------------------------------------------------------------------------------------------
+  if is_sudo(msg) then
+          if text:match("^[!/#][Aa]utoleave (.*)$") then
+            local status = {string.match(text, "^([!/#][Aa]utoleave) (.*)$")}
+            if status[2] == "yes" then
+              if database:get('autoleave') == "yes" then
+                  send(msg.chat_id_, msg.id_, 1, '> Auto Leave is now active !', 1, 'md')
+else
+                  send(msg.chat_id_, msg.id_, 1, '> Auto Leave has been actived !', 1, 'md')
+                end
+                database:set('autoleave','yes')
+              end
+            end
+            if status[2] == "no" then
+              if database:get('autoleave') == "no" then
+                  send(msg.chat_id_, msg.id_, 1, '> Auto Leave is now deactive !', 1, 'md')
+                end
+              else
+                  send(msg.chat_id_, msg.id_, 1, '> Auto leave has been deactived !', 1, 'md')
+                end
+                database:set('autoleave','no')
+              end
+            end
+          end9 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]reload$") and is_sudo(msg) then
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
