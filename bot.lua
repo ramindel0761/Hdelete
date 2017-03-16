@@ -2004,13 +2004,18 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]id$") and msg.reply_to_message_id_ == 0  then
-local function getpro(extra, result, success)
-local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
-   if result.photos_[0] then
-            sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> SuperGroup ID : '..msg.chat_id_..'\n> Your ID: '..msg.sender_user_id_..'\n> Total Messages: '..user_msgs,msg.id_,msg.id_)
-   else
-      send(msg.chat_id_, msg.id_, 1, "*You Don't Have Profile Photos*!!\n\n> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`", 1, 'md')
-   end
+	if is_sudo(result) then
+	  t = 'Sudo'
+      elseif is_admin(result.id_) then
+	  t = 'Global Admin'
+      elseif is_owner(result.id_, msg.chat_id_) then
+	  t = 'Group Owner'
+      elseif is_mod(result.id_, msg.chat_id_) then
+	  t = 'Moderator'
+      else
+	  t = 'Member'
+	  end
+      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`\n>Rank : `"..t.."`", 1, 'md')
    end
    tdcli_function ({
     ID = "GetUserProfilePhotos",
@@ -2803,7 +2808,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	   database:set("bot:enable:"..txt[2],true)
   end
   -----------------------------------------------------------------------------------------------
-  if text:match('^[#!/]add') and is_admin(msg.sender_user_id_, msg.chat_id_) then
+  if text:match('^[#!/]add$') and is_admin(msg.sender_user_id_, msg.chat_id_) then
        local txt = {string.match(text, "^[#/!](add)$")} 
        database:set("bot:charge:"..msg.chat_id_,true)
 	   send(msg.chat_id_, msg.id_, 1, 'Group Added!', 1, 'md')
@@ -2813,7 +2818,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	   database:set("bot:enable:"..msg.chat_id_,true)
   end
   -----------------------------------------------------------------------------------------------
-  if text:match('^[#!/]rem') and is_admin(msg.sender_user_id_, msg.chat_id_) then
+  if text:match('^[#!/]rem$') and is_admin(msg.sender_user_id_, msg.chat_id_) then
        local txt = {string.match(text, "^[#/!](rem)$")} 
        database:del("bot:charge:"..msg.chat_id_)
 	   send(msg.chat_id_, msg.id_, 1, 'Group Removed!', 1, 'md')
