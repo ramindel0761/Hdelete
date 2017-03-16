@@ -2712,7 +2712,18 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	local txt = {string.match(text, "^[#/!](echo) (.*)$")} 
          send(msg.chat_id_, msg.id_, 1, txt[2], 1, 'md')
     end
-	-----------------------------------------------------------------------------------------------
+	-------------------------------------SetChar---------------------------------------------------
+          if text:match("^[!/#][Ss]etchar (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+            local sensspam = {string.match(text, "^([!/#][Ss]etchar (%d+)$")}
+            if tonumber(sensspam[2]) < 50 or tonumber(sensspam[2]) > 600 then
+                send(msg.chat_id_, msg.id_, 1, '*> Error.*\n*Number is Invalid!*\n*Range :* `[50-600]`', 1, 'md')
+              end
+            else
+              database:set('bot:sens:spam'..msg.chat_id_,sensspam[2])
+                send(msg.chat_id_, msg.id_, 1, '*> Allowed Text Characters Has Been Set to* `|' ..sensspam[2]..'|`', 1, 'md')
+            end
+          end
+ 	-----------------------------------------------------------------------------------------------
     	if text:match("^[#!/]setrules (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local txt = {string.match(text, "^[#/!](setrules) (.*)$")}
 	database:set('bot:rules'..msg.chat_id_, txt[2])
