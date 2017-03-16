@@ -1549,7 +1549,6 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                 chat_kick(msg.chat_id_, result.id_)
 					end
             end
-				 local text = msg.content_.text_:gsub('آزادسازی','unbanall')
           if text:match("^[Uu]nbanall$") and is_sudo(msg) and msg.reply_to_message_id_ then
             function ungban_by_reply(extra, result, success)
               local hash = 'bot:gbanned:'
@@ -1566,7 +1565,6 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
             function ungban_by_username(extra, result, success)
               local hash = 'bot:gbanned:'
               if result.id_ then
-                if database:get('lang:gp:'..msg.chat_id_) then
                   text = '*User* `|'..result.id_..'|` *Globally Unbanned!*'
                 end
                 database:srem(hash, result.id_)
@@ -1584,7 +1582,6 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
             local ap = {string.match(text, "^([Uu]nbanall) (%d+)$")}
             local hash = 'bot:gbanned:'
               database:srem(hash, ap[2])
-              if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been unbanned !', 1, 'md')
               end
             end
