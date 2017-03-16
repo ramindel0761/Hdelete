@@ -2722,7 +2722,6 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
               database:set('bot:sens:spam'..msg.chat_id_,sensspam[2])
                 send(msg.chat_id_, msg.id_, 1, '*> Allowed Text Characters Has Been Set to* `|' ..sensspam[2]..'|`', 1, 'md')
             end
-          end
  	-----------------------------------------------------------------------------------------------
     	if text:match("^[#!/]setrules (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local txt = {string.match(text, "^[#/!](setrules) (.*)$")}
