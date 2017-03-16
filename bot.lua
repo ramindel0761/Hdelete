@@ -593,7 +593,7 @@ function tdcli_update_callback(data)
                 end
         end
 	end
- if database:get("autoleave") == "yes" then
+ if database:get("autoleave") == "On" then
       if not database:get("bot:enable:"..msg.chat_id_) then
         if not database:get("bot:autoleave:"..msg.chat_id_) then
           database:setex("bot:autoleave:"..msg.chat_id_,1250,true)
@@ -2876,23 +2876,23 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
   end
    -----------------------------------------------------------------------------------------------
           if text:match("^[!/#][Aa]utoleave (.*)$") and is_sudo(msg) then
-            local status = {string.match(text, "^([!/#][Aa]utoleave) (.*)$")}
-            if status[2] == "yes" then
-              if database:get('autoleave') == "yes" then
+            local statuss = {string.match(text, "^([!/#][Aa]utoleave) (.*)$")}
+            if statuss[2] == "yes" then
+              if database:get('autoleave') == "On" then
                   send(msg.chat_id_, msg.id_, 1, '> Auto Leave is now active !', 1, 'md')
 else
                   send(msg.chat_id_, msg.id_, 1, '> Auto Leave has been actived !', 1, 'md')
                 end
-                database:set('autoleave','yes')
+                database:set('autoleave','On')
               end
             end
-            if status[2] == "no" then
-              if database:get('autoleave') == "no" then
+            if statuss[2] == "no" then
+              if database:get('autoleave') == "Off" then
                   send(msg.chat_id_, msg.id_, 1, '> Auto Leave is now deactive !', 1, 'md')
               else
                   send(msg.chat_id_, msg.id_, 1, '> Auto leave has been deactived !', 1, 'md')
                 end
-                database:set('autoleave','no')
+                database:set('autoleave','Off')
               end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]reload$") and is_sudo(msg) then
