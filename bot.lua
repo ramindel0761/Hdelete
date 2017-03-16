@@ -2868,7 +2868,6 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
                   offset_ = 0,
                   limit_ = tonumber(matches[2])
                 }, delmsg, nil)
-                if database:get('lang:gp:'..msg.chat_id_) then
                   pm ='> *'..matches[2]..' recent message removed*!'
                 end
                 send(msg.chat_id_,0, 1, pm, 1, 'html')
