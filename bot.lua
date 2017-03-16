@@ -1975,7 +1975,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
       else
 	  t = 'Member'
 	  end
-            texts = '*Username* : `@'..ap[2]..'`\n*Your ID* : `('..result.id_..')`\n*Your Rank* : `'..t..'`'
+            texts = '*Username* : `@'..ap[2]..'`\n*ID* : `('..result.id_..')`\n*Rank* : `'..t..'`'
             else 
             texts = '*UserName InCorrect!*'
     end
@@ -2017,9 +2017,14 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
       else
 	  t = 'Member'
 	  end
-      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`\n>Rank : `"..t.."`", 1, 'md')
-   end					
-	end
+            texts = '*Username* : `@'..ap[2]..'`\n*ID* : `('..result.id_..')`\n*Rank* : `'..t..'`'
+            else 
+            texts = '*UserName InCorrect!*'
+    end
+	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
+    end
+	      resolve_username(ap[2],id_by_username)
+    end
    tdcli_function ({
     ID = "GetUserProfilePhotos",
     user_id_ = msg.sender_user_id_,
