@@ -2715,7 +2715,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	-------------------------------------SetChar---------------------------------------------------
           if text:match("^[!/#][Ss]etchar (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
             local sensspam = {string.match(text, "^[!/#][Ss]etchar (%d+)$")}
-            if tonumber(sensspam[2]) < 50 or tonumber(sensspam[2]) > 600 then
+            if tonumber(sensspam[2]) < 50 then
                 send(msg.chat_id_, msg.id_, 1, '*> Error.*\n*Number is Invalid!*\n*Range :* `[50-600]`', 1, 'md')
               end
             else
