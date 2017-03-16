@@ -2852,7 +2852,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-				  if is_momod(msg.sender_user_id_, msg.chat_id_) then
+				  if is_mod(msg.sender_user_id_, msg.chat_id_) then
           if text:match('^[Dd]el (%d+)$') then
             local matches = {string.match(text, "^([Dd]el) (%d+)$")}
             if msg.chat_id_:match("^-100") then
