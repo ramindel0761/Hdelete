@@ -2210,7 +2210,6 @@ if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_
                 end
                 database:set('autoleave','no')
               end
-            end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setfloodtime (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local floodt = {string.match(text, "^[#/!](setfloodtime) (%d+)$")} 
