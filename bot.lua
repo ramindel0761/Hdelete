@@ -2482,6 +2482,12 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	          send(msg.chat_id_, msg.id_, 1, '*'..msg.from.username..'*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+    if text:match('^[!/#]update') and is_sudo(msg) then
+          local s = io.popen("git pull")
+          local text = ( s:read("*a") )
+          send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+        end
+       -----------------------------------------------------------------------------------------------			
   	if text:match("^[#!/]clean (.*)$") then
 	local txt = {string.match(text, "^[#/!](clean) (.*)$")} 
        if txt[2] == 'banlist' then
