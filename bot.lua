@@ -2897,7 +2897,7 @@ else
                 database:set('autoleave','no')
               end
             end
-          end9 
+          end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]reload$") and is_sudo(msg) then
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
