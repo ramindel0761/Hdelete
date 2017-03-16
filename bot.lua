@@ -2290,7 +2290,7 @@ if text:match("^[#!/]stats$") and is_admin(msg.sender_user_id_, msg.chat_id_) th
           elseif not database:get('autoleave') then
             autoleave = "No"
           end
-                   send(msg.chat_id_, msg.id_, 1, '*Stats:*\n\n> *Groups*:  `'..gps..'`\n> *Users*:  `'..users..'`\n> *All Recieved Msgs*:  `'..allmgs..'`\n> *AutoLeave*:  `"..autoleave.."`', 1, 'md')
+                   send(msg.chat_id_, msg.id_, 1, '*Stats:*\n\n> *Groups*:  `'..gps..'`\n> *Users*:  `'..users..'`\n> *All Recieved Msgs*:  `'..allmgs..'`\n> *AutoLeave*:  `'..autoleave..'`', 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
 if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
