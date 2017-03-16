@@ -2852,41 +2852,6 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-  if is_momod(msg.sender_user_id_, msg.chat_id_) then
-          if text:match('^[Dd]el (%d+)$') then
-            local matches = {string.match(text, "^([Dd]el) (%d+)$")}
-            if msg.chat_id_:match("^-100") then
-              if tonumber(matches[2]) > 100 or tonumber(matches[2]) < 1 then
-                if database:get('lang:gp:'..msg.chat_id_) then
-                  pm = '> Please use a number greater than 1 and less than 100 !'
-                else
-                  pm = '> لطفا از عددی بزرگتر از 1 و کوچکتر از 100 استفاده کنید !'
-                end
-                send(msg.chat_id_,0, 1, pm, 1, 'html')
-              else
-                tdcli_function ({
-                  ID = "GetChatHistory",
-                  chat_id_ = msg.chat_id_,
-                  from_message_id_ = 0,
-                  offset_ = 0,
-                  limit_ = tonumber(matches[2])
-                }, delmsg, nil)
-                if database:get('lang:gp:'..msg.chat_id_) then
-                  pm ='> *'..matches[2]..' recent message removed*!'
-                else
-                  pm ='> '..matches[2]..' پیام اخیر حذف شد !'
-                end
-                send(msg.chat_id_,0, 1, pm, 1, 'html')
-              end
-            else
-              if database:get('lang:gp:'..msg.chat_id_) then
-                pm ='> This is not possible in the conventional group !'
-              else
-                pm ='> در گروه معمولی این امکان وجود ندارد !'
-              end
-              send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
-            end
-          end
 	-----------------------------------------------------------------------------------------------
    if text:match("^[#!/]me$") then
       if is_sudo(msg) then
