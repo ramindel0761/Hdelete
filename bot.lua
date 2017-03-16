@@ -2852,10 +2852,10 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-          if text:match("^[Ww]hois (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-            local memb = {string.match(text, "^([Ww]hois) (.*)$")}
+          if text:match("^[!/#][Ww]hois (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+            local memb = {string.match(text, "^([!/#][Ww]hois) (.*)$")}
             function whois(extra,result,success)
-                send(msg.chat_id_, msg.id_, 1, '> Name :'..result.first_name_..'\n> Username : @'..result.username_..'\n> ID : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '*> FirstName :* `|'..result.first_name_..'|`\n*> Username :* `|@'..result.username_..'|`\n> *User ID :* `|'..msg.sender_user_id_..'|`', 1, 'md')
               end
             getUser(memb[2],whois)
           end
