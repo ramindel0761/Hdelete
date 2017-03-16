@@ -21,6 +21,17 @@ function is_sudo(msg)
   return var
 end
 -----------------------------------------------------------------------------------------------
+function setrank(msg, name, value) -- setrank function
+  local hash = nil
+if chat_type(msg.chat_id_) ~= "supergroup" then
+    hash = 'rank:'..msg.chat_id_..':variables'
+  end
+  if hash then
+    database:hset(hash, name, value)
+ send(msg.chat_id_, msg.id_, 1, '*User Rank* `"..name.."` *Changed To* `"..value.."`', 1, 'md')
+  end
+end
+-----------------------------------------------------------------------------------------------
 function is_admin(user_id)
     local var = false
 	local hashs =  'bot:admins:'
@@ -1797,6 +1808,26 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	      resolve_username(ap[2],addadmin_by_username)
     end
 	-----------------------------------------------------------------------------------------------
+ if text:match("^[#!/]setrank$") then
+  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+  redis:incr(hash)
+  if not is_sudo(msg) then
+    return "Only for Sudo"
+  end
+  local receiver = get_receiver(msg)
+  local Reply = msg.reply_id
+  if msg.reply_id then
+  local value = string.sub(matches[2], 1, 1000)
+    msgr = get_message(msg.reply_id, action_by_reply2, {receiver=receiver, Reply=Reply, value=value})
+  else
+  local name = string.sub(matches[2], 1, 50)
+  local value = string.sub(matches[3], 1, 1000)
+  local text = setrank(msg, name, value)
+
+  return text
+  end
+  end
+				
 	if text:match("^[#!/]addadmin (%d+)$") and is_sudo(msg) then
 	local ap = {string.match(text, "^[#/!](addadmin) (%d+)$")} 	
 	        database:sadd('bot:admins:', ap[2])
@@ -2016,7 +2047,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
       else
 	  t = 'Member'
 	end
-      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n> *Total Messages*: `"..user_msgs.."`\n>Rank : `"..t.."`", 1, 'md')
+      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n> *Total Messages*: `"..user_msgs.."`\n> *Rank*: `"..t.."`", 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]getpro (%d+)$") and msg.reply_to_message_id_ == 0  then
