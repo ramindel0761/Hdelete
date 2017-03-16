@@ -2899,7 +2899,7 @@ else
               else
                   send(msg.chat_id_, msg.id_, 1, '*> AutoLeave Has Been Deactived !*', 1, 'md')
                 end
-                database:rem('autoleave','yes')
+                database:del('autoleave','yes')
               end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]reload$") and is_sudo(msg) then
