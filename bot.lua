@@ -1549,40 +1549,6 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                 chat_kick(msg.chat_id_, result.id_)
 					end
             end
-          if text:match("^[Uu]nbanall$") and is_sudo(msg) and msg.reply_to_message_id_ then
-            function ungban_by_reply(extra, result, success)
-              local hash = 'bot:gbanned:'
-              if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been unbanned (Gban)!', 1, 'md')
-              end
-              database:srem(hash, result.sender_user_id_)
-            end
-            getMessage(msg.chat_id_, msg.reply_to_message_id_,ungban_by_reply)
-          end
-          -----------------------------------------------------------------------------------------------
-          if text:match("^[Uu]nbanall @(.*)$") and is_sudo(msg) then
-            local apid = {string.match(text, "^([Uu]nbanall) @(.*)$")}
-            function ungban_by_username(extra, result, success)
-              local hash = 'bot:gbanned:'
-              if result.id_ then
-                  text = '*User* `|'..result.id_..'|` *Globally Unbanned!*'
-                end
-                database:srem(hash, result.id_)
-              else
-                  text = '*UserName InCorrect!*'
-              end
-              send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
-            end
-            resolve_username(apid[2],ungban_by_username)
-          end
-          -----------------------------------------------------------------------------------------------
-          if text:match("^[Uu]nbanall (%d+)$") and is_sudo(msg) then
-            local ap = {string.match(text, "^([Uu]nbanall) (%d+)$")}
-            local hash = 'bot:gbanned:'
-              database:srem(hash, ap[2])
-                send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been unbanned !', 1, 'md')
-              end
-            end
 	-----------------------------------------------------------------------------------------------			
 	if text:match("^[#!/]delall$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function delall_by_reply(extra, result, success)
