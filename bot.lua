@@ -2839,27 +2839,23 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
         end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]charge stats") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-            local ex = database:ttl("bot:charge:"..msg.chat_id_)
-            if ex == -1 then
-                send(msg.chat_id_, msg.id_, 1, '> Unlimited !', 1, 'md')
-            else
-              local b = math.floor(ex / day ) + 1
-              if b == 0 then
-                  send(msg.chat_id_, msg.id_, 1, "> Group Charge has ended !", 1, 'md')
-               end
-                local d = math.floor(ex / day ) + 1
-                  send(msg.chat_id_, msg.id_, 1, "> Group have Charge For "..d.." day", 1, 'md')
-            end
-	end
+    local ex = database:ttl("bot:charge:"..msg.chat_id_)
+       if ex == -1 then
+		send(msg.chat_id_, msg.id_, 1, '_نامحدود!_', 1, 'md')
+       else
+        local d = math.floor(ex / day ) + 1
+	   		send(msg.chat_id_, msg.id_, 1, d.." روز تا انقضا گروه باقی مانده", 1, 'md')
+       end
+    end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]charge stats (%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 	local txt = {string.match(text, "^[#/!](charge stats) (%d+)$")} 
     local ex = database:ttl("bot:charge:"..txt[2])
        if ex == -1 then
-		send(msg.chat_id_, msg.id_, 1, '*Infinity!*', 1, 'md')
+		send(msg.chat_id_, msg.id_, 1, '_نامحدود!_', 1, 'md')
        else
         local d = math.floor(ex / day ) + 1
-	   		send(msg.chat_id_, msg.id_, 1, "`"..d.."` *Later!*", 1, 'md')
+	   		send(msg.chat_id_, msg.id_, 1, d.." روز تا انقضا گروه باقی مانده", 1, 'md')
        end
     end
 	-----------------------------------------------------------------------------------------------
