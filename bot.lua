@@ -2003,19 +2003,8 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
    getMessage(msg.chat_id_, msg.reply_to_message_id_,inv_reply)
     end
 	-----------------------------------------------------------------------------------------------
-	if is_sudo(msg) then
-	  t = 'Sudo'
-      elseif is_admin(msg) then
-	  t = 'Global Admin'
-      elseif is_owner(msg.sender_user_id_, msg.chat_id_) then
-	  t = 'Group Owner'
-      elseif is_mod(msg.sender_user_id_, msg.chat_id_) then
-	  t = 'Moderator'
-      else
-	  t = 'Member'
-	end
 if text:match("^[#!/]id$") and msg.reply_to_message_id_ == 0  then
-      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`\n>Rank : `"..t.."`", 1, 'md')
+      send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`", 1, 'md')
 	end
    tdcli_function ({
     ID = "GetUserProfilePhotos",
