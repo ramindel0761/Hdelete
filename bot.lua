@@ -2017,7 +2017,6 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	  end
       send(msg.chat_id_, msg.id_, 1, "> *SuperGroup ID* : `"..msg.chat_id_.."`\n> *Your ID*: `"..msg.sender_user_id_.."`\n_> *Total Messages*: `"..user_msgs.."`\n>Rank : `"..t.."`", 1, 'md')
    end					
-	end
    tdcli_function ({
     ID = "GetUserProfilePhotos",
     user_id_ = msg.sender_user_id_,
