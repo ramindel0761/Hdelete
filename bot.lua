@@ -6,6 +6,7 @@ notify = lgi.require('Notify')
 notify.init ("Telegram updates")
 chats = {}
 day = 86400
+realm = -1001051846450
 bot_id =  323370170 -- Your Bot USER_ID
 sudo_users = {255317894}
   -----------------------------------------------------------------------------------------------
