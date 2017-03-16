@@ -2834,6 +2834,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
             send(v, 0, 1,'> همکار '..result.first_name_..' با شناسه : '..msg.sender_user_id_..' گروه با نام '..chat.title_..' را به صورت نامحدود شارژ کرد !', 1, 'md')
             database:set("bot:charge:"..msg.chat_id_,true)
             database:set("bot:enable:"..msg.chat_id_,true)
+		end
           getUser(msg.sender_user_id_,unit)
         end
 	-----------------------------------------------------------------------------------------------
@@ -2921,7 +2922,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
        database:del("bot:charge:"..msg.chat_id_)
 	   send(msg.chat_id_, msg.id_, 1, 'Group Removed!', 1, 'md')
 	   for k,v in pairs(sudo_users) do
-	      send(v, 0, 1, "*User* `|"..msg.sender_user_id_.."|` *Removed bot To New Group!*" , 1, 'md')
+	      send(v, 0, 1, "*User* `|"..msg.sender_user_id_.."|` *Removed bot From New Group!*" , 1, 'md')
        end
   end
   -----------------------------------------------------------------------------------------------
@@ -3150,7 +3151,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
    end
   end
   -----------------------------------------------------------------------------------------------
-
+end
   -----------------------------------------------------------------------------------------------
                                        -- end code --
   -----------------------------------------------------------------------------------------------
