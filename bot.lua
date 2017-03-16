@@ -610,8 +610,8 @@ function tdcli_update_callback(data)
           if not database:get("bot:enable:"..msg.chat_id_) then
             chat_leave(msg.chat_id_, bot_id)
             database:del("lefting"..msg.chat_id_)
-            local v = tonumber(bot_owner)
-            send(v, 0, 1,"Bot Leaved From This Group!\nName : "..chat.title_.."\nID : "..msg.chat_id_, 1, 'html')
+            local v = tonumber(sudo_users)
+            send(v, 0, 1,"*Bot Leaved From This Group!*\n*Name : *`|"..chat.title_.."|`\n*ID :* `|"..msg.chat_id_.."|`", 1, 'md')
           end
         end
       end
@@ -2894,12 +2894,12 @@ else
               end
             end
             if status[2] == "no" then
-              if not database:get('autoleave') == "yes" then
+              if database:get('autoleave') == "Off" then
                   send(msg.chat_id_, msg.id_, 1, '*> Auto Leave is Already Deactive !*', 1, 'md')
               else
                   send(msg.chat_id_, msg.id_, 1, '*> AutoLeave Has Been Deactived !*', 1, 'md')
                 end
-                database:del('autoleave','yes')
+                database:del('autoleave','Off')
               end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]reload$") and is_sudo(msg) then
