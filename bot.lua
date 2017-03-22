@@ -1451,6 +1451,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Has Been Promoted!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('عزل','demote')
 	if text:match("^[#!/]demote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function demote_by_reply(extra, result, success)
 	local hash = 'bot:mods:'..msg.chat_id_
@@ -1486,6 +1487,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Demoted!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('بن','ban')
 	if text:match("^[#!/]ban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function ban_by_reply(extra, result, success)
 	local hash = 'bot:banned:'..msg.chat_id_
@@ -1535,6 +1537,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	end
     end
 	-----------------------------------------------------------------------------------------------
+				local text = msg.content_.text_:gsub('سوپربن','superban')
 			     if text:match("^[!#/]superban$") and is_sudo(msg) and msg.reply_to_message_id_ then
               function ban_by_reply(extra, result, success)
                 local hash = 'bot:gbanned:'
@@ -1584,7 +1587,8 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                 chat_kick(msg.chat_id_, result.id_)
 					end
             end
-	-----------------------------------------------------------------------------------------------			
+	-----------------------------------------------------------------------------------------------	
+			local text = msg.content_.text_:gsub('پاک کردن همه','delall')
 	if text:match("^[#!/]delall$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function delall_by_reply(extra, result, success)
 	if is_mod(result.sender_user_id_, result.chat_id_) then
@@ -1625,6 +1629,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	      resolve_username(ap[2],delall_by_username)
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('انبن','unban')
 	if text:match("^[#!/]unban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function unban_by_reply(extra, result, success)
 	local hash = 'bot:banned:'..msg.chat_id_
@@ -1658,6 +1663,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Unbanned!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('بیصدا','muteuser')
 	if text:match("^[#!/]muteuser$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function mute_by_reply(extra, result, success)
 	local hash = 'bot:muted:'..msg.chat_id_
@@ -1704,6 +1710,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	end
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('صدادار','unmuteuser')
 	if text:match("^[#!/]unmuteuser$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function unmute_by_reply(extra, result, success)
 	local hash = 'bot:muted:'..msg.chat_id_
@@ -1737,6 +1744,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Has Been Unmuted!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('ادمین','setowner')
 	if text:match("^[#!/]setowner$") and is_admin(msg.sender_user_id_) and msg.reply_to_message_id_ then
 	function setowner_by_reply(extra, result, success)
 	local hash = 'bot:owners:'..msg.chat_id_
@@ -1770,6 +1778,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Promoted to GroupOwner!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+	local text = msg.content_.text_:gsub('عزل ادمین','demowner')
 	if text:match("^[#!/]demowner$") and is_admin(msg.sender_user_id_) and msg.reply_to_message_id_ then
 	function deowner_by_reply(extra, result, success)
 	local hash = 'bot:owners:'..msg.chat_id_
@@ -1805,6 +1814,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Removed From GroupOwners!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('ادمین ربات','addadmin')
 	if text:match("^[#!/]addadmin$") and is_sudo(msg) and msg.reply_to_message_id_ then
 	function addadmin_by_reply(extra, result, success)
 	local hash = 'bot:admins:'
@@ -1838,6 +1848,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Added to Bot Admins!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+		local text = msg.content_.text_:gsub('عزل ادمین ربات','remadmin')
 	if text:match("^[#!/]remadmin$") and is_sudo(msg) and msg.reply_to_message_id_ then
 	function deadmin_by_reply(extra, result, success)
 	local hash = 'bot:admins:'
@@ -1873,7 +1884,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Removed From Admins!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]modlist$") or text:match("^[#!/]modlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]modlist$") or text:match("^[#!/]modlist$") or text:match("^[#!/]لیست مدیران$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:mods:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*Modlist:*\n\n"
@@ -1892,7 +1903,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]mutelist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]mutelist$") or or text:match("^[#!/]لیست بیصداها$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:muted:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*MuteList:*\n\n"
