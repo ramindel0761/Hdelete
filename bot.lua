@@ -1430,8 +1430,8 @@ if text:match("^[#!/]promote$") or text:match("^ارتقا$") and is_owner(msg.s
 	      getMessage(msg.chat_id_, msg.reply_to_message_id_,promote_by_reply)
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]promote @(.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](promote) @(.*)$")} 
+	if text:match("^[#!/]promote @(.*)$") or text:match("^ارتقا @(.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+	local ap = {string.match(text, "^[#/!](promote) @(.*)$","^ارتقا @(.*)$")} 
 	function promote_by_username(extra, result, success)
 	if result.id_ then
 	        database:sadd('bot:mods:'..msg.chat_id_, result.id_)
