@@ -1903,7 +1903,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]mutelist$") or or text:match("^[#!/]لیست بیصداها$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]mutelist$") or text:match("^[#!/]لیست بیصداها$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:muted:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*MuteList:*\n\n"
