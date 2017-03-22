@@ -1417,7 +1417,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
 	     chat_leave(msg.chat_id_, bot_id)
     end
 	-----------------------------------------------------------------------------------------------
-if text:match("^[#!/]promote$") or text:match("^ارتقا$") is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
+if text:match("^[#!/]promote$") or text:match("^ارتقا$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function promote_by_reply(extra, result, success)
 	local hash = 'bot:mods:'..msg.chat_id_
 	if database:sismember(hash, result.sender_user_id_) then
