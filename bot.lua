@@ -2007,7 +2007,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
   end
   -----------------------------------------------------------------------------------------------
 -----------------------------------------Setlang-------------------------------------------------
-  if text:match("^[Ss]etlang (.*)$") or text:match("^تنظیم زبان (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+  if text:match("^[!/#][Ss]etlang (.*)$") or text:match("^[!/#]تنظیم زبان (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
           local langs = {string.match(text, "^(.*) (.*)$")}
           if langs[2] == "fa" or langs[2] == "فارسی" then
             if not database:get('lang:gp:'..msg.chat_id_) then
