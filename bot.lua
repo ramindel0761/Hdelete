@@ -2006,6 +2006,27 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
    getMessage(msg.chat_id_, msg.reply_to_message_id_,id_by_reply)
   end
   -----------------------------------------------------------------------------------------------
+-----------------------------------------Setlang-------------------------------------------------
+  if text:match("^[Ss]etlang (.*)$") or text:match("^تنظیم زبان (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+          local langs = {string.match(text, "^(.*) (.*)$")}
+          if langs[2] == "fa" or langs[2] == "فارسی" then
+            if not database:get('lang:gp:'..msg.chat_id_) then
+              send(msg.chat_id_, msg.id_, 1, '> زبان ربات از قبل روی فارسی قرار دارد!', 1, 'md')
+            else
+              send(msg.chat_id_, msg.id_, 1, '>زبان ربات فارسی شد! ', 1, 'md')
+              database:del('lang:gp:'..msg.chat_id_)
+            end
+          end
+          if langs[2] == "en" or langs[2] == "انگلیسی" then
+            if database:get('lang:gp:'..msg.chat_id_) then
+              send(msg.chat_id_, msg.id_, 1, '> *Bot Lang Is Already En*!', 1, 'md')
+            else
+              send(msg.chat_id_, msg.id_, 1, '_> Bot Lang Changed To_ : *En*!', 1, 'md')
+              database:set('lang:gp:'..msg.chat_id_,true)
+            end
+          end
+        end
+-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]id @(.*)$") then
 	local ap = {string.match(text, "^[#/!](id) @(.*)$")} 
 	function id_by_username(extra, result, success)
