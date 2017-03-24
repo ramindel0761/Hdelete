@@ -189,7 +189,7 @@ end
 function getChatId(id)
   local chat = {}
   local id = tostring(id)
-  
+
   if id:match('^-100') then
     local channel_id = id:gsub('-100', '')
     chat = {ID = channel_id, type = 'channel'}
@@ -197,7 +197,7 @@ function getChatId(id)
     local group_id = id:gsub('-', '')
     chat = {ID = group_id, type = 'group'}
   end
-  
+
   return chat
 end
   -----------------------------------------------------------------------------------------------
@@ -227,10 +227,10 @@ function do_notify (user, msg)
   n:show ()
 end
   -----------------------------------------------------------------------------------------------
-local function getParseMode(parse_mode)  
+local function getParseMode(parse_mode)
   if parse_mode then
     local mode = parse_mode:lower()
-  
+
     if mode == 'markdown' or mode == 'md' then
       P = {ID = "TextParseModeMarkdown"}
     elseif mode == 'html' then
@@ -304,7 +304,7 @@ end
 -----------------------------------------------------------------------------------------------
 local function send(chat_id, reply_to_message_id, disable_notification, text, disable_web_page_preview, parse_mode)
   local TextParseMode = getParseMode(parse_mode)
-  
+
   tdcli_function ({
     ID = "SendMessage",
     chat_id_ = chat_id,
@@ -408,8 +408,8 @@ end
 -----------------------------------------------------------------------------------------------
 function delete_msg(chatid,mid)
   tdcli_function ({
-  ID="DeleteMessages", 
-  chat_id_=chatid, 
+  ID="DeleteMessages",
+  chat_id_=chatid,
   message_ids_=mid
   },
   dl_cb, nil)
@@ -501,14 +501,14 @@ function getUser(user_id, cb)
   }, cb, nil)
 end
 -----------------------------------------------------------------------------------------------
-function pin(channel_id, message_id, disable_notification) 
-   tdcli_function ({ 
-     ID = "PinChannelMessage", 
-     channel_id_ = getChatId(channel_id).ID, 
-     message_id_ = message_id, 
-     disable_notification_ = disable_notification 
-   }, dl_cb, nil) 
-end 
+function pin(channel_id, message_id, disable_notification)
+   tdcli_function ({
+     ID = "PinChannelMessage",
+     channel_id_ = getChatId(channel_id).ID,
+     message_id_ = message_id,
+     disable_notification_ = disable_notification
+   }, dl_cb, nil)
+end
 -----------------------------------------------------------------------------------------------
 function tdcli_update_callback(data)
 	-------------------------------------------
@@ -532,7 +532,7 @@ function tdcli_update_callback(data)
              --vardump(result)
        end
 	      getMessage(msg.chat_id_, msg.reply_to_message_id_,get_mymsg_contact)
-         return false 
+         return false
       end
     -------------* EXPIRE *-----------------
     if not database:get("bot:charge:"..msg.chat_id_) then
@@ -731,7 +731,7 @@ function tdcli_update_callback(data)
   -----------------------------------------------------------------------------------------------
   -------------------------------------- Process mod --------------------------------------------
   -----------------------------------------------------------------------------------------------
-  
+
   -------------------------------------------------------------------------------------------------------
   -------------------------------------------------------------------------------------------------------
   --------------------------******** START MSG CHECKS ********-------------------------------------------
@@ -742,28 +742,28 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
         local msgs = {[0] = id}
         local chat = msg.chat_id_
 		  chat_kick(msg.chat_id_, msg.sender_user_id_)
-		  return 
+		  return
 end
 if is_muted(msg.sender_user_id_, msg.chat_id_) then
         local id = msg.id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
           delete_msg(chat,msgs)
-		  return 
+		  return
 end
 if is_gbanned(msg.sender_user_id_) then
         local id = msg.id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
 		  chat_kick(msg.chat_id_, msg.sender_user_id_)
-		   return 
-end	
+		   return
+end
 if database:get('bot:muteall'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
         local id = msg.id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
         delete_msg(chat,msgs)
-        return 
+        return
 end
     database:incr('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
 	database:incr('group:msgs'..msg.chat_id_)
@@ -775,7 +775,7 @@ if msg.content_.ID == "MessagePinMessage" then
          pin(msg.chat_id_,pin_id,0)
    end
 end
-if database:get('bot:viewget'..msg.sender_user_id_) then 
+if database:get('bot:viewget'..msg.sender_user_id_) then
     if not msg.forward_info_ then
 		send(msg.chat_id_, msg.id_, 1, '_Got a problem!!_\n*Please Send Again Command And forward your post*', 1, 'md')
 		database:del('bot:viewget'..msg.sender_user_id_)
@@ -802,7 +802,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return 
+          return
    end
    if caption_text then
       check_filter_words(msg, caption_text)
@@ -863,7 +863,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return 
+          return
    end
    end
   elseif msg_type == 'MSG:Sticker' then
@@ -873,7 +873,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return 
+          return
    end
    end
 elseif msg_type == 'MSG:NewUserLink' then
@@ -882,7 +882,7 @@ elseif msg_type == 'MSG:NewUserLink' then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return 
+          return
    end
    function get_welcome(extra,result,success)
     if database:get('welcome:'..msg.chat_id_) then
@@ -904,7 +904,7 @@ elseif msg_type == 'MSG:NewUserAdd' then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return 
+          return
    end
       --vardump(msg)
    if msg.content_.members_[0].username_ and msg.content_.members_[0].username_:match("[Bb][Oo][Tt]$") then
@@ -945,7 +945,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return 
+          return
    end
    end
 elseif msg_type == 'MSG:Audio' then
@@ -965,7 +965,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return 
+          return
    end
    if caption_text then
       check_filter_words(msg, caption_text)
@@ -1036,7 +1036,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return  
+          return
    end
    if caption_text then
       check_filter_words(msg, caption_text)
@@ -1107,7 +1107,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return  
+          return
    end
    if caption_text then
       check_filter_words(msg, caption_text)
@@ -1178,7 +1178,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return  
+          return
    end
    if caption_text then
       check_filter_words(msg, caption_text)
@@ -1249,7 +1249,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     local msgs = {[0] = id}
     local chat = msg.chat_id_
        delete_msg(chat,msgs)
-          return  
+          return
    end
    if caption_text then
    check_filter_words(msg, caption_text)
@@ -1301,7 +1301,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
         delete_msg(chat,msgs)
 	end
    end
-   end	
+   end
    end
 elseif msg_type == 'MSG:Text' then
  --vardump(msg)
@@ -1406,7 +1406,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
   -------------------------------------------------------------------------------------------------------
   -------------------------------------------------------------------------------------------------------
   if database:get('bot:cmds'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
-  return 
+  return
   else
     ------------------------------------ With Pattern -------------------------------------------
 	if text:match("^[#!/]ping$") then
@@ -1418,7 +1418,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     end
 	----------------------------------------------------------------------------------------------
 	local text = msg.content_.text_:gsub('ارتقا','promote')
-	local text = msg.content_.text_:gsub('p','promote')
+  local text = msg.content_.text_:gsub('p','promote')
 if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function promote_by_reply(extra, result, success)
 	local hash = 'bot:mods:'..msg.chat_id_
@@ -1433,12 +1433,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote @(.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](promote) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](promote) @(.*)$")}
 	function promote_by_username(extra, result, success)
 	if result.id_ then
 	        database:sadd('bot:mods:'..msg.chat_id_, result.id_)
             texts = '*User* `|'..result.id_..'|` *Has Been Promoted!*'
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1447,12 +1447,13 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote (%d+)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](promote) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](promote) (%d+)$")}
 	        database:sadd('bot:mods:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Has Been Promoted!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('عزل','demote')
+    local text = msg.content_.text_:gsub('d','demote')
 	if text:match("^[#!/]demote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function demote_by_reply(extra, result, success)
 	local hash = 'bot:mods:'..msg.chat_id_
@@ -1468,12 +1469,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]demote @(.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:mods:'..msg.chat_id_
-	local ap = {string.match(text, "^[#/!](demote) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](demote) @(.*)$")}
 	function demote_by_username(extra, result, success)
 	if result.id_ then
          database:srem(hash, result.id_)
             texts = '*User* `|'..result.id_..'|` *Has Been Demoted!*'
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1483,12 +1484,13 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]demote (%d+)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:mods:'..msg.chat_id_
-	local ap = {string.match(text, "^[#/!](demote) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](demote) (%d+)$")}
          database:srem(hash, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Demoted!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('بن','ban')
+    local text = msg.content_.text_:gsub('b','ban')
 	if text:match("^[#!/]ban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function ban_by_reply(extra, result, success)
 	local hash = 'bot:banned:'..msg.chat_id_
@@ -1509,7 +1511,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]ban @(.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](ban) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](ban) @(.*)$")}
 	function ban_by_username(extra, result, success)
 	if result.id_ then
 	if is_mod(result.id_, msg.chat_id_) then
@@ -1519,7 +1521,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
             texts = '*User* `|'..result.id_..'|` *Banned!*'
 		 chat_kick(msg.chat_id_, result.id_)
 	end
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1539,6 +1541,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 				local text = msg.content_.text_:gsub('سوپربن','superban')
+        local text = msg.content_.text_:gsub('sb','superban')
 			     if text:match("^[!#/]superban$") and is_sudo(msg) and msg.reply_to_message_id_ then
               function ban_by_reply(extra, result, success)
                 local hash = 'bot:gbanned:'
@@ -1588,8 +1591,9 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
                 chat_kick(msg.chat_id_, result.id_)
 					end
             end
-	-----------------------------------------------------------------------------------------------	
+	-----------------------------------------------------------------------------------------------
 			local text = msg.content_.text_:gsub('پاک کردن همه','delall')
+      local text = msg.content_.text_:gsub('delall','da')
 	if text:match("^[#!/]delall$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function delall_by_reply(extra, result, success)
 	if is_mod(result.sender_user_id_, result.chat_id_) then
@@ -1603,7 +1607,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]delall (%d+)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-		local ass = {string.match(text, "^[#/!](delall) (%d+)$")} 
+		local ass = {string.match(text, "^[#/!](delall) (%d+)$")}
 	if is_mod(ass[2], msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '*You Can,t Delete Msgs from Moderators!!*', 1, 'md')
     else
@@ -1613,7 +1617,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]delall @(.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](delall) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](delall) @(.*)$")}
 	function delall_by_username(extra, result, success)
 	if result.id_ then
 	if is_mod(result.id_, msg.chat_id_) then
@@ -1622,7 +1626,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 		 		     del_all_msgs(msg.chat_id_, result.id_)
             text = '*All Msgs From* `|'..result.id_..'|` *Has been Deleted!!*'
-            else 
+            else
             text = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
@@ -1631,6 +1635,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('انبن','unban')
+    local text = msg.content_.text_:gsub('ub','unban')
 	if text:match("^[#!/]unban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function unban_by_reply(extra, result, success)
 	local hash = 'bot:banned:'..msg.chat_id_
@@ -1645,12 +1650,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]unban @(.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](unban) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](unban) @(.*)$")}
 	function unban_by_username(extra, result, success)
 	if result.id_ then
          database:srem('bot:banned:'..msg.chat_id_, result.id_)
             text = '*User* `|'..result.id_..'|` *Unbanned!*'
-            else 
+            else
             text = '*User InCorrect'
     end
 	         send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
@@ -1659,12 +1664,13 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]unban (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](unban) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](unban) (%d+)$")}
 	        database:srem('bot:banned:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Unbanned!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('بیصدا','muteuser')
+    local text = msg.content_.text_:gsub('muteuser','m')
 	if text:match("^[#!/]muteuser$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function mute_by_reply(extra, result, success)
 	local hash = 'bot:muted:'..msg.chat_id_
@@ -1683,7 +1689,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]muteuser @(.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](muteuser) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](muteuser) @(.*)$")}
 	function mute_by_username(extra, result, success)
 	if result.id_ then
 	if is_mod(result.id_, msg.chat_id_) then
@@ -1693,7 +1699,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
             texts = '*User* `|'..result.id_..'|` *Muted!*'
 		 chat_kick(msg.chat_id_, result.id_)
 	end
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1712,6 +1718,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('صدادار','unmuteuser')
+    local text = msg.content_.text_:gsub('unmuteuser','um')
 	if text:match("^[#!/]unmuteuser$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function unmute_by_reply(extra, result, success)
 	local hash = 'bot:muted:'..msg.chat_id_
@@ -1726,12 +1733,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]unmuteuser @(.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](unmuteuser) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](unmuteuser) @(.*)$")}
 	function unmute_by_username(extra, result, success)
 	if result.id_ then
          database:srem('bot:muted:'..msg.chat_id_, result.id_)
             text = '*User* `|'..result.id_..'|` *Has Been Unmuted!*'
-            else 
+            else
             text = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
@@ -1740,12 +1747,13 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]unmuteuser (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](unmuteuser) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](unmuteuser) (%d+)$")}
 	        database:srem('bot:muted:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Has Been Unmuted!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('ادمین','setowner')
+    local text = msg.content_.text_:gsub('setowner','sow')
 	if text:match("^[#!/]setowner$") and is_admin(msg.sender_user_id_) and msg.reply_to_message_id_ then
 	function setowner_by_reply(extra, result, success)
 	local hash = 'bot:owners:'..msg.chat_id_
@@ -1760,12 +1768,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setowner @(.*)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](setowner) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](setowner) @(.*)$")}
 	function setowner_by_username(extra, result, success)
 	if result.id_ then
 	        database:sadd('bot:owners:'..msg.chat_id_, result.id_)
             texts = '*User* `|'..result.id_..'|` *Promoted to GroupOwner!*'
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1774,12 +1782,13 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setowner (%d+)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-	local ap = {string.match(text, "^[#/!](setowner) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](setowner) (%d+)$")}
 	        database:sadd('bot:owners:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Promoted to GroupOwner!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	local text = msg.content_.text_:gsub('عزل ادمین','demowner')
+  local text = msg.content_.text_:gsub('demowner','dow')
 	if text:match("^[#!/]demowner$") and is_admin(msg.sender_user_id_) and msg.reply_to_message_id_ then
 	function deowner_by_reply(extra, result, success)
 	local hash = 'bot:owners:'..msg.chat_id_
@@ -1795,12 +1804,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]demowner @(._)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:owners:'..msg.chat_id_
-	local ap = {string.match(text, "^[#/!](demowner) @(._)$")} 
+	local ap = {string.match(text, "^[#/!](demowner) @(._)$")}
 	function remowner_by_username(extra, result, success)
 	if result.id_ then
          database:srem(hash, result.id_)
             texts = '*User* `|'..result.id_..'|` *Removed From GroupOwners!*'
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1810,12 +1819,13 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]demowner (%d+)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:owners:'..msg.chat_id_
-	local ap = {string.match(text, "^[#/!](demowner) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](demowner) (%d+)$")}
          database:srem(hash, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Removed From GroupOwners!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('ادمین ربات','addadmin')
+    local text = msg.content_.text_:gsub('addadmin','aa')
 	if text:match("^[#!/]addadmin$") and is_sudo(msg) and msg.reply_to_message_id_ then
 	function addadmin_by_reply(extra, result, success)
 	local hash = 'bot:admins:'
@@ -1830,26 +1840,27 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]addadmin @(.*)$") and is_sudo(msg) then
-	local ap = {string.match(text, "^[#/!](addadmin) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](addadmin) @(.*)$")}
 	function addadmin_by_username(extra, result, success)
 	if result.id_ then
 	        database:sadd('bot:admins:', result.id_)
             texts = '*User* `|'..result.id_..'|` *Added To Bot Admins!*'
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
     end
 	      resolve_username(ap[2],addadmin_by_username)
     end
-	-----------------------------------------------------------------------------------------------		
+	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]addadmin (%d+)$") and is_sudo(msg) then
-	local ap = {string.match(text, "^[#/!](addadmin) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](addadmin) (%d+)$")}
 	        database:sadd('bot:admins:', ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Added to Bot Admins!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 		local text = msg.content_.text_:gsub('عزل ادمین ربات','remadmin')
+    local text = msg.content_.text_:gsub('remadmin','ra')
 	if text:match("^[#!/]remadmin$") and is_sudo(msg) and msg.reply_to_message_id_ then
 	function deadmin_by_reply(extra, result, success)
 	local hash = 'bot:admins:'
@@ -1865,12 +1876,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]remadmin @(.*)$") and is_sudo(msg) then
 	local hash = 'bot:admins:'
-	local ap = {string.match(text, "^[#/!](remadmin) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](remadmin) @(.*)$")}
 	function remadmin_by_username(extra, result, success)
 	if result.id_ then
          database:srem(hash, result.id_)
             texts = '*User* `|'..result.id_..'|` *Removed From Bot Admins!*'
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1880,12 +1891,12 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]remadmin (%d+)$") and is_sudo(msg) then
 	local hash = 'bot:admins:'
-	local ap = {string.match(text, "^[#/!](remadmin) (%d+)$")} 	
+	local ap = {string.match(text, "^[#/!](remadmin) (%d+)$")}
          database:srem(hash, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `|'..ap[2]..'|` *Removed From Admins!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]modlist$") or text:match("^[#!/]modlist$") or text:match("^[#!/]لیست مدیران$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]modlist$") or text:match("^[#!/]mods$") or text:match("^[#!/]لیست مدیران$") or text:match("^[#!/]ml$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:mods:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*Modlist:*\n\n"
@@ -1904,7 +1915,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]mutelist$") or text:match("^[#!/]لیست بیصداها$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]mutelist$") or text:match("^[#!/]لیست بیصداها$") or text:match("^[#!/]mul$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:muted:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*MuteList:*\n\n"
@@ -1923,7 +1934,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]owner$") or text:match("^[#!/]owners$") or text:match("^[#!/]owners$") and is_sudo(msg) then
+	if text:match("^[#!/]owner$") or text:match("^[#!/]owners$") or text:match("^[#!/]owners$") or text:match("^[#!/]owl$") and is_sudo(msg) then
     local hash =  'bot:owners:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*Owner's List:*\n\n"
@@ -1942,7 +1953,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]banlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]banlist$") or text:match("^[#!/]bl$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:banned:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*Banlist*\n\n"
@@ -1961,7 +1972,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-				if text:match("^[#!/]gbanlist$") and is_sudo(msg) then
+				if text:match("^[#!/]gbanlist$") or text:match("^[#!/]gbl$") and is_sudo(msg) then
     local hash =  'bot:gbanned:'..msg.chat_id_
 	local list = database:smembers(hash)
 	local text = "*Globall Banlist*\n\n"
@@ -1980,7 +1991,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]adminlist$") and is_sudo(msg) then
+	if text:match("^[#!/]adminlist$") or text:match("^[#!/]al$") and is_sudo(msg) then
     local hash =  'bot:admins:'
 	local list = database:smembers(hash)
 	local text = "*Admins:*\n\n"
@@ -2008,7 +2019,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
   end
   -----------------------------------------------------------------------------------------------
 -----------------------------------------Setlang-------------------------------------------------
-  if text:match("^[!/#][Ss]etlang (.*)$") or text:match("^[!/#]تنظیم زبان (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+  if text:match("^[!/#][Ss]etlang (.*)$") or text:match("^[!/#]تنظیم زبان (.*)$") or text:match("^[#!/]sl$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
           local langs = {string.match(text, "^(.*) (.*)$")}
           if langs[2] == "fa" or langs[2] == "فارسی" then
             if not database:get('lang:gp:'..msg.chat_id_) then
@@ -2029,7 +2040,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
         end
 -----------------------------------------------------------------------------------------------
     if text:match("^[#!/]id @(.*)$") then
-	local ap = {string.match(text, "^[#/!](id) @(.*)$")} 
+	local ap = {string.match(text, "^[#/!](id) @(.*)$")}
 	function id_by_username(extra, result, success)
 	if result.id_ then
 	if is_sudo(result) then
@@ -2044,7 +2055,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	  t = 'Member'
 	  end
             texts = '*Username* : `@'..ap[2]..'`\n*Your ID* : `('..result.id_..')`\n*Your Rank* : `'..t..'`'
-            else 
+            else
             texts = '*UserName InCorrect!*'
     end
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -2052,7 +2063,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	      resolve_username(ap[2],id_by_username)
     end
     -----------------------------------------------------------------------------------------------
- if text:match("^[#!/]kick$") or text:match("^[#!/]block$") and msg.reply_to_message_id_ and is_mod(msg.sender_user_id_, msg.chat_id_) then
+ if text:match("^[#!/]kick$") or text:match("^[#!/]block$") or text:match("^[#!/]k$") or text:match("^[#!/]b$") and msg.reply_to_message_id_ and is_mod(msg.sender_user_id_, msg.chat_id_) then
       function kick_reply(extra, result, success)
 	if is_mod(result.sender_user_id_, result.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '*You Cant Ban|Kick Admins!*', 1, 'md')
@@ -2088,7 +2099,7 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	end
 	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]getpro (%d+)$") and msg.reply_to_message_id_ == 0  then
-		local pronumb = {string.match(text, "^[#/!](getpro) (%d+)$")} 
+		local pronumb = {string.match(text, "^[#/!](getpro) (%d+)$")}
 local function gpro(extra, result, success)
 --vardump(result)
    if pronumb[2] == '1' then
@@ -2163,8 +2174,9 @@ local function gpro(extra, result, success)
   }, gpro, nil)
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('lock','l')
 	if text:match("^[#!/]lock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local lockpt = {string.match(text, "^[#/!](lock) (.*)$")} 
+	local lockpt = {string.match(text, "^[#/!](lock) (.*)$")}
     --[[  if lockpt[2] == "edit" then
          send(msg.chat_id_, msg.id_, 1, '*Now, Members Cant Edit Messages!*', 1, 'md')
          database:set('editmsg'..msg.chat_id_,'delmsg')
@@ -2187,8 +2199,9 @@ local function gpro(extra, result, success)
       end
 	end
 	-----------------------------------------------------------------------------------------------
+ local text = msg.content_.text_:gsub('setflood','sf')
 if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local floodmax = {string.match(text, "^[#/!](setflood) (%d+)$")} 
+	local floodmax = {string.match(text, "^[#/!](setflood) (%d+)$")}
 	if tonumber(floodmax[2]) < 2 then
          send(msg.chat_id_, msg.id_, 1, '*Your Number So Low!*\n`Minimum:` *2*', 1, 'md')
 	else
@@ -2197,8 +2210,9 @@ if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_
 	end
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('setfloodtime','sft')
 	if text:match("^[#!/]setfloodtime (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local floodt = {string.match(text, "^[#/!](setfloodtime) (%d+)$")} 
+	local floodt = {string.match(text, "^[#/!](setfloodtime) (%d+)$")}
 	if tonumber(floodt[2]) < 2 then
          send(msg.chat_id_, msg.id_, 1, '`Error.`\n*Your Number So Low!*\n`Minimum:` *2*', 1, 'md')
 	else
@@ -2207,49 +2221,50 @@ if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_
 	end
 	end
 	-----------------------------------------------[Lock - Edit]------------------------------------------------
-	if text:match("^[#!/]lock edit$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]lock edit$") or text:match("^[#!/]l edit$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '*Edit Has Been Locked!*', 1, 'md')
          database:set('editmsg'..msg.chat_id_,'didam')
 	end
 	------------------------------------------[Unlock - Edit]-----------------------------------------------------
-	if text:match("^[#!/]unlock edit$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]ul edit$") or text:match("^[#!/]unlock edit$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '*Edit Has Been UnLocked!*', 1, 'md')
          database:del('editmsg'..msg.chat_id_,'didam')
 	end
 	-----------------------------------------------------------------------------------------------
-if text:match("^[#!/]setlink$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+if text:match("^[#!/]setlink$") or text:match("^[#!/]sl$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '*Now, Send Me GroupLink!*', 1, 'md')
          database:set("bot:group:link"..msg.chat_id_, 'Send Your GroupLink')
 	end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]link$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]link$") or text:match("^[#!/]l$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local link = database:get("bot:group:link"..msg.chat_id_)
 	  if link then
          send(msg.chat_id_, msg.id_, 1, '*GroupLink:* \n'..link, 1, 'md')
-	  else 
+	  else
          send(msg.chat_id_, msg.id_, 1, '_Bot Is Not Group_ *Creator*.\n*You Can Set Link By* /setlink *Command!*', 1, 'md')
 	  end
  	end
-	
+
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]welcome on$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]welcome on$") or text:match("^[#!/]w on$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '> Welcome *Enabled* In This Supergroup!', 1, 'md')
 		 database:set("bot:welcome"..msg.chat_id_,true)
 	end
-	if text:match("^[#!/]welcome off$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]welcome off$") or text:match("^[#!/]w off$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '> Welcome *Disabled* In This Supergroup!', 1, 'md')
 		 database:del("bot:welcome"..msg.chat_id_)
 	end
+    local text = msg.content_.text_:gsub('set welcome','sw')
 	if text:match("^[#!/]set welcome (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local welcome = {string.match(text, "^[#/!](set welcome) (.*)$")} 
+	local welcome = {string.match(text, "^[#/!](set welcome) (.*)$")}
          send(msg.chat_id_, msg.id_, 1, '*Welcome Msg Has Been Saved!*\nWlc Text:\n\n`'..welcome[2]..'`', 1, 'md')
 		 database:set('welcome:'..msg.chat_id_,welcome[2])
 	end
-	if text:match("^[#!/]del welcome$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]del welcome$") or text:match("^[#!/]dw$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '*Welcome Msg Has Been Deleted!*', 1, 'md')
 		 database:del('welcome:'..msg.chat_id_)
 	end
-	if text:match("^[#!/]get welcome$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]get welcome$") or text:match("^[#!/]gw$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local wel = database:get('welcome:'..msg.chat_id_)
 	if wel then
          send(msg.chat_id_, msg.id_, 1, wel, 1, 'md')
@@ -2258,37 +2273,40 @@ if text:match("^[#!/]setlink$") and is_mod(msg.sender_user_id_, msg.chat_id_) th
 	end
 	end
 	-----------------------------------------------------------------------------------------------
+      local text = msg.content_.text_:gsub('action','a')
 	if text:match("^[#!/]action (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local lockpt = {string.match(text, "^[#/!](action) (.*)$")} 
-      if lockpt[2] == "typing" then
+	local lockpt = {string.match(text, "^[#/!](action) (.*)$")}
+      if lockpt[2] == "typing" or "ty" then
           sendaction(msg.chat_id_, 'Typing')
 	  end
-	  if lockpt[2] == "video" then
+	  if lockpt[2] == "video" or "vi" then
           sendaction(msg.chat_id_, 'RecordVideo')
 	  end
-	  if lockpt[2] == "voice" then
+	  if lockpt[2] == "voice" or "vo" then
           sendaction(msg.chat_id_, 'RecordVoice')
 	  end
-	  if lockpt[2] == "photo" then
+	  if lockpt[2] == "photo" or "ph" then
           sendaction(msg.chat_id_, 'UploadPhoto')
 	  end
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('filter','f')
 	if text:match("^[#!/]filter (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local filters = {string.match(text, "^[#/!](filter) (.*)$")} 
+	local filters = {string.match(text, "^[#/!](filter) (.*)$")}
     local name = string.sub(filters[2], 1, 50)
           database:hset('bot:filters:'..msg.chat_id_, name, 'filtered')
 		  send(msg.chat_id_, msg.id_, 1, "*New Word Filtered!*\n> `"..name.."`", 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('rw','uf')
 	if text:match("^[#!/]rw (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local rws = {string.match(text, "^[#/!](rw) (.*)$")} 
+	local rws = {string.match(text, "^[#/!](rw) (.*)$")}
     local name = string.sub(rws[2], 1, 50)
           database:hdel('bot:filters:'..msg.chat_id_, rws[2])
 		  send(msg.chat_id_, msg.id_, 1, "`"..rws[2].."` *Removed From Filtered List!*", 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]filterlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]filterlist$") or text:match("^[!/#]fl$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:filters:'..msg.chat_id_
       if hash then
          local names = database:hkeys(hash)
@@ -2303,17 +2321,18 @@ if text:match("^[#!/]setlink$") and is_mod(msg.sender_user_id_, msg.chat_id_) th
        end
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('broadcast','bc')
 	if text:match("^[#!/]broadcast (.*)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
     local gps = database:scard("bot:groups") or 0
     local gpss = database:smembers("bot:groups") or 0
-	local rws = {string.match(text, "^[#/!](broadcast) (.*)$")} 
+	local rws = {string.match(text, "^[#/!](broadcast) (.*)$")}
 	for i=1, #gpss do
 		  send(gpss[i], 0, 1, rws[2], 1, 'md')
     end
                    send(msg.chat_id_, msg.id_, 1, '*Your Msg Send to* `|'..gps..'|` *Groups*!', 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
-if text:match("^[#!/]stats$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
+if text:match("^[#!/]stats$") or text:match("^[#!/]st$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
     local gps = database:scard("bot:groups")
 	local users = database:scard("bot:userss")
     local allmgs = database:get("bot:allmsgs")
@@ -2327,8 +2346,9 @@ if text:match("^[#!/]stats$") and is_admin(msg.sender_user_id_, msg.chat_id_) th
                    send(msg.chat_id_, msg.id_, 1, '*Stats:*\n\n> *Groups*:  `'..gps..'`\n> *Users*:  `'..users..'`\n> *All Recieved Msgs*:  `'..allmgs..'`\n> *AutoLeave*:  `'..autoleave..'`', 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('unlock','ul')
 if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local unlockpt = {string.match(text, "^[#/!](unlock) (.*)$")} 
+	local unlockpt = {string.match(text, "^[#/!](unlock) (.*)$")}
   --[[    if unlockpt[2] == "edit" then
        send(msg.chat_id_, msg.id_, 1, '*Now, Members Allowed to Edit Msgs!*', 1, 'md')
          database:del('editmsg'..msg.chat_id_)
@@ -2351,14 +2371,16 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
       end
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('mute all','mua')
   	 	if text:match("^[#!/]mute all (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local mutept = {string.match(text, "^[#!/]mute all (%d+)$")}
 	    		database:setex('bot:muteall'..msg.chat_id_, tonumber(mutept[1]), true)
          send(msg.chat_id_, msg.id_, 1, '*Group Muted For* `'..mutept[1]..'` *Seconds!*', 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('lock','l')
   		if text:match("^[#!/]lock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local mutept = {string.match(text, "^[#/!](lock) (.*)$")} 
+	local mutept = {string.match(text, "^[#/!](lock) (.*)$")}
       if mutept[2] == "all" then
          send(msg.chat_id_, msg.id_, 1, '*All Items Has Been Locked!*', 1, 'md')
 						database:set('bot:muteall'..msg.chat_id_,true)
@@ -2422,11 +2444,11 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	  if mutept[2] == "english" then
          send(msg.chat_id_, msg.id_, 1, '*English Has Been Locked!*', 1, 'md')
 						database:set('bot:english:mute'..msg.chat_id_,true)
-      end 
+      end
 	  if mutept[2] == "sticker" then
          send(msg.chat_id_, msg.id_, 1, '*Sticker Has Been Locked!*', 1, 'md')
 						database:set('bot:sticker:mute'..msg.chat_id_,true)
-      end 
+      end
 	  if mutept[2] == "service" then
          send(msg.chat_id_, msg.id_, 1, '*TGservice Msgs Has Been Locked!*', 1, 'md')
 						database:set('bot:tgservice:mute'..msg.chat_id_,true)
@@ -2437,8 +2459,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
       end
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('unlock','ul')
   	if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local unmutept = {string.match(text, "^[#/!](unlock) (.*)$")} 
+	local unmutept = {string.match(text, "^[#/!](unlock) (.*)$")}
       if unmutept[2] == "all" then
          send(msg.chat_id_, msg.id_, 1, '*All Items Has Been Allowed!*', 1, 'md')
          database:del('bot:muteall'..msg.chat_id_)
@@ -2514,26 +2537,24 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	  if unmutept[2] == "forward" then
          send(msg.chat_id_, msg.id_, 1, '*Forward Has Been Allowed!*', 1, 'md')
          database:del('bot:forward:mute'..msg.chat_id_)
-      end 
+      end
 	end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('edit','e')
   	if text:match("^[#!/]edit (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local editmsg = {string.match(text, "^[#/!](edit) (.*)$")} 
+	local editmsg = {string.match(text, "^[#/!](edit) (.*)$")}
 		 edit(msg.chat_id_, msg.reply_to_message_id_, nil, editmsg[2], 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-  	if text:match("^[#!/]user$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	          send(msg.chat_id_, msg.id_, 1, '*'..msg.from.username..'*', 1, 'md')
-    end
-	-----------------------------------------------------------------------------------------------
-    if text:match('^[!/#]update') and is_sudo(msg) then
+    if text:match('^[!/#]update') or text:match('^[!/#]u') and is_sudo(msg) then
           local s = io.popen("git pull")
           local text = ( s:read("*a") )
           send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
         end
-       -----------------------------------------------------------------------------------------------			
+       -----------------------------------------------------------------------------------------------
+       local text = msg.content_.text_:gsub('clean','c')
   	if text:match("^[#!/]clean (.*)$") then
-	local txt = {string.match(text, "^[#/!](clean) (.*)$")} 
+	local txt = {string.match(text, "^[#/!](clean) (.*)$")}
        if txt[2] == 'banlist' then
 	      database:del('bot:banned:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '_> Banlist has been_ *Cleaned*', 1, 'md')
@@ -2546,7 +2567,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
           end
       end
     channel_get_bots(msg.chat_id_,g_bots)
-	          send(msg.chat_id_, msg.id_, 1, '*> All bots* *kicked!*', 1, 'md')
+	          send(msg.chat_id_, msg.id_, 1, '*> All bots* *Kicked!*', 1, 'md')
 	end
 	   if txt[2] == 'modlist' and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	      database:del('bot:mods:'..msg.chat_id_)
@@ -2661,7 +2682,7 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	lock_pin = 'Locked'
 	else
 	lock_pin = 'Allowed'
-	end 
+	end
     ------------
 	if database:get('bot:sticker:mute'..msg.chat_id_) then
 	lock_sticker = 'Locked'
@@ -2772,33 +2793,38 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
          send(msg.chat_id_, msg.id_, 1, TXT, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('echo','ec')
   	if text:match("^[#!/]echo (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-	local txt = {string.match(text, "^[#/!](echo) (.*)$")} 
+	local txt = {string.match(text, "^[#/!](echo) (.*)$")}
          send(msg.chat_id_, msg.id_, 1, txt[2], 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('leave','le')
           if text:match("^[!/#][Ll]eave$") and is_sudo(msg) then
             chat_leave(msg.chat_id_, bot_id)
             database:srem("bot:groups",msg.chat_id_)
         end
  	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('setrules','sr')
     	if text:match("^[#!/]setrules (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local txt = {string.match(text, "^[#/!](setrules) (.*)$")}
 	database:set('bot:rules'..msg.chat_id_, txt[2])
          send(msg.chat_id_, msg.id_, 1, '*Group Rules Set!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('rules','r')
   	if text:match("^[#!/]rules$") then
 	local rules = database:get('bot:rules'..msg.chat_id_)
          send(msg.chat_id_, msg.id_, 1, rules, 1, nil)
     end
 	-----------------------------------------------------------------------------------------------
-  	if text:match("^[#!/]share$") and is_mod(msg) then
+  	if text:match("^[#!/]share$") or text:match("^[!/#]sh$") then
        sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 14433047824, 'SpheroTc', 'Update!', 323370170)
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('sn','setname')
 	if text:match("^[#!/]setname (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
-	local txt = {string.match(text, "^[#/!](setname) (.*)$")} 
+	local txt = {string.match(text, "^[#/!](setname) (.*)$")}
 	     changetitle(msg.chat_id_, txt[2])
          send(msg.chat_id_, msg.id_, 1, '*Group Name Updated!*_', 1, 'md')
     end
@@ -2810,20 +2836,21 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	     getUser(msg.sender_user_id_,guser_by_reply)
     end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]setphoto$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+	if text:match("^[#!/]setphoto$") or text:match("^[#!/]sp$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '_Please send a photo now!_', 1, 'md')
 		 database:set('bot:setphoto'..msg.chat_id_..':'..msg.sender_user_id_,true)
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('charge','setexpire','c','se')
 	if text:match("^[#!/]charge (%d+)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-		local a = {string.match(text, "^[#/!](charge) (%d+)$")} 
+		local a = {string.match(text, "^[#/!](charge) (%d+)$")}
          send(msg.chat_id_, msg.id_, 1, '*Group Charged for *`|'..a[2]..'|`* Days*', 1, 'md')
 		 local time = a[2] * day
          database:setex("bot:charge:"..msg.chat_id_,time,true)
 		 database:set("bot:enable:"..msg.chat_id_,true)
     end
 	-----------------------------------------------------------------------------------------------
-
+local text = msg.content_.text_:gsub('charge stats','expire','cst')
 	if text:match("^[#!/]charge stats") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local ex = database:ttl("bot:charge:"..msg.chat_id_)
        if ex == -1 then
@@ -2834,8 +2861,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
        end
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('charge stats','expire','cst')
 	if text:match("^[#!/]charge stats (%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-	local txt = {string.match(text, "^[#/!](charge stats) (%d+)$")} 
+	local txt = {string.match(text, "^[#/!](charge stats) (%d+)$")}
     local ex = database:ttl("bot:charge:"..txt[2])
        if ex == -1 then
 		send(msg.chat_id_, msg.id_, 1, '*Infinity!*', 1, 'md')
@@ -2847,15 +2875,17 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	-----------------------------------------------------------------------------------------------
 	 if is_sudo(msg) then
   -----------------------------------------------------------------------------------------------
-  if text:match("^[#!/]leave(-%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-  	local txt = {string.match(text, "^[#/!](leave)(-%d+)$")} 
+  local text = msg.content_.text_:gsub('leave','l')
+  if text:match("^[#!/]leave_(-%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
+  	local txt = {string.match(text, "^[#/!](leave)(-%d+)$")}
 	   send(msg.chat_id_, msg.id_, 1, '*Bot Succefulli Leaved From >* `|'..txt[2]..'|` *=)*', 1, 'md')
 	   send(txt[2], 0, 1, 'ربات ب دلایلی از گروه خارج میشود برای اطلاعات بیشتر ب یکی از دو ایدی زیر مراجعه کنید\n@MrBlacklife\n@niyazrobo', 1, 'html')
 	   chat_leave(txt[2], bot_id)
   end
   -----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('plan','p')
   if text:match('^[#!/]plan1(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-       local txt = {string.match(text, "^[#/!](plan1)(-%d+)$")} 
+       local txt = {string.match(text, "^[#/!](plan1)(-%d+)$")}
        local timeplan1 = 2592000
        database:setex("bot:charge:"..txt[2],timeplan1,true)
 	   send(msg.chat_id_, msg.id_, 1, 'پلن 1 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه تا 30 روز دیگر اعتبار دارد! ( 1 ماه )', 1, 'md')
@@ -2866,8 +2896,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	   database:set("bot:enable:"..txt[2],true)
   end
   -----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('plan','p')
   if text:match('^[#!/]plan2(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-       local txt = {string.match(text, "^[#/!](plan2)(-%d+)$")} 
+       local txt = {string.match(text, "^[#/!](plan2)(-%d+)$")}
        local timeplan2 = 7776000
        database:setex("bot:charge:"..txt[2],timeplan2,true)
 	   send(msg.chat_id_, msg.id_, 1, 'پلن 2 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه تا 90 روز دیگر اعتبار دارد! ( 3 ماه )', 1, 'md')
@@ -2878,8 +2909,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	   database:set("bot:enable:"..txt[2],true)
   end
   -----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('plan','p')
   if text:match('^[#!/]plan3(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-       local txt = {string.match(text, "^[#/!](plan3)(-%d+)$")} 
+       local txt = {string.match(text, "^[#/!](plan3)(-%d+)$")}
        database:set("bot:charge:"..txt[2],true)
 	   send(msg.chat_id_, msg.id_, 1, 'پلن 3 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه به صورت نامحدود شارژ شد!', 1, 'md')
 	   send(txt[2], 0, 1, 'ربات بدون محدودیت فعال شد ! ( نامحدود )', 1, 'md')
@@ -2889,8 +2921,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	   database:set("bot:enable:"..txt[2],true)
   end
   -----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('add','a')
   if text:match('^[#!/]add$') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-       local txt = {string.match(text, "^[#/!](add)$")} 
+       local txt = {string.match(text, "^[#/!](add)$")}
        database:set("bot:charge:"..msg.chat_id_,true)
 	   send(msg.chat_id_, msg.id_, 1, 'Group Added!', 1, 'md')
 	   for k,v in pairs(sudo_users) do
@@ -2899,8 +2932,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 	   database:set("bot:enable:"..msg.chat_id_,true)
   end
   -----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('rem','r')
   if text:match('^[#!/]rem$') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-       local txt = {string.match(text, "^[#/!](rem)$")} 
+       local txt = {string.match(text, "^[#/!](rem)$")}
        database:del("bot:charge:"..msg.chat_id_)
 	   send(msg.chat_id_, msg.id_, 1, 'Group Removed!', 1, 'md')
 	   for k,v in pairs(sudo_users) do
@@ -2908,14 +2942,16 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
        end
   end
   -----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('join','j')
    if text:match('join(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-       local txt = {string.match(text, "^[#/!](join)(-%d+)$")} 
+       local txt = {string.match(text, "^[#/!](join)(-%d+)$")}
 	   send(msg.chat_id_, msg.id_, 1, '*You Are Succefulli Joined >* `|'..txt[3]..'|` *=)*', 1, 'md')
 	   send(txt[2], 0, 1, '*Admin Joined!🌚*', 1, 'md')
 	   add_user(txt[2], msg.sender_user_id_, 10)
   end
   end
    -----------------------------------------------------------------------------------------------
+   local text = msg.content_.text_:gsub('autoleave','al')
           if text:match("^[!/#][Aa]utoleave (.*)$") and is_sudo(msg) then
             local status = {string.match(text, "^([!/#][Aa]utoleave) (.*)$")}
             if status[2] == "yes" then
@@ -2936,10 +2972,11 @@ else
                 database:del('autoleave','Off')
               end
 	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]reload$") and is_sudo(msg) then
+	if text:match("^[#!/]reload$") or text:match("^[#!/]rl$") and is_sudo(msg) then
          send(msg.chat_id_, msg.id_, 1, '*Reloaded!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
+  local text = msg.content_.text_:gsub('whois','wi')
           if text:match("^[!/#][Ww]hois (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
             local memb = {string.match(text, "^([!/#][Ww]hois) (.*)$")}
             function whois(extra,result,success)
@@ -2963,7 +3000,7 @@ else
          send(msg.chat_id_, msg.id_, 1, '*Your ID: *'..msg.sender_user_id_..'\n*Your Rank: *'..t..'.', 1, 'md')
     end
    -----------------------------------------------------------------------------------------------
-  if text:match("^[#!/]pin$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+  if text:match("^[#!/]pin$") or text:match("^[#!/]p$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
         local id = msg.id_
         local msgs = {[0] = id}
        pin(msg.chat_id_,msg.reply_to_message_id_,0)
@@ -2971,12 +3008,13 @@ else
 	   database:set('pinnedmsg'..msg.chat_id_,msg.reply_to_message_id_)
    end
    -----------------------------------------------------------------------------------------------
-   if text:match("^[#!/]unpin$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+
+   if text:match("^[#!/]unpin$") or text:match("^[#!/]up$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
          unpinmsg(msg.chat_id_)
          send(msg.chat_id_, msg.id_, 1, '*Message Unpinned!*', 1, 'md')
    end
    -----------------------------------------------------------------------------------------------
-   if text:match("^[#!/]repin$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+   if text:match("^[#!/]repin$") or text:match("^[#!/]rp$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 local pin_id = database:get('pinnedmsg'..msg.chat_id_)
         if pin_id then
          pin(msg.chat_id_,pin_id,0)
@@ -2986,8 +3024,8 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 		 end
    end
    -----------------------------------------------------------------------------------------------
-   if text:match("^[#!/]help$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-   
+   if text:match("^[#!/]help$") or text:match("^[#!/]h$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+
    local text = [[`راهنمای ربات
 
 برای قفل کردن و باز کردن تنظیمات:
@@ -2998,11 +3036,11 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 چند نکته لازم:
 
 مثال :
-برای قفل لینک از 
+برای قفل لینک از
 /lock links
 استفاده کنید بقیه هم همینطور
 ----------------------------------------
-/lock edit 
+/lock edit
 این دستور برای وقتیه که میخواین اگه کسی پیامشو ادیت کرد پاک بشه
 ----------------------------------------
 /show edit
@@ -3011,8 +3049,8 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 /lock pin
 و
 /pin
-توجه کنید شما میخواید ی پیامو پین کنید و ادمیناتون نتونن تغییرش بدن 
-اول با دستور 
+توجه کنید شما میخواید ی پیامو پین کنید و ادمیناتون نتونن تغییرش بدن
+اول با دستور
 /pin
 و ریپلی روی متن مورد نظر اون رو پین میکنید بعد
 /lock pin
@@ -3035,7 +3073,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 ----------------------------------------
 اگه میخواید اسم و ایدی فردی ک میاد تو گروه نشون داده بشه از دستور زیر استفاده کنید
 
-/set welcome Salam {username} 
+/set welcome Salam {username}
 اسم = {firstname}
 فامیل = {lastname}
 ----------------------------------------
@@ -3049,7 +3087,7 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 اخراج همیشگی کاربر از گروه
 ----------------------------------------
 /unban |با ریپلی|
-حذف کاربر از لیست بن 
+حذف کاربر از لیست بن
 ----------------------------------------
 /banlist
 لیست افراد بن شده
@@ -3203,13 +3241,13 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
 	elseif database:get('editmsg'..msg.chat_id_) == 'didam' then
 	if database:get('bot:editid'..msg.message_id_) then
 		local old_text = database:get('bot:editid'..msg.message_id_)
-	    send(msg.chat_id_, msg.message_id_, 1, 'Dont Edit!\n*I See You What Say :D*:\n*Edit Was Locked!*\n*I"ll Delete Your Message*\n_Your Say: _*'..old_text..'*', 1, 'md')				
+	    send(msg.chat_id_, msg.message_id_, 1, 'Dont Edit!\n*I See You What Say :D*:\n*Edit Was Locked!*\n*I"ll Delete Your Message*\n_Your Say: _*'..old_text..'*', 1, 'md')
 	end
 	end
     getMessage(msg.chat_id_, msg.message_id_,get_msg_contact)
   -----------------------------------------------------------------------------------------------
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
-    tdcli_function ({ID="GetChats", offset_order_="9223372036854775807", offset_chat_id_=0, limit_=20}, dl_cb, nil)    
+    tdcli_function ({ID="GetChats", offset_order_="9223372036854775807", offset_chat_id_=0, limit_=20}, dl_cb, nil)
   end
   -----------------------------------------------------------------------------------------------
 end
