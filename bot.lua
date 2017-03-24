@@ -2841,7 +2841,9 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 		 database:set('bot:setphoto'..msg.chat_id_..':'..msg.sender_user_id_,true)
     end
 	-----------------------------------------------------------------------------------------------
-  local text = msg.content_.text_:gsub('charge','setexpire','c','se')
+  local text = msg.content_.text_:gsub('charge','setexpire')
+  local text = msg.content_.text_:gsub('charge','se')
+  local text = msg.content_.text_:gsub('charge','c')
 	if text:match("^[#!/]charge (%d+)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 		local a = {string.match(text, "^[#/!](charge) (%d+)$")}
          send(msg.chat_id_, msg.id_, 1, '*Group Charged for *`|'..a[2]..'|`* Days*', 1, 'md')
@@ -2850,7 +2852,8 @@ if text:match("^[#!/]unlock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_
 		 database:set("bot:enable:"..msg.chat_id_,true)
     end
 	-----------------------------------------------------------------------------------------------
-local text = msg.content_.text_:gsub('charge stats','expire','cst')
+local text = msg.content_.text_:gsub('charge stats','expire')
+local text = msg.content_.text_:gsub('charge stats','cst')
 	if text:match("^[#!/]charge stats") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local ex = database:ttl("bot:charge:"..msg.chat_id_)
        if ex == -1 then
@@ -2861,7 +2864,8 @@ local text = msg.content_.text_:gsub('charge stats','expire','cst')
        end
     end
 	-----------------------------------------------------------------------------------------------
-  local text = msg.content_.text_:gsub('charge stats','expire','cst')
+  local text = msg.content_.text_:gsub('charge stats','expire')
+local text = msg.content_.text_:gsub('charge stats','cst')
 	if text:match("^[#!/]charge stats (%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 	local txt = {string.match(text, "^[#/!](charge stats) (%d+)$")}
     local ex = database:ttl("bot:charge:"..txt[2])
