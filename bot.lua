@@ -1418,6 +1418,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) then
     end
 	----------------------------------------------------------------------------------------------
 	local text = msg.content_.text_:gsub('ارتقا','promote')
+	local text = msg.content_.text_:gsub('p','promote')
 if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function promote_by_reply(extra, result, success)
 	local hash = 'bot:mods:'..msg.chat_id_
