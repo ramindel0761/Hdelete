@@ -1707,6 +1707,21 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 	      resolve_username(ap[2],mute_by_username)
     end
 	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]random$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+    local test = {
+"1",
+"2",
+"3",
+"4",
+"5",
+"6",
+"7",
+"8",
+"9",
+"10",
+}
+local t = test[math.random(#test)]
+	send(msg.chat_id_, msg.id_, 1, '_Winner_ *:* `|'..t..'|`', 1, 'md')
 	if text:match("^[#!/]muteuser (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](muteuser) (%d+)$")}
 	if is_mod(ap[2], msg.chat_id_) then
