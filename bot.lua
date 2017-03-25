@@ -1720,8 +1720,10 @@ if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) 
 "9",
 "10",
 }
-local t = test[math.random(#test)]
+		local t = test[math.random(#test)]
 	send(msg.chat_id_, msg.id_, 1, '_Winner_ *:* `|'..t..'|`', 1, 'md')
+	end
+    -----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]muteuser (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](muteuser) (%d+)$")}
 	if is_mod(ap[2], msg.chat_id_) then
