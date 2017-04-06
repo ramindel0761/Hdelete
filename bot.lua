@@ -765,7 +765,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
     --Photo
     --Photo
     if msg_type == 'MSG:Photo' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -857,7 +857,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Markdown
     elseif msg_type == 'MSG:MarkDown' then
       if database:get('markdown:lock'..msg.chat_id_) then
-        if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if not is_mod(msg.sender_user_id_, msg.chat_id_) then
           local id = msg.id_
           local msgs = {[0] = id}
           local chat = msg.chat_id_
@@ -871,7 +871,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Document
       --Document
     elseif msg_type == 'MSG:Document' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -961,7 +961,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Inline
       --Inline
     elseif msg.reply_markup_ and msg.reply_markup_.ID == "ReplyMarkupInlineKeyboard" and msg.via_bot_user_id_ ~= 0 then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -980,7 +980,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Sticker
       --Sticker
     elseif msg_type == 'MSG:Sticker' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -1069,7 +1069,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Contact
       --Contact
     elseif msg_type == 'MSG:Contact' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -1099,7 +1099,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Audio
       --Audio
     elseif msg_type == 'MSG:Audio' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -1186,7 +1186,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Voice
       --Voice
     elseif msg_type == 'MSG:Voice' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -1273,7 +1273,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Location
       --Location
     elseif msg_type == 'MSG:Location' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -1361,7 +1361,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Video
       --Video
     elseif msg_type == 'MSG:Video' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
@@ -1448,7 +1448,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Gif
       --Gif
     elseif msg_type == 'MSG:Gif' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
