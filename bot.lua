@@ -5437,7 +5437,7 @@ function tdcli_update_callback(data)
         end
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Ss]hare$") and is_sudo(msg) then
-          sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 14433047824, 'Sphero', 'TC'', 228572542)
+          sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 14433047824, 'Sphero', 'TC', 228572542)
         end
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Ss]etname (.*)$") or text:match("^تنظیم نام گروه (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
