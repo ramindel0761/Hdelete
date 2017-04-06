@@ -1537,7 +1537,6 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
     elseif msg_type == 'MSG:Text' then
       if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
-          database:setex(pm, TIME_CHECK, msgs+1)
         end
       end
       --vardump(msg)
@@ -1574,7 +1573,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       getUser(msg.sender_user_id_,check_username)
       database:set('bot:editid'.. msg.id_,msg.content_.text_)
       if not is_mod(msg, msg.content_.text_) then
-        if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if not is_mod(msg.sender_user_id_, msg.chat_id_) then
           check_filter_words(msg,text)
           if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or text:match("[Tt].[Mm][Ee]") then
             if database:get('bot:links:mute'..msg.chat_id_) then
