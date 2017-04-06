@@ -1573,7 +1573,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       end
       getUser(msg.sender_user_id_,check_username)
       database:set('bot:editid'.. msg.id_,msg.content_.text_)
-      if not is_free(msg, msg.content_.text_) then
+      if not is_mod(msg, msg.content_.text_) then
         if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
           check_filter_words(msg,text)
           if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or text:match("[Tt].[Mm][Ee]") then
