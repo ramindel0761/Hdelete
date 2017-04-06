@@ -1535,13 +1535,13 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       --Text
       --Text
     elseif msg_type == 'MSG:Text' then
-      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+      if not is_mod(msg.sender_user_id_, msg.chat_id_) then
         if database:get('anti-flood:'..msg.chat_id_) then
           database:setex(pm, TIME_CHECK, msgs+1)
         end
       end
       --vardump(msg)
-      if database:get("bot:group:link"..msg.chat_id_) == 'waiting' and is_momod(msg.sender_user_id_, msg.chat_id_) then
+      if database:get("bot:group:link"..msg.chat_id_) == 'waiting' and is_mod(msg.sender_user_id_, msg.chat_id_) then
         if msg.content_.text_:match("(https://telegram.me/joinchat/%S+)") or msg.content_.text_:match("(https://t.me/joinchat/%S+)") then
           local glink = msg.content_.text_:match("(https://telegram.me/joinchat/%S+)") or msg.content_.text_:match("(https://t.me/joinchat/%S+)")
           local hash = "bot:group:link"..msg.chat_id_
@@ -1561,7 +1561,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
           database:hset(svuser, 'username', username)
         end
         if username and username:match("[Bb][Oo][Tt]$") or username:match("_[Bb][Oo][Tt]$") then
-          if database:get('bot:bots:mute'..msg.chat_id_) and not is_momod(msg.chat_id_, msg.chat_id_) then
+          if database:get('bot:bots:mute'..msg.chat_id_) and not is_mod(msg.chat_id_, msg.chat_id_) then
             local id = msg.id_
             local msgs = {[0] = id}
             local chat = msg.chat_id_
