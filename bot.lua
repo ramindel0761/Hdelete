@@ -725,7 +725,7 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
       delete_msg(chat,msgs)
       return
     end
-    if database:get('bot:muteall'..msg.chat_id_) and not is_momod(msg.sender_user_id_, msg.chat_id_) then
+    if database:get('bot:muteall'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
       local id = msg.id_
       local msgs = {[0] = id}
       local chat = msg.chat_id_
