@@ -704,666 +704,972 @@ function tdcli_update_callback(data)
   -------------------------------------------------------------------------------------------------------
   -------------------------------------------------------------------------------------------------------
 if is_banned(msg.sender_user_id_, msg.chat_id_) then
-        local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-		  chat_kick(msg.chat_id_, msg.sender_user_id_)
-		  return 
-end
-if is_muted(msg.sender_user_id_, msg.chat_id_) then
-        local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-          delete_msg(chat,msgs)
-		  return 
-end
-if is_gbanned(msg.sender_user_id_) then
-        local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-		  chat_kick(msg.chat_id_, msg.sender_user_id_)
-		   return 
-end	
-if database:get('bot:muteall'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
-        local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-        return 
-end
-    database:incr('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
-	database:incr('group:msgs'..msg.chat_id_)
-if msg.content_.ID == "MessagePinMessage" then
-  if database:get('pinnedmsg'..msg.chat_id_) and database:get('bot:pin:mute'..msg.chat_id_) then
-   send(msg.chat_id_, msg.id_, 1, '*You Dont Have Access*\n*Sorry. but Me Unpinned Your Message*\n*if You Have a Rank in Bot*\n_Send Me_ */pin* _And just reply Your message_', 1, 'md')
-   unpinmsg(msg.chat_id_)
-   local pin_id = database:get('pinnedmsg'..msg.chat_id_)
-         pin(msg.chat_id_,pin_id,0)
-   end
-end
-if database:get('bot:viewget'..msg.sender_user_id_) then 
-    if not msg.forward_info_ then
-		send(msg.chat_id_, msg.id_, 1, '_Got a problem!!_\n*Please Send Again Command And forward your post*', 1, 'md')
-		database:del('bot:viewget'..msg.sender_user_id_)
-	else
-		send(msg.chat_id_, msg.id_, 1, 'Your Post Views:\n> '..msg.views_..' View!', 1, 'md')
-        database:del('bot:viewget'..msg.sender_user_id_)
-	end
-end
-if msg_type == 'MSG:Photo' then
-   --vardump(msg)
- if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-     if database:get('bot:photo:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return 
-   end
-   if caption_text then
-      check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") or msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-   if database:get('bot:links:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("@") or msg.content_.entities_[0].ID and msg.content_.entities_[0].ID == "MessageEntityMentionName" then
-   if database:get('bot:tag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("#") then
-   if database:get('bot:hashtag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[Hh][Tt][Tt][Pp][Ss]://") or caption_text:match("[Hh][Tt][Tt][Pp]://") or caption_text:match(".[Ii][Rr]") or caption_text:match(".[Cc][Oo][Mm]") or caption_text:match(".[Oo][Rr][Gg]") or caption_text:match(".[Ii][Nn][Ff][Oo]") or caption_text:match("[Ww][Ww][Ww].") or caption_text:match(".[Tt][Kk]") then
-   if database:get('bot:webpage:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[\216-\219][\128-\191]") then
-   if database:get('bot:arabic:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[ASDFGHJKLQWERTYUIOPZXCVBNMasdfghjklqwertyuiopzxcvbnm]") then
-   if database:get('bot:english:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-   end
-  elseif msg_type == 'MSG:Inline' then
-   if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-    if database:get('bot:inline:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return 
-   end
-   end
-  elseif msg_type == 'MSG:Sticker' then
-   if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-  if database:get('bot:sticker:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return 
-   end
-   end
-elseif msg_type == 'MSG:NewUserLink' then
-  if database:get('bot:tgservice:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return 
-   end
-   function get_welcome(extra,result,success)
-    if database:get('welcome:'..msg.chat_id_) then
-        text = database:get('welcome:'..msg.chat_id_)
-    else
-        text = '*Hi {firstname} 😃*'
+      local id = msg.id_
+      local msgs = {[0] = id}
+      local chat = msg.chat_id_
+      chat_kick(msg.chat_id_, msg.sender_user_id_)
+      return
     end
-    local text = text:gsub('{firstname}',(result.first_name_ or ''))
-    local text = text:gsub('{lastname}',(result.last_name_ or ''))
-    local text = text:gsub('{username}',(result.username_ or ''))
-         send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
-   end
-	  if database:get("bot:welcome"..msg.chat_id_) then
+    if is_muted(msg.sender_user_id_, msg.chat_id_) then
+      local id = msg.id_
+      local msgs = {[0] = id}
+      local chat = msg.chat_id_
+      delete_msg(chat,msgs)
+      return
+    end
+    if is_gbanned(msg.sender_user_id_) then
+      local id = msg.id_
+      local msgs = {[0] = id}
+      local chat = msg.chat_id_
+      chat_kick(msg.chat_id_, msg.sender_user_id_)
+      delete_msg(chat,msgs)
+      return
+    end
+    if database:get('bot:muteall'..msg.chat_id_) and not is_momod(msg.sender_user_id_, msg.chat_id_) then
+      local id = msg.id_
+      local msgs = {[0] = id}
+      local chat = msg.chat_id_
+      delete_msg(chat,msgs)
+      return
+    end
+    database:incr('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
+    database:incr('group:msgs'..msg.chat_id_)
+    if msg.content_.ID == "MessagePinMessage" then
+      if database:get('pinnedmsg'..msg.chat_id_) and database:get('bot:pin:mute'..msg.chat_id_) then
+        unpinmsg(msg.chat_id_)
+        local pin_id = database:get('pinnedmsg'..msg.chat_id_)
+        pinmsg(msg.chat_id_,pin_id,0)
+      end
+    end
+    if database:get('bot:viewget'..msg.sender_user_id_) then
+      if not msg.forward_info_ then
+        if database:get('lang:gp:'..msg.chat_id_) then
+          send(msg.chat_id_, msg.id_, 1, 'Operation Error ! \n\n > Please re-submit the command and then view the number of hits to get forward more!', 1, 'md')
+        else
+          send(msg.chat_id_, msg.id_, 1, 'خطا در انجام عملیات !\n\n > لطفا دستور را مجدد ارسال کنید و سپس عمل مشاهده تعداد بازدید را با فوروارد مطلب دریافت کنید !', 1, 'md')
+        end
+        database:del('bot:viewget'..msg.sender_user_id_)
+      else
+        if database:get('lang:gp:'..msg.chat_id_) then
+          send(msg.chat_id_, msg.id_, 1, '> The more hits you : '..msg.views_..' seen', 1, 'md')
+        else
+          send(msg.chat_id_, msg.id_, 1, '> میزان بازدید پست شما : '..msg.views_..' بازدید', 1, 'md')
+        end
+        database:del('bot:viewget'..msg.sender_user_id_)
+      end
+    end
+    --Photo
+    --Photo
+    ------- --- Photo--------- Photo
+    -- -----------------Photo
+    --Photo
+    --Photo
+    if msg_type == 'MSG:Photo' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Fwd] [Photo]")
+            end
+          end
+        end
+        if database:get('bot:photo:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Photo]")
+        end
+        if msg.content_.caption_ then
+          check_filter_words(msg, msg.content_.caption_)
+          if database:get('bot:links:mute'..msg.chat_id_) then
+            if msg.content_.caption_:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt].[Mm][Ee]") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Photo]")
+              if database:get('bot:strict'..msg.chat_id_) then
+                chat_kick(msg.chat_id_, msg.sender_user_id_)
+              end
+            end
+          end
+          if database:get('tags:lock'..msg.chat_id_) then
+            if msg.content_.caption_:match("@") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Photo]")
+            end
+          end
+          if msg.content_.caption_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Photo]")
+            end
+          end
+          if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") or msg.content_.caption_:match(".[Ii][Rr]") or msg.content_.caption_:match(".[Cc][Oo][Mm]") or msg.content_.caption_:match(".[Oo][Rr][Gg]") or msg.content_.caption_:match(".[Ii][Nn][Ff][Oo]") or msg.content_.caption_:match("[Ww][Ww][Ww].") or msg.content_.caption_:match(".[Tt][Kk]") or msg.content_.ID == "MessageEntityTextUrl" or msg.content_.ID == "MessageEntityUrl" then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Photo]")
+            end
+          end
+          if msg.content_.caption_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Photo]")
+            end
+          end
+          if msg.content_.caption_:match("[A-Z]") or msg.content_.caption_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Photo]")
+            end
+          end
+        end
+      end
+
+      --Markdown
+      --Markdown
+      ------- --- Markdown--------- Markdown
+      -- -----------------Markdown
+      --Markdown
+      --Markdown
+    elseif msg_type == 'MSG:MarkDown' then
+      if database:get('markdown:lock'..msg.chat_id_) then
+        if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+        end
+      end
+      --Document
+      --Document
+      ------- --- Document--------- Document
+      -- -----------------Document
+      --Document
+      --Document
+    elseif msg_type == 'MSG:Document' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Fwd] [Document]")
+            end
+          end
+        end
+        if database:get('bot:document:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Document]")
+        end
+        if msg.content_.caption_ then
+          check_filter_words(msg, msg.content_.caption_)
+          if database:get('bot:links:mute'..msg.chat_id_) then
+            if msg.content_.caption_:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt].[Mm][Ee]") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Document]")
+              if database:get('bot:strict'..msg.chat_id_) then
+                chat_kick(msg.chat_id_, msg.sender_user_id_)
+              end
+            end
+          end
+          if database:get('tags:lock'..msg.chat_id_) then
+            if msg.content_.caption_:match("@") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Document]")
+            end
+          end
+          if msg.content_.caption_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Document]")
+            end
+          end
+          if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") or msg.content_.caption_:match(".[Ii][Rr]") or msg.content_.caption_:match(".[Cc][Oo][Mm]") or msg.content_.caption_:match(".[Oo][Rr][Gg]") or msg.content_.caption_:match(".[Ii][Nn][Ff][Oo]") or msg.content_.caption_:match("[Ww][Ww][Ww].") or msg.content_.caption_:match(".[Tt][Kk]") or msg.content_.ID == "MessageEntityTextUrl" or msg.content_.ID == "MessageEntityUrl" then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Web] [Document]")
+            end
+          end
+          if msg.content_.caption_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Document]")
+            end
+          end
+          if msg.content_.caption_:match("[A-Z]") or msg.content_.caption_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Document]")
+            end
+          end
+        end
+      end
+      --Inline
+      --Inline
+      ------- --- Inline--------- Inline
+      -- -----------------Inline
+      --Inline
+      --Inline
+    elseif msg.reply_markup_ and msg.reply_markup_.ID == "ReplyMarkupInlineKeyboard" and msg.via_bot_user_id_ ~= 0 then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if database:get('bot:inline:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Inline]")
+        end
+      end
+      --Sticker
+      --Sticker
+      ------- --- Sticker--------- Sticker
+      -- -----------------Sticker
+      --Sticker
+      --Sticker
+    elseif msg_type == 'MSG:Sticker' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if database:get('bot:sticker:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Sticker]")
+        end
+      end
+    elseif msg_type == 'MSG:JoinByLink' then
+      if database:get('bot:tgservice:mute'..msg.chat_id_) then
+        local id = msg.id_
+        local msgs = {[0] = id}
+        local chat = msg.chat_id_
+        delete_msg(chat,msgs)
+        print("Deleted [Lock] [Tgservice] [JoinByLink]")
+        return
+      end
+      function get_welcome(extra,result,success)
+        if database:get('welcome:'..msg.chat_id_) then
+          text = database:get('welcome:'..msg.chat_id_)
+        else
+          if database:get('lang:gp:'..msg.chat_id_) then
+            text = 'Hi {firstname} Welcome To Group 🌹'
+          else
+            text = 'سلام {firstname} خوش اومدی 🌹'
+          end
+        end
+        local text = text:gsub('{firstname}',(result.first_name_ or ''))
+        local text = text:gsub('{lastname}',(result.last_name_ or ''))
+        local text = text:gsub('{username}',(result.username_ or ''))
+        local text = text:gsub('{gpname}',(chat.title_ or ''))
+        send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+      end
+      if database:get("bot:welcome"..msg.chat_id_) then
         getUser(msg.sender_user_id_,get_welcome)
       end
-elseif msg_type == 'MSG:NewUserAdd' then
-  if database:get('bot:tgservice:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return 
-   end
-      --vardump(msg)
-   if msg.content_.members_[0].username_ and msg.content_.members_[0].username_:match("[Bb][Oo][Tt]$") then
-      if database:get('bot:bots:mute'..msg.chat_id_) and not is_mod(msg.content_.members_[0].id_, msg.chat_id_) then
-		 chat_kick(msg.chat_id_, msg.content_.members_[0].id_)
-		 return false
-	  end
-   end
-   if is_banned(msg.content_.members_[0].id_, msg.chat_id_) then
-		 chat_kick(msg.chat_id_, msg.content_.members_[0].id_)
-		 return false
-   end
-   if database:get("bot:welcome"..msg.chat_id_) then
-    if database:get('welcome:'..msg.chat_id_) then
-        text = database:get('welcome:'..msg.chat_id_)
-    else
-        text = '*Hi {firstname} 😃*'
-    end
-    local text = text:gsub('{firstname}',(msg.content_.members_[0].first_name_ or ''))
-    local text = text:gsub('{lastname}',(msg.content_.members_[0].last_name_ or ''))
-    local text = text:gsub('{username}',('@'..msg.content_.members_[0].username_ or ''))
-         send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
-   end
-elseif msg_type == 'MSG:Contact' then
- if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
+      --New User Add
+      --New User Add
+      ------- --- New User Add--------- New User Add
+      -- -----------------New User Add
+      --New User Add
+      --New User Add
+    elseif msg_type == 'MSG:NewUserAdd' then
+      if database:get('bot:tgservice:mute'..msg.chat_id_) then
+        local id = msg.id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
         delete_msg(chat,msgs)
-	end
-   end
-   end
-  if database:get('bot:contact:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return 
-   end
-   end
-elseif msg_type == 'MSG:Audio' then
- if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-  if database:get('bot:music:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return 
-   end
-   if caption_text then
-      check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") then
-   if database:get('bot:links:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
- if caption_text:match("@") or msg.content_.entities_[0].ID == "MessageEntityMentionName" then
-   if database:get('bot:tag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-  	if caption_text:match("#") then
-   if database:get('bot:hashtag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("[Hh][Tt][Tt][Pp][Ss]://") or caption_text:match("[Hh][Tt][Tt][Pp]://") or caption_text:match(".[Ii][Rr]") or caption_text:match(".[Cc][Oo][Mm]") or caption_text:match(".[Oo][Rr][Gg]") or caption_text:match(".[Ii][Nn][Ff][Oo]") or caption_text:match("[Ww][Ww][Ww].") or caption_text:match(".[Tt][Kk]") then
-   if database:get('bot:webpage:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-     if caption_text:match("[\216-\219][\128-\191]") then
-    if database:get('bot:arabic:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[ASDFGHJKLQWERTYUIOPZXCVBNMasdfghjklqwertyuiopzxcvbnm]") then
-   if database:get('bot:english:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-   end
-elseif msg_type == 'MSG:Voice' then
- if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-  if database:get('bot:voice:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return  
-   end
-   if caption_text then
-      check_filter_words(msg, caption_text)
-  if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") or msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-   if database:get('bot:links:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-  if caption_text:match("@") then
-  if database:get('bot:tag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("#") then
-   if database:get('bot:hashtag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-	if caption_text:match("[Hh][Tt][Tt][Pp][Ss]://") or caption_text:match("[Hh][Tt][Tt][Pp]://") or caption_text:match(".[Ii][Rr]") or caption_text:match(".[Cc][Oo][Mm]") or caption_text:match(".[Oo][Rr][Gg]") or caption_text:match(".[Ii][Nn][Ff][Oo]") or caption_text:match("[Ww][Ww][Ww].") or caption_text:match(".[Tt][Kk]") then
-   if database:get('bot:webpage:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	 if caption_text:match("[\216-\219][\128-\191]") then
-    if database:get('bot:arabic:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[ASDFGHJKLQWERTYUIOPZXCVBNMasdfghjklqwertyuiopzxcvbnm]") then
-   if database:get('bot:english:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-   end
-elseif msg_type == 'MSG:Location' then
- if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-  if database:get('bot:location:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return  
-   end
-   if caption_text then
-      check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") or msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-   if database:get('bot:links:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("@") or msg.content_.entities_[0].ID and msg.content_.entities_[0].ID == "MessageEntityMentionName" then
-   if database:get('bot:tag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("#") then
-   if database:get('bot:hashtag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("[Hh][Tt][Tt][Pp][Ss]://") or caption_text:match("[Hh][Tt][Tt][Pp]://") or caption_text:match(".[Ii][Rr]") or caption_text:match(".[Cc][Oo][Mm]") or caption_text:match(".[Oo][Rr][Gg]") or caption_text:match(".[Ii][Nn][Ff][Oo]") or caption_text:match("[Ww][Ww][Ww].") or caption_text:match(".[Tt][Kk]") then
-   if database:get('bot:webpage:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("[\216-\219][\128-\191]") then
-   if database:get('bot:arabic:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[ASDFGHJKLQWERTYUIOPZXCVBNMasdfghjklqwertyuiopzxcvbnm]") then
-   if database:get('bot:english:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-   end
-elseif msg_type == 'MSG:Video' then
- if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-  if database:get('bot:video:mute'..msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return  
-   end
-   if caption_text then
-      check_filter_words(msg, caption_text)
-  if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") or msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-   if database:get('bot:links:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("@") or msg.content_.entities_[0].ID and msg.content_.entities_[0].ID == "MessageEntityMentionName" then
-   if database:get('bot:tag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("#") then
-   if database:get('bot:hashtag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("[Hh][Tt][Tt][Pp][Ss]://") or caption_text:match("[Hh][Tt][Tt][Pp]://") or caption_text:match(".[Ii][Rr]") or caption_text:match(".[Cc][Oo][Mm]") or caption_text:match(".[Oo][Rr][Gg]") or caption_text:match(".[Ii][Nn][Ff][Oo]") or caption_text:match("[Ww][Ww][Ww].") or caption_text:match(".[Tt][Kk]") then
-   if database:get('bot:webpage:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("[\216-\219][\128-\191]") then
-   if database:get('bot:arabic:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[ASDFGHJKLQWERTYUIOPZXCVBNMasdfghjklqwertyuiopzxcvbnm]") then
-   if database:get('bot:english:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-   end
-elseif msg_type == 'MSG:Gif' then
- if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-  if database:get('bot:gifs:mute'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
-    local id = msg.id_
-    local msgs = {[0] = id}
-    local chat = msg.chat_id_
-       delete_msg(chat,msgs)
-          return  
-   end
-   if caption_text then
-   check_filter_words(msg, caption_text)
-   if caption_text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or caption_text:match("[Tt].[Mm][Ee]") or msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-   if database:get('bot:links:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("@") or msg.content_.entities_[0].ID and msg.content_.entities_[0].ID == "MessageEntityMentionName" then
-   if database:get('bot:tag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("#") then
-   if database:get('bot:hashtag:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-	if caption_text:match("[Hh][Tt][Tt][Pp][Ss]://") or caption_text:match("[Hh][Tt][Tt][Pp]://") or caption_text:match(".[Ii][Rr]") or caption_text:match(".[Cc][Oo][Mm]") or caption_text:match(".[Oo][Rr][Gg]") or caption_text:match(".[Ii][Nn][Ff][Oo]") or caption_text:match("[Ww][Ww][Ww].") or caption_text:match(".[Tt][Kk]") then
-   if database:get('bot:webpage:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if caption_text:match("[\216-\219][\128-\191]") then
-   if database:get('bot:arabic:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   if caption_text:match("[ASDFGHJKLQWERTYUIOPZXCVBNMasdfghjklqwertyuiopzxcvbnm]") then
-   if database:get('bot:english:mute'..msg.chat_id_) then
-    local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end	
-   end
-elseif msg_type == 'MSG:Text' then
- --vardump(msg)
-    if database:get("bot:group:link"..msg.chat_id_) == 'waiting' and is_mod(msg.sender_user_id_, msg.chat_id_) then
-      if text:match("(https://t.me/joinchat/%S+)") then
-	  local glink = text:match("(https://t.me/joinchat/%S+)")
-      local hash = "bot:group:link"..msg.chat_id_
-               database:set(hash,glink)
-			  send(msg.chat_id_, msg.id_, 1, '*New link Set!*', 1, 'md')
+        print("Deleted [Lock] [Tgservice] [NewUserAdd]")
+        return
       end
-   end
-    function check_username(extra,result,success)
-	 --vardump(result)
-	local username = (result.username_ or '')
-	local svuser = 'user:'..result.id_
-	if username then
-      database:hset(svuser, 'username', username)
-    end
-	if username and username:match("[Bb][Oo][Tt]$") then
-      if database:get('bot:bots:mute'..msg.chat_id_) and not is_mod(result.id_, msg.chat_id_) then
-		 chat_kick(msg.chat_id_, result.id_)
-		 return false
-		 end
-	  end
-   end
-    getUser(msg.sender_user_id_,check_username)
-   database:set('bot:editid'.. msg.id_,msg.content_.text_)
-   if not is_mod(msg.sender_user_id_, msg.chat_id_) then
-    check_filter_words(msg, text)
-	if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt].[Mm][Ee]") or msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     if database:get('bot:links:mute'..msg.chat_id_) then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-	if text then
-     if database:get('bot:text:mute'..msg.chat_id_) then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-if msg.forward_info_ then
-if database:get('bot:forward:mute'..msg.chat_id_) then
-	if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   end
-   if text:match("@") or msg.content_.entities_[0] and msg.content_.entities_[0].ID == "MessageEntityMentionName" then
-   if database:get('bot:tag:mute'..msg.chat_id_) then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if text:match("#") then
-      if database:get('bot:hashtag:mute'..msg.chat_id_) then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if text:match("[Hh][Tt][Tt][Pp][Ss]://") or text:match("[Hh][Tt][Tt][Pp]://") or text:match(".[Ii][Rr]") or text:match(".[Cc][Oo][Mm]") or text:match(".[Oo][Rr][Gg]") or text:match(".[Ii][Nn][Ff][Oo]") or text:match("[Ww][Ww][Ww].") or text:match(".[Tt][Kk]") then
-      if database:get('bot:webpage:mute'..msg.chat_id_) then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	if text:match("[\216-\219][\128-\191]") then
-      if database:get('bot:arabic:mute'..msg.chat_id_) then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	end
-   end
-   	  if text:match("[ASDFGHJKLQWERTYUIOPZXCVBNMasdfghjklqwertyuiopzxcvbnm]") then
-      if database:get('bot:english:mute'..msg.chat_id_) then
-     local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-        delete_msg(chat,msgs)
-	  end
-     end
-    end
-   end
+      if msg.content_.members_[0].username_ and msg.content_.members_[0].username_:match("[Bb][Oo][Tt]$") then
+        if not is_momod(msg.content_.members_[0].id_, msg.chat_id_) then
+          if database:get('bot:bots:mute'..msg.chat_id_) then
+            chat_kick(msg.chat_id_, msg.content_.members_[0].id_)
+            return false
+          end
+        end
+      end
+      if is_banned(msg.content_.members_[0].id_, msg.chat_id_) then
+        chat_kick(msg.chat_id_, msg.content_.members_[0].id_)
+        return false
+      end
+      if database:get("bot:welcome"..msg.chat_id_) then
+        if database:get('welcome:'..msg.chat_id_) then
+          text = database:get('welcome:'..msg.chat_id_)
+        else
+          if database:get('lang:gp:'..msg.chat_id_) then
+            text = 'Hi Welcome To Group'
+          else
+            text = 'سلام خوش اومدی'
+          end
+        end
+        local text = text:gsub('{firstname}',(msg.content_.members_[0].first_name_ or ''))
+        local text = text:gsub('{lastname}',(msg.content_.members_[0].last_name_ or ''))
+        local text = text:gsub('{username}',('@'..msg.content_.members_[0].username_ or ''))
+        send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+      end
+      --Contact
+      --Contact
+      ------- --- Contact--------- Contact
+      -- -----------------Contact
+      --Contact
+      --Contact
+    elseif msg_type == 'MSG:Contact' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Fwd] [Contact]")
+            end
+          end
+        end
+        if database:get('bot:contact:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Contact]")
+        end
+      end
+      --Audio
+      --Audio
+      ------- --- Audio--------- Audio
+      -- -----------------Audio
+      --Audio
+      --Audio
+    elseif msg_type == 'MSG:Audio' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Fwd] [Audio]")
+            end
+          end
+        end
+        if database:get('bot:music:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Audio]")
+        end
+        if msg.content_.caption_ then
+          check_filter_words(msg, msg.content_.caption_)
+          if database:get('bot:links:mute'..msg.chat_id_) then
+            if msg.content_.caption_:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt].[Mm][Ee]") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Audio]")
+            end
+          end
+          if database:get('tags:lock'..msg.chat_id_) then
+            if msg.content_.caption_:match("@") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Audio]")
+            end
+          end
+          if msg.content_.caption_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Audio]")
+            end
+          end
+          if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") or msg.content_.caption_:match(".[Ii][Rr]") or msg.content_.caption_:match(".[Cc][Oo][Mm]") or msg.content_.caption_:match(".[Oo][Rr][Gg]") or msg.content_.caption_:match(".[Ii][Nn][Ff][Oo]") or msg.content_.caption_:match("[Ww][Ww][Ww].") or msg.content_.caption_:match(".[Tt][Kk]") or msg.content_.ID == "MessageEntityTextUrl" or msg.content_.ID == "MessageEntityUrl" then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Web] [Audio]")
+            end
+          end
+          if msg.content_.caption_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Audio]")
+            end
+          end
+          if msg.content_.caption_:match("[A-Z]") or msg.content_.caption_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Audio]")
+            end
+          end
+        end
+      end
+      --Voice
+      --Voice
+      ------- --- Voice--------- Voice
+      -- -----------------Voice
+      --Voice
+      --Voice
+    elseif msg_type == 'MSG:Voice' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Fwd] [Voice]")
+            end
+          end
+        end
+        if database:get('bot:voice:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Voice]")
+        end
+        if msg.content_.caption_ then
+          check_filter_words(msg, msg.content_.caption_)
+          if database:get('bot:links:mute'..msg.chat_id_) then
+            if msg.content_.caption_:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt].[Mm][Ee]") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Voice]")
+            end
+          end
+          if database:get('tags:lock'..msg.chat_id_) then
+            if msg.content_.caption_:match("@") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Voice]")
+            end
+          end
+          if msg.content_.caption_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Voice]")
+            end
+          end
+          if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") or msg.content_.caption_:match(".[Ii][Rr]") or msg.content_.caption_:match(".[Cc][Oo][Mm]") or msg.content_.caption_:match(".[Oo][Rr][Gg]") or msg.content_.caption_:match(".[Ii][Nn][Ff][Oo]") or msg.content_.caption_:match("[Ww][Ww][Ww].") or msg.content_.caption_:match(".[Tt][Kk]") or msg.content_.ID == "MessageEntityTextUrl" or msg.content_.ID == "MessageEntityUrl" then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Web] [Voice]")
+            end
+          end
+          if msg.content_.caption_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Voice]")
+            end
+          end
+          if msg.content_.caption_:match("[A-Z]") or msg.content_.caption_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Voice]")
+            end
+          end
+        end
+      end
+      --Location
+      --Location
+      ------- --- Location--------- Location
+      -- -----------------Location
+      --Location
+      --Location
+    elseif msg_type == 'MSG:Location' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Location]")
+            end
+          end
+        end
+        if database:get('bot:location:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Location]")
+          return
+        end
+        if msg.content_.caption_ then
+          check_filter_words(msg, msg.content_.caption_)
+          if database:get('bot:links:mute'..msg.chat_id_) then
+            if msg.content_.caption_:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt].[Mm][Ee]") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Location]")
+            end
+          end
+          if database:get('tags:lock'..msg.chat_id_) then
+            if msg.content_.caption_:match("@") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Location]")
+            end
+          end
+          if msg.content_.caption_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Location]")
+            end
+          end
+          if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") or msg.content_.caption_:match(".[Ii][Rr]") or msg.content_.caption_:match(".[Cc][Oo][Mm]") or msg.content_.caption_:match(".[Oo][Rr][Gg]") or msg.content_.caption_:match(".[Ii][Nn][Ff][Oo]") or msg.content_.caption_:match("[Ww][Ww][Ww].") or msg.content_.caption_:match(".[Tt][Kk]") or msg.content_.ID == "MessageEntityTextUrl" or msg.content_.ID == "MessageEntityUrl" then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Web] [Location]")
+            end
+          end
+          if msg.content_.caption_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Location]")
+            end
+          end
+          if msg.content_.caption_:match("[A-Z]") or msg.content_.caption_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Location]")
+            end
+          end
+        end
+      end
+      --Video
+      --Video
+      ------- --- Video--------- Video
+      -- -----------------Video
+      --Video
+      --Video
+    elseif msg_type == 'MSG:Video' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Fwd] [Video]")
+            end
+          end
+        end
+        if database:get('bot:video:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Video]")
+        end
+        if msg.content_.caption_ then
+          check_filter_words(msg, msg.content_.caption_)
+          if database:get('bot:links:mute'..msg.chat_id_) then
+            if msg.content_.caption_:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or msg.content_.caption_:match("[Tt].[Mm][Ee]") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Video]")
+            end
+          end
+          if database:get('tags:lock'..msg.chat_id_) then
+            if msg.content_.caption_:match("@") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Video]")
+            end
+          end
+          if msg.content_.caption_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Video]")
+            end
+          end
+          if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") or msg.content_.caption_:match(".[Ii][Rr]") or msg.content_.caption_:match(".[Cc][Oo][Mm]") or msg.content_.caption_:match(".[Oo][Rr][Gg]") or msg.content_.caption_:match(".[Ii][Nn][Ff][Oo]") or msg.content_.caption_:match("[Ww][Ww][Ww].") or msg.content_.caption_:match(".[Tt][Kk]") or msg.content_.ID == "MessageEntityTextUrl" or msg.content_.ID == "MessageEntityUrl" then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Web] [Video] ")
+            end
+          end
+          if msg.content_.caption_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Video] ")
+            end
+          end
+          if msg.content_.caption_:match("[A-Z]") or msg.content_.caption_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Video]")
+            end
+          end
+        end
+      end
+      --Gif
+      --Gif
+      ------- --- Gif--------- Gif
+      -- -----------------Gif
+      --Gif
+      --Gif
+    elseif msg_type == 'MSG:Gif' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+        if msg.forward_info_ then
+          if database:get('bot:forward:mute'..msg.chat_id_) then
+            if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Fwd] [Gif]")
+            end
+          end
+        end
+        if database:get('bot:gifs:mute'..msg.chat_id_) then
+          local id = msg.id_
+          local msgs = {[0] = id}
+          local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+          print("Deleted [Lock] [Gif]")
+        end
+        if msg.content_.caption_ then
+          check_filter_words(msg, msg.content_.caption_)
+          if database:get('bot:links:mute'..msg.chat_id_) then
+            if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Gif] ")
+            end
+          end
+          if database:get('tags:lock'..msg.chat_id_) then
+            if msg.content_.caption_:match("@") then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Gif]")
+            end
+          end
+          if msg.content_.caption_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Gif]")
+            end
+          end
+          if msg.content_.caption_:match("[Hh][Tt][Tt][Pp][Ss]://") or msg.content_.caption_:match("[Hh][Tt][Tt][Pp]://") or msg.content_.caption_:match(".[Ii][Rr]") or msg.content_.caption_:match(".[Cc][Oo][Mm]") or msg.content_.caption_:match(".[Oo][Rr][Gg]") or msg.content_.caption_:match(".[Ii][Nn][Ff][Oo]") or msg.content_.caption_:match("[Ww][Ww][Ww].") or msg.content_.caption_:match(".[Tt][Kk]") then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Web] [Gif]")
+            end
+          end
+          if msg.content_.caption_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Gif]")
+            end
+          end
+          if msg.content_.caption_:match("[A-Z]") or msg.content_.caption_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Gif]")
+            end
+          end
+        end
+      end
+      --Text
+      --Text
+      ------- --- Text--------- Text
+      -- -----------------Text
+      --Text
+      --Text
+    elseif msg_type == 'MSG:Text' then
+      if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+        if database:get('anti-flood:'..msg.chat_id_) then
+          database:setex(pm, TIME_CHECK, msgs+1)
+        end
+      end
+      --vardump(msg)
+      if database:get("bot:group:link"..msg.chat_id_) == 'waiting' and is_momod(msg.sender_user_id_, msg.chat_id_) then
+        if msg.content_.text_:match("(https://telegram.me/joinchat/%S+)") or msg.content_.text_:match("(https://t.me/joinchat/%S+)") then
+          local glink = msg.content_.text_:match("(https://telegram.me/joinchat/%S+)") or msg.content_.text_:match("(https://t.me/joinchat/%S+)")
+          local hash = "bot:group:link"..msg.chat_id_
+          database:set(hash,glink)
+          if database:get('lang:gp:'..msg.chat_id_) then
+            send(msg.chat_id_, msg.id_, 1, 'Group link has been saved ✅', 1, 'md')
+          else
+            send(msg.chat_id_, msg.id_, 1, ' لینک گروه ثبت شد ✅', 1, 'md')
+          end
+        end
+      end
+      function check_username(extra,result,success)
+        --vardump(result)
+        local username = (result.username_ or '')
+        local svuser = 'user:'..result.id_
+        if username then
+          database:hset(svuser, 'username', username)
+        end
+        if username and username:match("[Bb][Oo][Tt]$") or username:match("_[Bb][Oo][Tt]$") then
+          if database:get('bot:bots:mute'..msg.chat_id_) and not is_momod(msg.chat_id_, msg.chat_id_) then
+            local id = msg.id_
+            local msgs = {[0] = id}
+            local chat = msg.chat_id_
+            delete_msg(chat,msgs)
+            chat_kick(msg.chat_id_, msg.sender_user_id_)
+            return false
+          end
+        end
+      end
+      getUser(msg.sender_user_id_,check_username)
+      database:set('bot:editid'.. msg.id_,msg.content_.text_)
+      if not is_free(msg, msg.content_.text_) then
+        if not is_vipmem(msg.sender_user_id_, msg.chat_id_) then
+          check_filter_words(msg,text)
+          if text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]") or text:match("[Tt][Ll][Gg][Rr][Mm].[Mm][Ee]") or text:match("[Tt].[Mm][Ee]") then
+            if database:get('bot:links:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Link] [Text]")
+              if database:get('bot:strict'..msg.chat_id_) then
+                chat_kick(msg.chat_id_, msg.sender_user_id_)
+              end
+            end
+          end
+          if database:get('bot:text:mute'..msg.chat_id_) then
+            local id = msg.id_
+            local msgs = {[0] = id}
+            local chat = msg.chat_id_
+            delete_msg(chat,msgs)
+            print("Deleted [Lock] [Text]")
+          end
+          if msg.forward_info_ then
+            if database:get('bot:forward:mute'..msg.chat_id_) then
+              if msg.forward_info_.ID == "MessageForwardedFromUser" or msg.forward_info_.ID == "MessageForwardedPost" then
+                local id = msg.id_
+                local msgs = {[0] = id}
+                local chat = msg.chat_id_
+                delete_msg(chat,msgs)
+                print("Deleted [Lock] [Fwd] [Text]")
+              end
+            end
+          end
+          if msg.content_.text_:match("@") then
+            if database:get('tags:lock'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Tag] [Text]")
+            end
+          end
+          if msg.content_.text_:match("#") then
+            if database:get('bot:hashtag:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Hashtag] [Text]")
+            end
+          end
+          if text:match("[Hh][Tt][Tt][Pp][Ss]://") or text:match("[Hh][Tt][Tt][Pp]://") or text:match(".[Ii][Rr]") or text:match(".[Cc][Oo][Mm]") or text:match(".[Oo][Rr][Gg]") or text:match(".[Ii][Nn][Ff][Oo]") or text:match("[Ww][Ww][Ww].") or text:match(".[Tt][Kk]") or msg.content_.ID == "MessageEntityTextUrl" or msg.content_.ID == "MessageEntityUrl" then
+            if database:get('bot:webpage:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Web] [Text]")
+            end
+          end
+          if msg.content_.text_:match("[\216-\219][\128-\191]") then
+            if database:get('bot:arabic:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Farsi] [Text]")
+            end
+          end
+          if msg.content_.text_ then
+            local _nl, ctrl_chars = string.gsub(text, '%c', '')
+            local _nl, real_digits = string.gsub(text, '%d', '')
+            local id = msg.id_
+            local msgs = {[0] = id}
+            local chat = msg.chat_id_
+            local hash = 'bot:sens:spam'..msg.chat_id_
+            if not database:get(hash) then
+              sens = 400
+            else
+              sens = tonumber(database:get(hash))
+            end
+            if database:get('bot:spam:mute'..msg.chat_id_) and string.len(msg.content_.text_) > (sens) or ctrl_chars > (sens) or real_digits > (sens) then
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [Spam] ")
+            end
+          end
+          if msg.content_.text_:match("[A-Z]") or msg.content_.text_:match("[a-z]") then
+            if database:get('bot:english:mute'..msg.chat_id_) then
+              local id = msg.id_
+              local msgs = {[0] = id}
+              local chat = msg.chat_id_
+              delete_msg(chat,msgs)
+              print("Deleted [Lock] [English] [Text]")
+            end
+          end
+        end
+      end
   -------------------------------------------------------------------------------------------------------
   -------------------------------------------------------------------------------------------------------
   -------------------------------------------------------------------------------------------------------
