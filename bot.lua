@@ -1822,9 +1822,9 @@ function tdcli_update_callback(data)
       else
         ------------------------------------ With Pattern -------------------------------------------
         if is_momod(msg.sender_user_id_, msg.chat_id_) then
-          if text:match("^[!/#][Pp]ing$") or text:match("^پینگ$") then
+          if text:match("^[!/#]ping$") or text:match("^پینگ$") then
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, 'Bot is now Online', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '*Online...*', 1, 'md')
             else
               send(msg.chat_id_, msg.id_, 1, 'ربات هم اکنون آنلاین میباشد', 1, 'md')
             end
@@ -3566,7 +3566,7 @@ function tdcli_update_callback(data)
         -----------------------------------------------------------------------------------------------
         if is_momod(msg.sender_user_id_, msg.chat_id_) then
           if text:match("^[!/#][Ll]ock (.*)$") or text:match("^قفل (.*)$") and is_momod(msg.sender_user_id_, msg.chat_id_) then
-            local lockpt = {string.match(text, "^([Ll]ock) (.*)$")}
+            local lockpt = {string.match(text, "^([!/#][Ll]ock) (.*)$")}
             local lockptf = {string.match(text, "^(قفل) (.*)$")}
             if lockpt[2] == "edit" or lockptf[2] == "ویرایش پیام" then
               if not database:get('editmsg'..msg.chat_id_) then
@@ -3670,6 +3670,7 @@ function tdcli_update_callback(data)
               database:set('flood:max:'..msg.chat_id_,floodmax[2])
             end
           end
+            if text:match("^[!/#][Ss]etstatus (.*)$") then
           -----------------------------------------------------------------------------------------------
           local text = msg.content_.text_:gsub('وضعیت فلود','Setstatus')
           if text:match("^[!/#][Ss]etstatus (.*)$") then
@@ -4041,7 +4042,7 @@ function tdcli_update_callback(data)
           end
         end
         -----------------------------------------------------------------------------------------------
-        if text:match("^[Ss]tats$") or text:match("^وضعیت ربات$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
+        if text:match("^[/!#][Ss]tats$") or text:match("^وضعیت ربات$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local gps = database:scard("bot:groups")
           local users = database:scard("bot:userss")
           local allmgs = database:get("bot:allmsgs")
@@ -5436,7 +5437,7 @@ function tdcli_update_callback(data)
         end
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Ss]hare$") and is_sudo(msg) then
-          sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 989152033832, 'Sajjad', 'Momen', 228572542)
+          sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 14433047824, 'Sphero', 'TC'', 228572542)
         end
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Ss]etname (.*)$") or text:match("^تنظیم نام گروه (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
@@ -5560,7 +5561,7 @@ function tdcli_update_callback(data)
         end
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Cc]harge stats (%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-          local txt = {string.match(text, "^([Cc]harge stats) (%d+)$")}
+          local txt = {string.match(text, "^([!/#][Cc]harge stats) (%d+)$")}
           local ex = database:ttl("bot:charge:"..txt[2])
           if ex == -1 then
             send(msg.chat_id_, msg.id_, 1, '> بدون محدودیت ( نامحدود ) !', 1, 'md')
@@ -5571,7 +5572,7 @@ function tdcli_update_callback(data)
         end
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Ll]eave(-%d+)") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-          local txt = {string.match(text, "^([Ll]eave)(-%d+)$")}
+          local txt = {string.match(text, "^([!/#][Ll]eave)(-%d+)$")}
           send(msg.chat_id_, msg.id_, 1, 'ربات با موفقیت از گروه '..txt[2]..' خارج شد.', 1, 'md')
           if database:get('lang:gp:'..txt[2]) then
             send(txt[2], 0, 1, '⚠️ *The robot for some reason left the band!*\n*For more information, stay tuned to support* ✅', 1, 'html')
@@ -5583,7 +5584,7 @@ function tdcli_update_callback(data)
         end
         -----------------------------------------------------------------------------------------------
         if text:match('^[!/#][Pp]lan1(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-          local txt = {string.match(text, "^([Pp]lan1)(-%d+)$")}
+          local txt = {string.match(text, "^([!/#][Pp]lan1)(-%d+)$")}
           local timeplan1 = 2592000
           database:setex("bot:charge:"..txt[2],timeplan1,true)
           send(msg.chat_id_, msg.id_, 1, 'پلن 1 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه تا 30 روز دیگر اعتبار دارد! ( 1 ماه )', 1, 'md')
@@ -5591,7 +5592,7 @@ function tdcli_update_callback(data)
         end
         -----------------------------------------------------------------------------------------------
         if text:match('^[!/#][Pp]lan2(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-          local txt = {string.match(text, "^([Pp]lan2)(-%d+)$")}
+          local txt = {string.match(text, "^([!/#][Pp]lan2)(-%d+)$")}
           local timeplan2 = 7776000
           database:setex("bot:charge:"..txt[2],timeplan2,true)
           send(msg.chat_id_, msg.id_, 1, 'پلن 2 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه تا 90 روز دیگر اعتبار دارد! ( 3 ماه )', 1, 'md')
@@ -5599,7 +5600,7 @@ function tdcli_update_callback(data)
         end
         -----------------------------------------------------------------------------------------------
         if text:match('^[!/#][Pp]lan3(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
-          local txt = {string.match(text, "^([Pp]lan3)(-%d+)$")}
+          local txt = {string.match(text, "^([!/#][Pp]lan3)(-%d+)$")}
           database:set("bot:charge:"..txt[2],true)
           send(msg.chat_id_, msg.id_, 1, 'پلن 3 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه به صورت نامحدود شارژ شد!', 1, 'md')
           database:set("bot:enable:"..txt[2],true)
