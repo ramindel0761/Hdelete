@@ -2723,6 +2723,13 @@ function tdcli_update_callback(data)
             send(msg.chat_id_, msg.id_, 1, '> کاربر : '..ap[2]..' از ادمینی حذف شد !', 1, 'md')
           end
         end
+		if text:match("^[!/#]help$") or text:match("^راهنما$") then
+   if database:get('lang:gp:'..msg.chat_id_) then
+                send(msg.chat_id_, msg.id_, 1, 'For Get Your Help\nUse Commands :\n------------\nMembers Help :\n/help member\nراهنما اعضا\n------------\nMods Help :\n/help mod\nراهنما مدیران\n------------\nOwners Help :\n/help owner\nراهنما سازنده\n------------\nBot Admins Help :\n/help admin\nراهنما ادمین\n------------\nBot Sudo Help:\n/help sudo\nراهنما سودو\n------------\n\n', 1, 'md')
+        else
+                  send(msg.chat_id_, msg.id_, 1, 'برای دریافت راهنما مخصوص خودتون از دستورات زیر استفاده کنید توجه کنید که اگر مقام شما بالاتر از مقام دیگری است میتوانید دستورات اون رو هم دریافت کنید\nراهنمای اعضای معمولی :\n/help member\nراهنما اعضا\n------------\nراهنمای مدیران :\n/help mod\nراهنما مدیران\n------------\nراهنما سازنده گروه :\n/help owner\nراهنما سازنده\n------------\nراهنمای ادمین ربات :\n/help admin\nراهنما ادمین\n------------\nراهنمای اونر اصلی ربات :\n/help sudo\nراهنما سودو\n------------\n\nتوجه کنید ک اگر راهنمایی رو زدید و ربات جواب نداد یعنی اون راهنما مخصوص شما نیست و باید یک راهنمای دیگه رو انتخاب کنید\n\n', 1, 'md')
+                end
+        end
         -----------------------------------------------------------------------------------------------
         if is_momod(msg.sender_user_id_, msg.chat_id_) then
           if text:match("^[!/#][Mm]odlist$") or text:match("^لیست مدیران گروه$") then
