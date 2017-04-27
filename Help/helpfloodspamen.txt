@@ -1,0 +1,32 @@
+﻿•• *Guide lock flood and spam* :
+
+Lock will prevent spammers from sending messages loud and long!
+Its sensitivity is adjustable and unit characters is!
+It is set in the following order:
+
+`/Setspam [40 - Up]`
+
+For example, you want to delete messages longer than 80 characters should be used from the command Setspam 80!
+
+Flood lock prevents the burst, sending multiple messages!
+Sensitivity is adjustable and it shows!
+
+It is the second mode!
+
+> First :
+
+If he burst start *Sending messages*, all messages will be removed and 5 seconds he can send a message!
+
+Active command of the Situation :
+
+`/Setstatus del`
+
+> The second mode :
+
+If he burst start *Sending messages* , all messages will be deleted from the group Remove he will !
+
+`/Setstatus kick`
+
+Its *Sensitivity* is adjustable to a duplicate message!
+
+`/Setflood [2 - Up]`

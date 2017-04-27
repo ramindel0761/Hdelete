@@ -1,0 +1,22 @@
+•• *Guide for Cleans* :
+
+> *Clean Filter Words*
+
+Pattern :
+`/clean filterlist`
+
+> *Clean Modrators list*
+
+Pattern :
+`/clean modlist`
+
+> *Clean BanUsers*
+
+Pattern :
+`/clean banlist`
+
+> *Clean MutedUsers*
+
+Pattern :
+`/clean mutelist`
+    

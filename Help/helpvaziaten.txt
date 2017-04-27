@@ -1,0 +1,41 @@
+﻿•• *Guide robot status* :
+
+> */Strict mode*
+
+A condition that, if enabled, someone from the group remove send the link!
+
+*Activation* :
+`/Lock strict`
+
+*Deactivate* :
+`/Unlock strict`
+
+> *Overall lock Group*
+
+A condition that prevents a normal user from sending any messages!
+
+*Activation* :
+`/Lock all`
+
+*Deactivate* :
+`/Unlock all`
+
+To enable the timer can act as follows:
+
+*Activation for an Hour* :
+`/lock gtime 1`
+
+*Activation for two Hours* :
+`/lock gtime 2`
+
+And ...
+
+> *NoN-answer*
+
+Some of universal grammar, that is normal users are answered, they will not respond if this mode is enabled!
+
+*Activation* :
+`/Lock cmd`
+
+*Deactivate* :
+`/Unlock cmd`

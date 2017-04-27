@@ -1,0 +1,22 @@
+﻿ •• *The main Media Guide* :
+
+You can active Media lock withe `lock` Pattern and You can inactive Media lock withe `Unlock` Pattern !
+
+*/lock Example* :
+`/lock File`
+
+*/Unlock Example* :
+`/Unlock File`
+
+> All *Media* of Bot :
+
+- `Gif`
+- `Photo`
+- `Video`
+- `Text`
+- `Voice`
+- `Music`
+- `location`
+- `File`
+- `Contact`
+- `Sticker`

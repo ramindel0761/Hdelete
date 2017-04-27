@@ -1,0 +1,7 @@
+﻿•• *Instruction Set and get links Group* :
+
+Enter the command `/Setlink`  !
+
+Then link the group to be *Recorded* within the group itSelf  !
+
+Once registered with the command `Link` can get it whenever you want !

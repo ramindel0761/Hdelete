@@ -1,0 +1,16 @@
+﻿» *List of bot Guide* :
+
+•• Please choose a *Section* to display !
+
+`1-` Enable or disable the status of the Robot
+`2-` Lock the main section to enable or disable
+`3-` Lock or unlock the media lock
+`4-` Switch and lock sensitivity Flood and spam
+`5-` Promotion and dismissal of the user
+`6-` Part of the set and get link Group
+`7-` Ancillary facilities robot
+`8-` Set Settings of Group Panel
+`9-` How to Clean lists
+`0-` Cancel operation
+
+> To get to the *FAQ* section , simply send its *Number* !

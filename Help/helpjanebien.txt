@@ -1,0 +1,27 @@
+﻿🔃 *Lateral guide features* :
+
+Id command you can use to *get your profile* !
+
+If you want your details along with your profile photo robot sends orders to send `Getidstatus photo` ! To return to the simple mode command to send `Getidstatus simple` !
+
+Ordered `me` to get the numeric ID is your place!
+
+To get a numeric identifier, you can use two methods
+
+> The first method :
+
+Ryplay person a message and send commands `Id`
+
+> The second Method :
+
+Id command and the *Username* of the Person writing it up
+*Example* :
+`/id @Username`
+
+To get to see your profile, you can use the following command
+
+`/getpro [1 - 10]`
+
+*Example* :
+`/getpro 2`
+

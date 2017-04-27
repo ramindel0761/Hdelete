@@ -1,0 +1,31 @@
+﻿🔃 *The main lock Guide* :
+
+You can active bot locks withe `lock` Pattern and You can inactive bot locks withe `Unlock` Pattern !
+
+*/lock Example* :
+`/lock links`
+
+*/Unlock Example* :
+`/Unlock links`
+
+> All *Values* of Bot :
+
+- `Spam`
+- `links`
+- `Webpage`
+- `Flood`
+- `Tgservice`
+- `English`
+- `Farsi`
+- `Inline`
+- `Pin`
+- `Mention`
+- `Markdown`
+- `Edit`
+- `Bots`
+- `Fwd`
+- `Hashtag`
+- `Post`
+- `Duplipost`
+- `Game`
+- `Inline`

@@ -1,0 +1,29 @@
+﻿•• *A Manager's Guide to Promotion or dismissal as a user* :
+
+>> There are Four ways for *Promotion* !
+
+> The first Method :
+
+One of the messages to the user and command Ryplay *Promote submit* !
+
+> The second method:
+
+Promote Write command and the command to write the same numeric ID!
+*Example* :
+`/Promote 201321014`
+
+> The third method :
+
+Promote ordered to write and record the user's username in front of it!
+*Example* :
+`/Promote @Username`
+
+Dismissal of the above steps is enough for one person only with the difference that instead ordered to replace Promote Demote command
+*Example* :
+`/Demote @Username`
+
+> The four method :
+
+*Example*
+
+`/Promote 'Metion'`

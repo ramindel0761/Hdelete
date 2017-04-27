@@ -1,0 +1,12 @@
+•• *Guide Group Panel* :
+
+> *Set Group En language*
+
+Pattern :
+`setlang en`
+
+> *Set Group Fa language*
+
+Pattern :
+`setlang fa`
+
