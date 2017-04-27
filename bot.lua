@@ -2835,12 +2835,12 @@ function tdcli_update_callback(data)
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
 		   elseif text:match("^8") then
                   database:del('helptime:'..msg.chat_id_)
-                  local h = ( helppanel:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
+                  local i = ( helppanel:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, i, 1, 'md')
 		   elseif text:match("^9$") then
                   database:del('helptime:'..msg.chat_id_)
-                  local h = ( helpclean:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
+                  local j = ( helpclean:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, j, 1, 'md')
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> عملیات لغو گردید !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
