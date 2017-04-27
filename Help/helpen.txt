@@ -9,8 +9,6 @@
 `5-` Promotion and dismissal of the user
 `6-` Part of the set and get link Group
 `7-` Ancillary facilities robot
-`8-` Set Settings of Group Panel
-`9-` How to Clean lists
 `0-` Cancel operation
 
 > To get to the *FAQ* section , simply send its *Number* !
