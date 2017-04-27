@@ -2724,7 +2724,7 @@ function tdcli_update_callback(data)
           end
         end
  if is_momod(msg.sender_user_id_, msg.chat_id_) then
-          if text:match("^[Hh]elp$") or text:match("^راهنما$") then
+          if text:match("^[!/#][Hh]elp$") or text:match("^راهنما$") then
             local help = io.open("./Help/help.txt", "r")
             local helpen = io.open("./Help/helpen.txt", "r")
             local helptime = 60
