@@ -2724,7 +2724,7 @@ function tdcli_update_callback(data)
           end
         end
 	 if is_momod(msg.sender_user_id_, msg.chat_id_) then
-          if text:match("^[Hh]elp$") or text:match("^راهنما$") then
+          if text:match("^[!/#][Hh]elp$") or text:match("^راهنما$") then
             local help = io.open("./Help/help.txt", "r")
             local helpen = io.open("./Help/helpen.txt", "r")
             local helptime = 60
@@ -2779,12 +2779,12 @@ function tdcli_update_callback(data)
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
 		elseif text:match("^8") then
                   database:del('helptime:'..msg.chat_id_)
-                  local h = ( helppanelen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
+                  local i = ( helppanelen:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, i, 1, 'md')
 		   elseif text:match("^9$") then
                   database:del('helptime:'..msg.chat_id_)
-                  local h = ( helpcleanen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
+                  local j = ( helpcleanen:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, j, 1, 'md')
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> The operation was canceled !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
