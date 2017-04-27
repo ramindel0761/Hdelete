@@ -2779,12 +2779,12 @@ function tdcli_update_callback(data)
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
 		elseif text:match("^8$") then
                   database:del('helptime:'..msg.chat_id_)
-                  local i = ( helppanelen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, i, 1, 'md')
+                  local ii = ( helppanelen:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, ii, 1, 'md')
 		   elseif text:match("^9$") then
                   database:del('helptime:'..msg.chat_id_)
-                  local j = ( helpcleanen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, j, 1, 'md')
+                  local jj = ( helpcleanen:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, jj, 1, 'md')
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> The operation was canceled !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
@@ -2835,8 +2835,8 @@ function tdcli_update_callback(data)
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
 		   elseif text:match("^8$") then
                   database:del('helptime:'..msg.chat_id_)
-                  local qq = ( helppanel:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, qq, 1, 'md')
+                  local ee = ( helppanel:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, ee, 1, 'md')
 		   elseif text:match("^9$") then
                   database:del('helptime:'..msg.chat_id_)
                   local ww = ( helpclean:read("*a") )
