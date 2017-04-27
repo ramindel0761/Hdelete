@@ -2737,9 +2737,7 @@ function tdcli_update_callback(data)
               send(msg.chat_id_, msg.id_, 1, a, 1, 'md')
             end
           end
-          if not database:get('helptime:'..msg.chat_id_) then
-		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
-                else
+          if database:get('helptime:'..msg.chat_id_) then
             if is_momod(msg.sender_user_id_, msg.chat_id_) then
               if database:get('lang:gp:'..msg.chat_id_) then
                 local helplocken = io.open("./Help/helplocken.txt", "r")
@@ -2780,11 +2778,13 @@ function tdcli_update_callback(data)
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> The operation was canceled !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
+				if database:ttl('helptime:'..msg.chat_id_, helptime) == 0 then
+		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
+                end
                 else
                   if text:match("^%d+$") then
                     send(msg.chat_id_, msg.id_, 1, '> Your number is not in the list!', 1, 'md')
                     database:del('help:'..msg.chat_id_)
-                  end
                 end
               end
               if not database:get('lang:gp:'..msg.chat_id_) then
@@ -2826,13 +2826,13 @@ function tdcli_update_callback(data)
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> عملیات لغو گردید !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
+		if database:ttl('helptime:'..msg.chat_id_, helptime) == 0 then
+		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
+                end
                 else
                   if text:match("^%d+$") then
                     send(msg.chat_id_, msg.id_, 1, '> شماره مورد نظر شما در لیست موجود نمیباشد !', 1, 'md')
                   end
-		if database:ttl('helptime:'..msg.chat_id_, helptime) == 0 then
-		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
-                end
                 end
               end
             end
