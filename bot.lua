@@ -2777,14 +2777,14 @@ function tdcli_update_callback(data)
                   database:del('helptime:'..msg.chat_id_)
                   local h = ( helpjanebien:read("*a") )
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
-		elseif text:match("^8$") then
+		elseif text:match("^9$") then
                   database:del('helptime:'..msg.chat_id_)
-                  local ii = ( helppanelen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, ii, 1, 'md')
-		   elseif text:match("^9$") then
+                  local www = ( helppanelen:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, www, 1, 'md')
+		   elseif text:match("^10$") then
                   database:del('helptime:'..msg.chat_id_)
-                  local jj = ( helpcleanen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, jj, 1, 'md')
+                  local ww = ( helpcleanen:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, ww, 1, 'md')
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> The operation was canceled !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
@@ -2833,11 +2833,11 @@ function tdcli_update_callback(data)
                   database:del('helptime:'..msg.chat_id_)
                   local h = ( helpjanebi:read("*a") )
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
-		   elseif text:match("^8$") then
-                  database:del('helptime:'..msg.chat_id_)
-                  local ee = ( helppanel:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, ee, 1, 'md')
 		   elseif text:match("^9$") then
+                  database:del('helptime:'..msg.chat_id_)
+                  local www = ( helppanel:read("*a") )
+                  send(msg.chat_id_, msg.id_, 1, www, 1, 'md')
+		   elseif text:match("^10$") then
                   database:del('helptime:'..msg.chat_id_)
                   local ww = ( helpclean:read("*a") )
                   send(msg.chat_id_, msg.id_, 1, ww, 1, 'md')
