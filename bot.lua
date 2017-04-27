@@ -2727,7 +2727,7 @@ function tdcli_update_callback(data)
           if text:match("^[!/#][Hh]elp$") or text:match("^راهنما$") then
             local help = io.open("./Help/help.txt", "r")
             local helpen = io.open("./Help/helpen.txt", "r")
-            local helptime = 60
+            local helptime = 15
             local a = ( help:read("*a") )
             local aen = ( helpen:read("*a") )
             database:setex('helptime:'..msg.chat_id_, helptime, true)
@@ -2737,7 +2737,9 @@ function tdcli_update_callback(data)
               send(msg.chat_id_, msg.id_, 1, a, 1, 'md')
             end
           end
-          if database:get('helptime:'..msg.chat_id_) then
+          if not database:get('helptime:'..msg.chat_id_) then
+		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
+                else
             if is_momod(msg.sender_user_id_, msg.chat_id_) then
               if database:get('lang:gp:'..msg.chat_id_) then
                 local helplocken = io.open("./Help/helplocken.txt", "r")
@@ -2783,9 +2785,6 @@ function tdcli_update_callback(data)
                     send(msg.chat_id_, msg.id_, 1, '> Your number is not in the list!', 1, 'md')
                     database:del('help:'..msg.chat_id_)
                   end
-		if database:ttl('helptime:'..msg.chat_id_, helptime) == 0 then
-		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
-                end
                 end
               end
               if not database:get('lang:gp:'..msg.chat_id_) then
