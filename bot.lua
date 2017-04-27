@@ -2787,6 +2787,7 @@ function tdcli_update_callback(data)
                 end
               end
 		end
+		end
               if not database:get('lang:gp:'..msg.chat_id_) then
                 local helplock = io.open("./Help/helplock.txt", "r")
                 local helpmedia = io.open("./Help/helpmedia.txt", "r")
