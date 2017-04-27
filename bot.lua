@@ -2723,8 +2723,8 @@ function tdcli_update_callback(data)
             send(msg.chat_id_, msg.id_, 1, '> کاربر : '..ap[2]..' از ادمینی حذف شد !', 1, 'md')
           end
         end
-	 if is_momod(msg.sender_user_id_, msg.chat_id_) then
-          if text:match("^[!/#][Hh]elp$") or text:match("^راهنما$") then
+ if is_momod(msg.sender_user_id_, msg.chat_id_) then
+          if text:match("^[Hh]elp$") or text:match("^راهنما$") then
             local help = io.open("./Help/help.txt", "r")
             local helpen = io.open("./Help/helpen.txt", "r")
             local helptime = 60
@@ -2741,9 +2741,7 @@ function tdcli_update_callback(data)
             if is_momod(msg.sender_user_id_, msg.chat_id_) then
               if database:get('lang:gp:'..msg.chat_id_) then
                 local helplocken = io.open("./Help/helplocken.txt", "r")
-		local helpcleanen = io.open("./Help/helpcleanen.txt", "r")
                 local helpmediaen = io.open("./Help/helpmediaen.txt", "r")
-		local helppanelen = io.open("./Help/helppanelen.txt", "r")
                 local helpsetlinken = io.open("./Help/helpsetlinken.txt", "r")
                 local helpprodemoen = io.open("./Help/helpprodemoen.txt", "r")
                 local helpjanebien = io.open("./Help/helpjanebien.txt", "r")
@@ -2777,14 +2775,6 @@ function tdcli_update_callback(data)
                   database:del('helptime:'..msg.chat_id_)
                   local h = ( helpjanebien:read("*a") )
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
-		elseif text:match("^8$") then
-                  database:del('helptime:'..msg.chat_id_)
-                  local i = ( helppanelen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, i, 1, 'md')
-		   elseif text:match("^9$") then
-                  database:del('helptime:'..msg.chat_id_)
-                  local j = ( helpcleanen:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, j, 1, 'md')
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> The operation was canceled !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
@@ -2796,15 +2786,13 @@ function tdcli_update_callback(data)
                 end
               end
               if not database:get('lang:gp:'..msg.chat_id_) then
-		local helpmedia = io.open("./Help/helpmedia.txt", "r")
-		local helppanel = io.open("./Help/helppanel.txt", "r")
-		local helpprodemo = io.open("./Help/helpprodemo.txt", "r")
-		local helpjanebi = io.open("./Help/helpjanebi.txt", "r")
-		local helpspamflood = io.open("./Help/helpfloodspam.txt", "r")
-		local helpvaziat = io.open("./Help/helpvaziat.txt", "r")
                 local helplock = io.open("./Help/helplock.txt", "r")
+                local helpmedia = io.open("./Help/helpmedia.txt", "r")
                 local helpsetlink = io.open("./Help/helpsetlink.txt", "r")
-		local helpclean = io.open("./Help/helpclean.txt", "r")
+                local helpprodemo = io.open("./Help/helpprodemo.txt", "r")
+                local helpjanebi = io.open("./Help/helpjanebi.txt", "r")
+                local helpspamflood = io.open("./Help/helpfloodspam.txt", "r")
+                local helpvaziat = io.open("./Help/helpvaziat.txt", "r")
                 if text:match("^1$") then
                   database:del('helptime:'..msg.chat_id_)
                   local b = ( helpvaziat:read("*a") )
@@ -2833,14 +2821,6 @@ function tdcli_update_callback(data)
                   database:del('helptime:'..msg.chat_id_)
                   local h = ( helpjanebi:read("*a") )
                   send(msg.chat_id_, msg.id_, 1, h, 1, 'md')
-		   elseif text:match("^8$") then
-                  database:del('helptime:'..msg.chat_id_)
-                  local i = ( helppanel:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, i, 1, 'md')
-		   elseif text:match("^9$") then
-                  database:del('helptime:'..msg.chat_id_)
-                  local j = ( helpclean:read("*a") )
-                  send(msg.chat_id_, msg.id_, 1, j, 1, 'md')
                 elseif text:match("^0$") then
                   send(msg.chat_id_, msg.id_, 1, '> عملیات لغو گردید !', 1, 'md')
                   database:del('help:'..msg.chat_id_)
