@@ -2783,6 +2783,9 @@ function tdcli_update_callback(data)
                     send(msg.chat_id_, msg.id_, 1, '> Your number is not in the list!', 1, 'md')
                     database:del('help:'..msg.chat_id_)
                   end
+		if database:ttl('helptime:'..msg.chat_id_, helptime) == 0 then
+		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
+                end
                 end
               end
               if not database:get('lang:gp:'..msg.chat_id_) then
@@ -2828,6 +2831,9 @@ function tdcli_update_callback(data)
                   if text:match("^%d+$") then
                     send(msg.chat_id_, msg.id_, 1, '> شماره مورد نظر شما در لیست موجود نمیباشد !', 1, 'md')
                   end
+		if database:ttl('helptime:'..msg.chat_id_, helptime) == 0 then
+		send(msg.chat_id_, msg.id_, 1, '> زمان استفاده از راهنما به پایان رسید\nبرای استفاده دوباره\n`راهنما`\nبزنید!', 1, 'md')
+                end
                 end
               end
             end
