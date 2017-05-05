@@ -5578,13 +5578,6 @@ function tdcli_update_callback(data)
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Cc]harge (%d+)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local a = {string.match(text, "^([!/#][Cc]harge) (%d+)$")}
-          if a[2]:match("0") then
-            if not database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '> عددی بزرگتر از 0 وارد نمایید !', 1, 'md')
-            else
-              send(msg.chat_id_, msg.id_, 1, '> Enter a number greater than 0 !', 1, 'md')
-            end
-          else
             if database:get('lang:gp:'..msg.chat_id_) then
               send(msg.chat_id_, msg.id_, 1, '> Group has been charged for '..a[2]..' day(s)!', 1, 'md')
             else
