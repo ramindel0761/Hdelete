@@ -5587,7 +5587,6 @@ function tdcli_update_callback(data)
             database:setex("bot:charge:"..msg.chat_id_,time,true)
             database:set("bot:enable:"..msg.chat_id_,true)
           end
-        end
         if text:match("^[!/#][Cc]harge [Uu]nit$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
           function unit(extra,result,success)
             local v = tonumber(bot_owner)
