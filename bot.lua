@@ -3985,7 +3985,7 @@ function tdcli_update_callback(data)
             database:del("bot:welcome"..msg.chat_id_)
           end
           if text:match("^[!/#][Ss]et welcome (.*)$") or text:match("^تنظیم متن خوش امدگویی (.*)$") then
-            local welcome = {string.match(text, "^([Ss]et welcome) (.*)$")}
+            local welcome = {string.match(text, "^([!/#][Ss]et welcome) (.*)$")}
             if database:get('lang:gp:'..msg.chat_id_) then
               send(msg.chat_id_, msg.id_, 1, '> Welcome text has been saved !\n\nWelcome text :\n\n'..welcome[2], 1, 'html')
             else
@@ -4145,7 +4145,7 @@ function tdcli_update_callback(data)
         if text:match("^[!/#][Bb]roadcast (.*)$") or text:match("^ارسال همگانی (.*)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local gps = database:scard("bot:groups") or 0
           local gpss = database:smembers("bot:groups") or 0
-          local rws = {string.match(text, "^([Bb]roadcast) (.*)$")}
+          local rws = {string.match(text, "^([!/#][Bb]roadcast) (.*)$")}
           local rwss = {string.match(text, "^(ارسال همگانی) (.*)$")}
           local bib = rws[2] or rwss[2]
           for i=1, #gpss do
