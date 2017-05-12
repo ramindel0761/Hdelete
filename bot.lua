@@ -3386,6 +3386,20 @@ function tdcli_update_callback(data)
             }, getprofa, nil)
           end
         end
+		local function check_member_super_deleted(cb_extra, success, result)
+ local msg = cb_extra.msg
+  local deleted = 0 
+if success == 0 then
+send(msg.chat.id, "*first set me as admin!*", 1, 'md') 
+end
+for k,v in pairs(result) do
+  if not v.first_name and not v.last_name then
+deleted = deleted + 1
+ chat_kick(v.peer_id,msg.to.id)
+ end
+ end
+ send(msg.chat.id, deleted.." *Deleted account removed from group!*", 1, 'md') 
+ end 
         -----------------------------------------------------------------------------------------------
         local text = msg.content_.text_:gsub('وضعیت دریافت عکس پروفایل','Getprofilestatus')
         if is_momod(msg.sender_user_id_, msg.chat_id_) then
