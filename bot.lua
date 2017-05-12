@@ -3393,7 +3393,7 @@ if success == 0 then
 send(msg.chat.id, "*first set me as admin!*", 1, 'md') 
 end
 for k,v in pairs(result) do
-  if not v.first_name and not v.last_name then
+  if text:match("^[!/#][Cc]lean deleted$") and not v.first_name and not v.last_name then
 deleted = deleted + 1
  chat_kick(v.peer_id,msg.to.id)
  end
