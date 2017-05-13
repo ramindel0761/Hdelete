@@ -4158,21 +4158,15 @@ end
           end
         end
         -----------------------------------------------------------------------------------------------
-        if text:match("^[!/#][Bb]roadcast (.*)$") or text:match("^ارسال همگانی (.*)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
-          local gps = database:scard("bot:groups") or 0
+if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
+    local gps = database:scard("bot:groups") or 0
           local gpss = database:smembers("bot:groups") or 0
           local rws = {string.match(text, "^([!/#][Bb]roadcast) (.*)$")}
-          local rwss = {string.match(text, "^(ارسال همگانی) (.*)$")}
-          local bib = rws[2] or rwss[2]
-          for i=1, #gpss do
-            send(gpss[i], 0, 1, bib, 1, 'md')
-          end
-          if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, '> Your Message send to : '..gps..' groups !', 1, 'md')
-          else
-            send(msg.chat_id_, msg.id_, 1, '> پیام مورد نظر شما به : '..gps..' گروه ارسال شد !', 1, 'md')
-          end
-        end
+	for i=1, #gpss do
+		  send(gpss[i], 0, 1, rws[2], 1, 'md')
+    end
+                   send(msg.chat_id_, msg.id_, 1, '*Your Msg Send to* `|'..gps..'|` *Groups*!', 1, 'md')
+	end
         -----------------------------------------------------------------------------------------------
         if text:match("^[/!#][Ss]tats$") or text:match("^وضعیت ربات$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local gps = database:scard("bot:groups")
