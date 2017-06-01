@@ -1842,9 +1842,9 @@ function tdcli_update_callback(data)
 		local url = 'http://latex.codecogs.com/png.download?'..'\\dpi{600}%20\\huge%20\\'..fonts[math.random(#fonts)]..'{{\\color{'..colors[math.random(#colors)]..'}'..jdat.ENtime..'}}'
 		local file = download_to_file(url,'time.webp')
 		tdcli.sendDocument(msg.to.id, 0, 0, 1, nil, file, msg_caption, dl_cb, nil)
-
-	end
-       -----------------------------------------------------------------------------------------------
+		end
+	       end
+        --------------------------------------------------------------------------------------------
 	if is_admin(msg.sender_user_id_, msg.chat_id_) then
           if text:match("^[!/#][Ll]eave$") or text:match("^ترک گروه$") then
             chat_leave(msg.chat_id_, bot_id)
