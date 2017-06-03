@@ -1827,7 +1827,9 @@ function tdcli_update_callback(data)
               send(msg.chat_id_, msg.id_, 1, '*Online...*', 1, 'md')
             else
               send(msg.chat_id_, msg.id_, 1, 'ربات هم اکنون آنلاین میباشد', 1, 'md')
-            end
+            else
+	       send(msg.chat_id_, msg.id_, 1, "> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
+	    end
           end
         end
         -----------------------------------------------------------------------------------------------
