@@ -1827,8 +1827,13 @@ function tdcli_update_callback(data)
               send(msg.chat_id_, msg.id_, 1, '*Online...*', 1, 'md')
             else
               send(msg.chat_id_, msg.id_, 1, 'ربات هم اکنون آنلاین میباشد', 1, 'md')
-            else
-	       send(msg.chat_id_, msg.id_, 1, "> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
+            end
+	  end
+	      if not database:get('getidstatus'..msg.chat_id_) then
+                if database:get('lang:gp:'..msg.chat_id_) then
+                  send(msg.chat_id_, msg.id_, 1, "> Your ID : "..msg.sender_user_id_.."\n> Number of messages : "..user_msgs, 1, 'md')
+                else
+                  send(msg.chat_id_, msg.id_, 1, "> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md') 
 	    end
           end
         end
