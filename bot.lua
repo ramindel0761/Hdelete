@@ -14,7 +14,7 @@ notify.init ("Telegram updates")
 chats = {}
 day = 86400
 --*********BOT ID*******--
-bot_id = 397616330 -- [[397616330]]
+bot_id = 385919496 -- [[385919496]]
 --**********************--
 --*********SUDO ID*******--
 sudo_users = {240870611} -- [[محل قرار گیری آیدی سودو ها]]
@@ -1828,11 +1828,8 @@ function tdcli_update_callback(data)
             else
               send(msg.chat_id_, msg.id_, 1, 'ربات هم اکنون آنلاین میباشد', 1, 'md')
             end
-	  end
-	  send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
-         end
-            resolve_username(ap[2],id_by_username)
-           end
+          end
+        end
         -----------------------------------------------------------------------------------------------
         if is_admin(msg.sender_user_id_, msg.chat_id_) then
           if text:match("^[!/#][Ll]eave$") or text:match("^ترک گروه$") then
