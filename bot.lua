@@ -1826,7 +1826,7 @@ function tdcli_update_callback(data)
             if database:get('lang:gp:'..msg.chat_id_) then
               send(msg.chat_id_, msg.id_, 1, '*Online...*', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, '😹̷͟ه͟͟م͟͟چ͟͟ن͟͟ا͟͟ن͟͟ ͟͟ر͟͟ا͟͟س͟͟ت͟͟ه͟͟ ͟͟م͟͟ی͟͟خ͟͟و͟͟ر͟͟ی͟͟ش͟؟😐, 'md')
+              send(msg.chat_id_, msg.id_, 1, 'همچنان راسته میخوریش؟    ', 1, 'md')
             end
           end
         end
