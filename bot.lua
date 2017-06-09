@@ -885,8 +885,7 @@ function tdcli_update_callback(data)
         if database:get('lang:gp:'..msg.chat_id_) then
           send(msg.chat_id_, msg.id_, 1, 'Operation Error ! \n\n > Please re-submit the command and then view the number of hits to get forward more!', 1, 'md')
         else
-          send(msg.chat_id_, msg.id_, 1, ̘ ̘̘'̘̘ـ̘̘פֿ̘̘̘̘ـ̘̘ط̘̘ا̘̘ ̘̘د̘̘ر̘̘ ̘̘ا̘̘ن̘̘ج̘̘ا̘̘م̘̘ ̘̘ع̘̘م̘̘ل̘̘ی̘̘ـ̘̘ـ̘̘ا̘̘ت̘̘ ̘̘!̘ \n\n > ̘ ̘̘ل̘̘ط̘̘ـ̘̘؋̘̘ـ̘̘ا̘̘ ̘̘د̘̘س̘̘ت̘̘و̘̘ر̘̘ ̘̘ر̘̘ا̘̘ ̘̘م̘̘ج̘̘د̘̘د̘̘ ̘̘ا̘̘ر̘̘س̘̘ا̘̘ل̘̘ ̘̘ک̘̘ن̘̘ی̘̘ـ̘̘ـ̘̘د̘̘ ̘̘و̘̘ ̘̘س̘̘پ̘̘س̘̘ ̘̘ع̘̘م̘̘ل̘̘ ̘̘م̘̘ش̘̘ا̘̘ه̘̘ـ̘̘ـ̘̘د̘̘ه̘̘ـ̘̘ ̘̘ت̘̘ع̘̘د̘̘ا̘̘د̘̘ ̘̘ب̘̘ا̘̘ز̘̘د̘̘ی̘̘ـ̘̘ـ̘̘د̘̘ ̘̘ر̘̘ا̘̘ ̘̘ب̘̘ا̘̘ ̘̘؋̘̘ـ̘̘و̘̘ر̘̘و̘̘ا̘̘ر̘̘د̘̘ ̘̘م̘̘ط̘̘ل̘̘ب̘̘ ̘̘د̘̘ر̘̘ی̘̘ـ̘̘ـ̘̘ا̘̘ـ̘̘؋̘̘ـ̘̘ت̘̘ ̘̘ک̘̘ن̘̘ی̘̘ـ̘̘ـ̘̘د̘̘ ̘ !', 1, 'md')
-        end
+          send(msg.chat_id_, msg.id_, 1, 'خطا در انجام عملیات !\n\n > لطفا دستور را مجدد ارسال کنید و سپس عمل مشاهده تعداد بازدید را با فوروارد مطلب دریافت کنید !', 1, 'md')        end
         database:del('bot:viewget'..msg.sender_user_id_)
       else
         if database:get('lang:gp:'..msg.chat_id_) then
