@@ -633,7 +633,7 @@ function tdcli_update_callback(data)
             chat_leave(msg.chat_id_, bot_id)
             database:del("lefting"..msg.chat_id_)
             local v = tonumber(bot_owner)
-            send(v, 0, 1," > ⭕️ ربات از گروه با مشخصات زیر خارج شد !\n 🔹نام گروه : "..chat.title_.."\n🔸آیدی گروه : "..msg.chat_id_, 1, 'html')
+            send(v, 0, 1," >  🔙 ربات از گروہ با مشـפֿـصات زیر פֿـارج شد〽️☭! \n#نام_گروه 🇮🇷: "..chat.title_.."\n#آیدی_گروه 🆔: "..msg.chat_id_, 1, 'html')
           end
         end
       end
@@ -883,16 +883,16 @@ function tdcli_update_callback(data)
     if database:get('bot:viewget'..msg.sender_user_id_) then
       if not msg.forward_info_ then
         if database:get('lang:gp:'..msg.chat_id_) then
-          send(msg.chat_id_, msg.id_, 1, 'Operation Error ! \n\n > Please re-submit the command and then view the number of hits to get forward more!', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '`Oᴘᴇʀᴀᴛɪᴏɴ اِرورEʀʀᴏʀ 🚯﹗` \n\n >` 🗯🎴Please re-submit the command and then view the number👁‍🗨 of hits to get forward more!`', 1, 'md')
         else
-          send(msg.chat_id_, msg.id_, 1, 'خطا در انجام عملیات !\n\n > لطفا دستور را مجدد ارسال کنید و سپس عمل مشاهده تعداد بازدید را با فوروارد مطلب دریافت کنید !', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '`🚷خطا در انجامERROr عملیات !`\n\n > `🗯🎴لطفا دستور را مجدد ارسال کنید و سپس عمل مشاهده تعداد بازدید 👁‍🗨را با فوروارد مطلب دریافت کنید` !', 1, 'md')
         end
         database:del('bot:viewget'..msg.sender_user_id_)
       else
         if database:get('lang:gp:'..msg.chat_id_) then
-          send(msg.chat_id_, msg.id_, 1, '> The more hits you : '..msg.views_..' seen', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '>📊 The more 👁‍🗨hits you : '..msg.views_..' seen📯', 1, 'md')
         else
-          send(msg.chat_id_, msg.id_, 1, '> میزان بازدید پست شما : '..msg.views_..' بازدید', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '>📊 میزان بازدید 👁‍🗨پست شما: '..msg.views_..'📯 بازدید', 1, 'md')
         end
         database:del('bot:viewget'..msg.sender_user_id_)
       end
@@ -1145,9 +1145,9 @@ function tdcli_update_callback(data)
           text = database:get('welcome:'..msg.chat_id_)
         else
           if database:get('lang:gp:'..msg.chat_id_) then
-            text = 'Hi {firstname} Welcome To Group 🌹'
+            text = 'нı✌ {firstname} ➳🃏 Wεʟcσмε Tσ ➳ Gяσυρ🀄️ 👥✘'
           else
-            text = 'سلام {firstname} خوش اومدی 🌹'
+            text = 'سلاܢܢ 💕{firstname}  ⚜פֿـوش اومدی 🇮🇷'
           end
         end
         local text = text:gsub('{firstname}',(result.first_name_ or ''))
@@ -1686,9 +1686,9 @@ function tdcli_update_callback(data)
           local hash = "bot:group:link"..msg.chat_id_
           database:set(hash,glink)
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, 'Group link has been saved ✅', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '`⚜Group link has been saved 🇮🇷`', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, ' لینک گروه ثبت شد ✅', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, ' `لینک گروه ثبت شد 🇮🇷`', 1, 'md')
           end
         end
       end
@@ -1824,9 +1824,9 @@ function tdcli_update_callback(data)
         if is_momod(msg.sender_user_id_, msg.chat_id_) then
           if text:match("^[!/#]ping$") or text:match("^پینگ$") then
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '*Online...*', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '*🇮🇷ᴏɴʟɪɴᴇ...*', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, 'همچنان راسته میخوریش؟    ', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '`🔰رُبات هَمچّناטּ در حال مُدیریَت گُروہ مِیباشَد 🇮🇷`', 1, 'md')
             end
           end
         end
@@ -1844,15 +1844,15 @@ function tdcli_update_callback(data)
             local hash = 'bot:momod:'..msg.chat_id_
             if database:sismember(hash, result.sender_user_id_) then
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is now a moderator', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤Usᴇʀ 🇮🇷: '..result.sender_user_id_..'`🎴is now a moderator🃏`', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' هم اکنون مدیر است !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤ڪًـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..'`🎴هم اکنون مدیر است🃏` !', 1, 'md')
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' *promoted* to moderator', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤Usᴇʀ 🇮🇷: '..result.sender_user_id_..'🃏*ᴘʀᴏᴍᴏᴛᴇᴅ* ƬƠ ᴍᴏᴅᴇʀᴀᴛᴏʀ🇮🇷', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' به مدیریت ارتقا مقام یافت !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤ڪًـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' `☈🃏به مدیریت ارتقا مقام یافت🇮🇷` !', 1, 'md')
               end
               database:sadd(hash, result.sender_user_id_)
             end
@@ -1865,16 +1865,16 @@ function tdcli_update_callback(data)
           function promote_by_username(extra, result, success)
             if result.id_ then
               if database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User :'..result.id_..' *promoted* to moderator'
+                texts = '> 🔻Usᴇʀ 🔸:'..result.id_..'🌐*ᴘʀᴏᴍᴏᴛᴇᴅ* ƬƠ ᴍᴏᴅᴇʀᴀᴛᴏʀ🃏'
               else
-                texts = '> کاربر با شناسه : '..result.id_..' به مدیریت ارتقا مقام یافت !'
+                texts = '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.id_..'⚜ `بـہ مدیریت ارتقا مقام یافت🉐!`'
               end
               database:sadd('bot:momod:'..msg.chat_id_, result.id_)
             else
               if not database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User not found'
+                texts = '>⚠️ Usᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ'
               else
-                texts = '> کاربر یافت نشد !'
+                texts = '>  ڪًـاربر یافت نشد ! ⚠️'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1885,9 +1885,9 @@ function tdcli_update_callback(data)
         if text:match("^[!/#][Pp]romote (%d+)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
           local ap = {string.match(text, "^([!/#][Pp]romote) (%d+)$")}
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' *promoted* to moderator', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..ap[2]..'🌐*ᴘʀᴏᴍᴏᴛᴇᴅ* ƬƠ ᴍᴏᴅᴇʀᴀᴛᴏʀ🃏', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' به مدیریت ارتقا مقام یافت !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..ap[2]..' ⚜ `بـہ مدیریت ارتقا مقام یافت🉐!`', 1, 'md')
           end
           database:sadd('bot:momod:'..msg.chat_id_, ap[2])
         end
@@ -1898,16 +1898,16 @@ function tdcli_update_callback(data)
             local hash = 'bot:momod:'..msg.chat_id_
             if not database:sismember(hash, result.sender_user_id_) then
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is not a moderator !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..'🚫 ɪs ɴᴏᴛ ᴀ ᴍᴏᴅᴇʀᴀᴛᴏʀ🌐﹗', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' مدیر نمیباشد !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' 🚫 مدیر نمیباشد〽️ !', 1, 'md')
               end
             else
               database:srem(hash, result.sender_user_id_)
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' was *removed* from moderator !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..' 〽️ᴡᴀs *reмoved*❌ ƒяσм ᴍᴏᴅᴇʀᴀᴛᴏʀ 🌐!', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' از مدیریت حذف شد !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' 〽️از مدیریت حذف❌ شد 🌐!', 1, 'md')
               end
             end
           end
@@ -1920,16 +1920,16 @@ function tdcli_update_callback(data)
           function demote_by_username(extra, result, success)
             if result.id_ then
               if database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User : '..result.id_..' was demoted'
+                texts = '> 🔻Usᴇʀ 🔸: '..result.id_..'〽️ ᴡᴀs ɗємσтєɗ❌'
               else
-                texts = '> کاربر با شناسه : '..result.id_..' عزل مقام شد'
+                texts = '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.id_..'〽️ عزل مقام شد❌'
               end
               database:srem(hash, result.id_)
             else
               if not database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User not found !'
+                texts = '>⚠️ Usᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ !'
               else
-                texts = '> کاربر یافت نشد !'
+                texts = '>  ڪًـاربر یافت نشد ⚠️'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1941,9 +1941,9 @@ function tdcli_update_callback(data)
           local hash = 'bot:momod:'..msg.chat_id_
           local ap = {string.match(text, "^([!/#][Dd]emote) (%d+)$")}
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' was demoted !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..ap[2]..' 〽️ᴡᴀs ɗємσтєɗ❌ !', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' عزل مقام شد !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..ap[2]..' 〽️ عزل مقام شد❌ !', 1, 'md')
           end
           database:srem(hash, ap[2])
         end
@@ -1955,15 +1955,15 @@ function tdcli_update_callback(data)
               local hash = 'bot:vipmem:'..msg.chat_id_
               if database:sismember(hash, result.sender_user_id_) then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is now a VIP member !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..' is now a VIP member !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' هم اکنون عضو ویژه است !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' هم اکنون عضو ویژه است !', 1, 'md')
                 end
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' *promoted* to VIP member !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..' *promoted* to VIP member !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' به عضو ویژه ارتقا مقام یافت !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' به عضو ویژه ارتقا مقام یافت !', 1, 'md')
                 end
                 database:sadd(hash, result.sender_user_id_)
               end
@@ -5705,7 +5705,7 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local txt = {string.match(text, "^([!/#][Pp]lan1)(-%d+)$")}
           local timeplan1 = 2592000
           database:setex("bot:charge:"..txt[2],timeplan1,true)
-          send(msg.chat_id_, msg.id_, 1, '̷پ̷̷ل̷̷ن̷̷ ̷̷1̷̷ ̷̷ب̷̷ا̷̷ ̷̷م̷̷و̷̷ف̷̷ق̷̷ی̷̷ت̷̷ ̷̷ب̷̷ر̷̷ا̷̷ی̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ '..txt[2]..'̷ ̷̷ف̷̷ع̷̷ا̷̷ل̷̷ ̷̷ش̷د\nاین گروه تا 30 روز دیگر اعتبار دارد! ( 1 ماه )', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, 'پلن 1 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه تا 30 روز دیگر اعتبار دارد! ( 1 ماه )', 1, 'md')
           database:set("bot:enable:"..txt[2],true)
         end
         -----------------------------------------------------------------------------------------------
@@ -5713,14 +5713,14 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local txt = {string.match(text, "^([!/#][Pp]lan2)(-%d+)$")}
           local timeplan2 = 7776000
           database:setex("bot:charge:"..txt[2],timeplan2,true)
-          send(msg.chat_id_, msg.id_, 1, '̷پ̷̷ل̷̷ن̷̷ ̷̷2̷̷ ̷̷ب̷̷ا̷̷ ̷̷م̷̷و̷̷ف̷̷ق̷̷ی̷̷ت̷̷ ̷̷ب̷̷ر̷̷ا̷̷ی̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ '..txt[2]..'̷ ̷̷ف̷̷ع̷̷ا̷̷ل̷̷ ̷̷ش̷د\n̷ا̷̷ی̷̷ن̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ت̷̷ا̷̷ ̷̷9̷̷0̷̷ ̷̷ر̷̷و̷̷ز̷̷ ̷̷د̷̷ی̷̷گ̷̷ر̷ اعتبار دارد! ( 3 ماه )', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, 'پلن 2 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه تا 90 روز دیگر اعتبار دارد! ( 3 ماه )', 1, 'md')
           database:set("bot:enable:"..txt[2],true)
         end
         -----------------------------------------------------------------------------------------------
         if text:match('^[!/#][Pp]lan3(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local txt = {string.match(text, "^([!/#][Pp]lan3)(-%d+)$")}
           database:set("bot:charge:"..txt[2],true)
-          send(msg.chat_id_, msg.id_, 1, '̷پ̷̷ل̷̷ن̷̷ ̷̷3̷̷ ̷̷ب̷̷ا̷̷ ̷̷م̷̷و̷̷ف̷̷ق̷̷ی̷̷ت̷̷ ̷̷ب̷̷ر̷̷ا̷̷ی̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ '..txt[2]..'̷ ̷̷ف̷̷ع̷̷ا̷̷ل̷̷ ̷̷ش̷د\n̷ا̷̷ی̷̷ن̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ب̷̷ه̷̷ ̷̷ص̷̷و̷̷ر̷ت نامحدود شارژ ̷ش̷د!', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, 'پلن 3 با موفقیت برای گروه '..txt[2]..' فعال شد\nاین گروه به صورت نامحدود شارژ شد!', 1, 'md')
           database:set("bot:enable:"..txt[2],true)
         end
         -----------------------------------------------------------------------------------------------
@@ -5729,17 +5729,17 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             local txt = {string.match(text, "^([!/#][Aa]dd)$")}
             if database:get("bot:enable:"..msg.chat_id_) then
               if not database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, ' ̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ا̷̷ز̷̷ ̷̷ق̷̷ب̷̷ل̷̷ ̷̷د̷̷ر̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷م̷̷ی̷̷ب̷̷ا̷̷ش̷̷د̷ !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, ' گروه از قبل در لیست مدیریتی ربات میباشد !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '> Tʜɪs ɢʀᴏᴜᴘ ɪs ᴀʟʀᴇᴀᴅʏ ɪɴ ʟɪsᴛ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> This group is already in list management !', 1, 'md')
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> Tʜɪs ɢʀᴏᴜᴘ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ᴛᴏ ʟɪsᴛ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> This group has been added to list management !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '> ̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ب̷̷ه̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷ا̷̷ض̷̷ا̷̷ف̷̷ه̷̷ ̷̷ش̷̷د̷ !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> گروه به لیست مدیریتی ربات اضافه شد !', 1, 'md')
               end
-            --  send(bot_owner, 0, 1, '>̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ج̷̷د̷̷ی̷̷د̷̷ی̷̷ ̷̷ب̷̷ه̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷ا̷̷ض̷̷ا̷̷ف̷̷ه̷̷ ̷̷ش̷̷د̷ !\n\n🌀 ̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷ه̷̷م̷̷ک̷̷ا̷̷ر̷̷ ̷̷ا̷̷ض̷̷ا̷̷ف̷̷ه̷̷ ̷̷ک̷̷ن̷̷ن̷̷د̷̷ه̷ :\n🔸̷آ̷̷ی̷̷د̷̷ی̷̷ ̷̷ه̷̷م̷̷ک̷̷ا̷ر : '..msg.sender_user_id_..'\n🔸̷ن̷̷ا̷̷م̷̷ ̷̷ه̷̷م̷̷ک̷̷ا̷̷ر̷ : '..result.first_name_..'\n\n🌀̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ :\n🔸 ̷آ̷̷ی̷̷د̷̷ی̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ : '..msg.chat_id_..'\n🔸̷ن̷̷ا̷̷م̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ : '..chat.title_..'\n\n🔹̷ا̷̷گ̷̷ر̷̷ ̷̷م̷̷ی̷̷خ̷̷و̷̷ا̷̷ه̷̷ی̷̷د̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ر̷̷ا̷̷ ̷̷ت̷̷ر̷̷ک̷̷ ̷̷ک̷̷ن̷̷د̷̷ ̷̷ا̷̷ز̷̷ ̷̷د̷̷س̷̷ت̷̷و̷̷ر̷̷ ̷̷ز̷̷ی̷̷ر̷̷ ̷̷ا̷̷س̷̷ت̷̷ف̷̷ا̷̷د̷̷ه̷̷ ̷̷ک̷̷ن̷̷ی̷د : \n\n🔖 leave'..msg.chat_id_..'\n\n🔸̷ا̷̷گ̷̷ر̷̷ ̷̷ق̷̷ص̷̷د̷̷ ̷̷و̷̷ا̷̷ر̷̷د̷̷ ̷̷ش̷̷د̷̷ن̷̷ ̷̷ب̷̷ه̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ر̷̷ا̷̷ ̷̷د̷̷ا̷̷ر̷̷ی̷̷د̷̷ ̷̷ا̷̷ز̷̷ ̷̷د̷̷س̷̷ت̷̷و̷̷ر̷̷ ̷̷ز̷̷ی̷̷ر̷̷ ̷̷ا̷̷س̷̷ت̷̷ف̷̷ا̷̷د̷̷ه̷̷ ̷̷ک̷̷ن̷̷ی̷̷د̷ : \n\n🔖 join'..msg.chat_id_..'\n\n🔅🔅🔅🔅🔅🔅\n\n📅̷ ̷̷ا̷̷گ̷̷ر̷̷ ̷̷ق̷̷ص̷̷د̷̷ ̷̷ت̷̷م̷̷د̷̷ی̷̷د̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ر̷̷ا̷̷ ̷̷د̷̷ا̷̷ر̷̷ی̷̷د̷̷ ̷̷ا̷̷ز̷̷ ̷̷د̷̷س̷̷ت̷̷و̷̷ر̷̷ا̷̷ت̷̷ ̷̷ز̷̷ی̷̷ر̷̷ ̷̷ا̷̷س̷̷ت̷̷ف̷̷ا̷̷د̷̷ه̷̷ ̷̷ک̷̷ن̷̷ی̷̷د̷ : \n\n⭕️̷ب̷̷ر̷̷ا̷̷ی̷̷ ̷̷ش̷̷ا̷̷ر̷̷ژ̷̷ ̷̷ب̷̷ه̷̷ ̷̷ص̷̷و̷̷ر̷̷ت̷̷ ̷̷ی̷̷ک̷̷ ̷̷م̷̷ا̷ه :\n🔖 plan1'..msg.chat_id_..'\n\n⭕️̷ب̷̷ر̷̷ا̷̷ی̷̷ ̷̷ش̷̷ا̷̷ر̷̷ژ̷̷ ̷̷ب̷̷ه̷̷ ̷̷ص̷̷و̷̷ر̷̷ت̷̷ ̷̷س̷̷ه̷̷ ̷̷م̷̷ا̷̷ه̷ :\n🔖 plan2'..msg.chat_id_..'\n\n⭕️̷ب̷̷ر̷̷ا̷̷ی̷̷ ̷̷ش̷̷ا̷̷ر̷̷ژ̷̷ ̷̷ب̷̷ه̷̷ ̷̷ص̷̷و̷̷ر̷̷ت̷̷ ̷̷ن̷̷ا̷̷م̷̷ح̷̷د̷̷و̷̷د̷ :\n🔖 plan3'..msg.chat_id_..'\n' , 1, 'html')
+            --  send(bot_owner, 0, 1, '> گروه جدیدی به لیست مدیریتی ربات اضافه شد !\n\n🌀 مشخصات همکار اضافه کننده :\n🔸آیدی همکار : '..msg.sender_user_id_..'\n🔸نام همکار : '..result.first_name_..'\n\n🌀مشخصات گروه :\n🔸 آیدی گروه : '..msg.chat_id_..'\n🔸نام گروه : '..chat.title_..'\n\n🔹اگر میخواهید ربات گروه را ترک کند از دستور زیر استفاده کنید : \n\n🔖 leave'..msg.chat_id_..'\n\n🔸اگر قصد وارد شدن به گروه را دارید از دستور زیر استفاده کنید : \n\n🔖 join'..msg.chat_id_..'\n\n🔅🔅🔅🔅🔅🔅\n\n📅 اگر قصد تمدید گروه را دارید از دستورات زیر استفاده کنید : \n\n⭕️برای شارژ به صورت یک ماه :\n🔖 plan1'..msg.chat_id_..'\n\n⭕️برای شارژ به صورت سه ماه :\n🔖 plan2'..msg.chat_id_..'\n\n⭕️برای شارژ به صورت نامحدود :\n🔖 plan3'..msg.chat_id_..'\n' , 1, 'html')
               database:set("bot:enable:"..msg.chat_id_,true)
               database:setex("bot:charge:"..msg.chat_id_,900,true)
               database:sadd('sudo:data:'..msg.sender_user_id_, msg.chat_id_)
@@ -5752,29 +5752,29 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local txt = {string.match(text, "^([!/#][Rr]em)$")}
           if not database:get("bot:enable:"..msg.chat_id_) then
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '> Gʀᴏᴜᴘ ɪs ɴᴏᴛ ɪɴ ʟɪsᴛ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ !', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '> Group is not in list management !', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, '> ̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷د̷̷ر̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷ن̷̷ی̷̷س̷ت !', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '> گروه در لیست مدیریتی ربات نیست !', 1, 'md')
             end
           else
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '> Gʀᴏᴜᴘ ʜᴀs ʙᴇᴇɴ ʀᴇᴍᴏᴠᴇᴅ ғʀᴏᴍ ʟɪsᴛ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ !', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '> Group has been removed from list management !', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, '> ̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ا̷̷ز̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ش̷̷د̷ !', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '> گروه از لیست مدیریتی ربات حذف شد !', 1, 'md')
             end
             database:del("bot:charge:"..msg.chat_id_)
             database:del("bot:enable:"..msg.chat_id_)
             database:srem('sudo:data:'..msg.sender_user_id_, msg.chat_id_)
             local v = tonumber(bot_owner)
-            send(v, 0, 1, "⭕️̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ی̷̷ ̷̷ب̷̷ا̷̷ ̷̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷ز̷̷ی̷̷ر̷̷ ̷̷ا̷̷ز̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ش̷̷د̷ !\n\n 🌀̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷ف̷̷ر̷̷د̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ک̷̷ن̷̷ن̷̷د̷̷ه̷ : \n 🔹̷آ̷̷ی̷̷د̷̷ی̷̷ ̷̷ف̷̷ر̷د : "..msg.sender_user_id_.."\n\n 🌀̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ :\n 🔸̷آ̷̷ی̷̷د̷̷ی̷̷ ̷̷گ̷̷ر̷̷و̷ه : "..msg.chat_id_.."\n 🔸̷ن̷̷ا̷̷م̷̷ ̷̷گ̷̷ر̷̷و̷ه : "..chat.title_ , 1, 'md')
+            send(v, 0, 1, "⭕️ گروهی با مشخصات زیر از لیست مدیریتی حذف شد !\n\n 🌀مشخصات فرد حذف کننده : \n 🔹آیدی فرد : "..msg.sender_user_id_.."\n\n 🌀مشخصات گروه :\n 🔸آیدی گروه : "..msg.chat_id_.."\n 🔸نام گروه : "..chat.title_ , 1, 'md')
           end
         end
         if text:match('^[Rr]em(-%d+)$') and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local gp = {string.match(text, "^([Rr]em)(-%d+)$")}
           database:del("bot:charge:"..gp[2])
           local v = tonumber(bot_owner)
-          send(msg.chat_id_, msg.id_, 1, '>̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ب̷̷ا̷̷ ̷̷ش̷̷ن̷̷ا̷̷س̷̷ه̷ '..gp[2]..' ̷ا̷̷ز̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ش̷̷د̷ !', 1, 'md')
-          send(v, 0, 1, "⭕️̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ی̷̷ ̷̷ب̷̷ا̷̷ ̷̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷ز̷̷ی̷̷ر̷̷ ̷̷ا̷̷ز̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ی̷̷ت̷̷ی̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ش̷̷د̷ !\n\n 🌀̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷ف̷̷ر̷̷د̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ک̷̷ن̷̷ن̷̷د̷̷ه̷ : \n 🔹̷آ̷̷ی̷̷د̷̷ی̷̷ ̷̷ف̷̷ر̷̷د̷ : "..msg.sender_user_id_.."\n\n 🌀̷م̷̷ش̷̷خ̷̷ص̷̷ا̷̷ت̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ :\n 🔸̷آ̷̷ی̷̷د̷̷ی̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ : "..gp[2] , 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '> گروه با شناسه '..gp[2]..' از لیست مدیریتی ربات حذف شد !', 1, 'md')
+          send(v, 0, 1, "⭕️ گروهی با مشخصات زیر از لیست مدیریتی حذف شد !\n\n 🌀مشخصات فرد حذف کننده : \n 🔹آیدی فرد : "..msg.sender_user_id_.."\n\n 🌀مشخصات گروه :\n 🔸آیدی گروه : "..gp[2] , 1, 'md')
         end
         -----------------------------------------------------------------------------------------------
         if text:match('^[!/#][Ss]erverinfo') and is_sudo(msg) then
@@ -5787,18 +5787,18 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local txt = {string.match(text, "^([!/#][Dd]ata) (%d+)$")}
           local hash =  'sudo:data:'..txt[2]
           local list = database:smembers(hash)
-          if tonumber(txt[2]) == 240870611 then
-            name = "رامین"
-          elseif tonumber(txt[2]) == 356602661 then
-            name = "پویا"
-          elseif tonumber(txt[2]) == 342409331 then
-            name = "نرگس"
-          elseif tonumber(txt[2]) == 345079252 then
-            name = "امیر"
-          elseif tonumber(txt[2]) == 282994760 then
-            name = "امیرو"
-          elseif tonumber(txt[2]) == 265511558 then
-            name = "علی"
+          if tonumber(txt[2]) == 181612899 then
+            name = "محمد"
+          elseif tonumber(txt[2]) == 192191034 then
+            name = "احسان"
+          elseif tonumber(txt[2]) == 222751735 then
+            name = "محمد رضا"
+          elseif tonumber(txt[2]) == 258220821 then
+            name = "دانیال"
+          elseif tonumber(txt[2]) == 272376346 then
+            name = "علیرضا"
+          elseif tonumber(txt[2]) == 228572542 then
+            name = "سجاد مومن"
           else
             name = "ناشناس"
             --elseif txt[2] ==
@@ -5810,12 +5810,12 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             --elseif txt[2] ==
             --name =
           end
-          local text = " >̷ ̷̷ا̷̷ط̷̷ل̷̷ا̷̷ع̷̷ا̷̷ت̷̷ ̷̷ه̷̷م̷̷ک̷̷ا̷̷ر̷ : \n\n̷ ̷̷ن̷̷ا̷̷م̷ : "..name.."\n\n̷ ̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ه̷̷ا̷̷ی̷̷ ̷̷ا̷̷ض̷̷ا̷̷ف̷̷ه̷̷ ̷̷ش̷̷د̷̷ه̷̷ ̷̷ت̷̷و̷̷س̷̷ط̷̷ ̷̷ا̷̷ی̷̷ن̷̷ ̷̷ف̷̷ر̷̷د̷ :\n\n"
+          local text = " > اطلاعات همکار : \n\n نام : "..name.."\n\n  گروه های اضافه شده توسط این فرد :\n\n"
           for k,v in pairs(list) do
             text = text..'\n'..k.." : "..v.."\n"
           end
           if #list == 0 then
-            text = ">̷ ̷̷ا̷̷ط̷̷ل̷̷ا̷̷ع̷̷ا̷̷ت̷̷ ̷̷ه̷̷م̷̷ک̷̷ا̷̷ر̷ : \n\n̷ ̷̷ن̷̷ا̷̷م̷ : "..name.." \n\n̷ ̷̷ت̷̷ا̷̷ ̷̷ب̷̷ه̷̷ ̷̷ح̷̷ا̷̷ل̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ی̷̷ ̷̷ب̷̷ه̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷ا̷̷ض̷̷ا̷̷ف̷̷ه̷̷ ̷̷ن̷̷ک̷̷ر̷̷د̷̷ه̷̷ ̷̷ا̷̷س̷̷ت̷ "
+            text = "> اطلاعات همکار : \n\n نام : "..name.." \n\n تا به حال گروهی به ربات اضافه نکرده است "
           end
           send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
         end
@@ -5824,7 +5824,7 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local txt = {string.match(text, "^([!/#][Aa]ddgp) (%d+) (-%d+)$")}
           local sudo = txt[2]
           local gp = txt[3]
-          send(msg.chat_id_, msg.id_, 1, ">̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷م̷̷و̷̷ر̷̷د̷̷ ̷̷ن̷̷ظ̷̷ر̷̷ ̷̷ب̷̷ا̷̷ ̷̷م̷̷و̷̷ف̷̷ق̷̷ی̷̷ت̷̷ ̷̷ب̷̷ه̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ه̷̷ا̷̷ی̷̷ ̷̷ه̷̷م̷̷ک̷̷ا̷̷ر̷̷ ̷̷ب̷̷ا̷̷ ̷̷ش̷̷ن̷̷ا̷̷س̷̷ه̷ : "..txt[2].." #̷ا̷̷ض̷̷ا̷̷ف̷̷ه̷̷ ̷̷ش̷د", 1, 'html')
+          send(msg.chat_id_, msg.id_, 1, "> گروه مورد نظر با موفقیت به لیست گروه های همکار با شناسه : "..txt[2].." #اضافه شد", 1, 'html')
           database:sadd('sudo:data:'..sudo, gp)
         end
         -----------------------------------------------------------------------------------------------
@@ -5832,13 +5832,13 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local txt = {string.match(text, "^([!/#][Rr]emgp) (%d+) (-%d+)$")}
           local hash = 'sudo:data:'..txt[2]
           local gp = txt[3]
-          send(msg.chat_id_, msg.id_, 1, ">̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷م̷̷و̷̷ر̷̷د̷̷ ̷̷ن̷̷ظ̷̷ر̷̷ ̷̷ب̷̷ا̷̷ ̷̷م̷̷و̷̷ف̷̷ق̷̷ی̷̷ت̷̷ ̷̷ا̷̷ز̷̷ ̷̷ل̷̷ی̷̷س̷̷ت̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ه̷̷ا̷̷ی̷̷ ̷̷ه̷̷م̷̷ک̷̷ا̷̷ر̷̷ ̷̷ب̷̷ا̷̷ ̷̷ش̷̷ن̷̷ا̷̷س̷̷ه̷ : "..txt[2].." #̷ح̷̷ذ̷̷ف̷̷ ̷̷ش̷د", 1, 'html')
+          send(msg.chat_id_, msg.id_, 1, "> گروه مورد نظر با موفقیت از لیست گروه های همکار با شناسه : "..txt[2].." #حذف شد", 1, 'html')
           database:srem(hash, gp)
         end
         -----------------------------------------------------------------------------------
         if text:match('^[!/#][Jj]oin(-%d+)') and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local txt = {string.match(text, "^([!/#][Jj]oin)(-%d+)$")}
-          send(msg.chat_id_, msg.id_, 1, '̷ب̷̷ا̷̷م̷̷و̷̷ف̷̷ق̷̷ی̷̷ت̷̷ ̷̷ش̷̷م̷̷ا̷̷ ̷̷ر̷̷ا̷̷ ̷̷ب̷̷ه̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷ '..txt[2]..' ̷ا̷̷ض̷̷ا̷̷ف̷̷ه̷̷ ̷̷ک̷̷ر̷̷د̷̷م̷ !', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, 'باموفقیت شما را به گروه '..txt[2]..' اضافه کردم !', 1, 'md')
           add_user(txt[2], msg.sender_user_id_, 20)
         end
         ------------------------------------------------------------------------------------
@@ -5846,9 +5846,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local meld = {string.match(text, "^([!/#][Mm]eld)(-%d+)$")}
           send(msg.chat_id_, msg.id_, 1, '> با موفقیت در گروه مورد نظر اعلام گردید !', 1, 'md')
           if database:get('lang:gp:'..meld[2]) then
-            send(meld[2], 0, 1, '⚠️ *Deαr Mαɴαɢer :\n\nCʀᴇᴅɪʙɪʟɪᴛʏ ᴏғ ᴛʜɪs ɢʀᴏᴜᴘ ɪs ᴏᴠᴇʀ !\n\nPʟᴇᴀsᴇ ᴠɪsɪᴛ ᴀs sᴏᴏɴ ᴀs ᴘᴏssɪʙʟᴇ ᴛᴏ ʀᴇᴄʜᴀʀɢᴇ ᴛʜᴇ ʀᴏʙᴏᴛ sᴜᴘᴘᴏʀᴛ* !', 1, 'md')
+            send(meld[2], 0, 1, '⚠️ *Dear Manager :\n\nCredibility of this group is over !\n\nPlease visit as soon as possible to recharge the robot support* !', 1, 'md')
           else
-            send(meld[2], 0, 1, '⚠️_̷ ̷̷م̷̷د̷̷ی̷̷ر̷̷ا̷̷ن̷̷ ̷̷گ̷̷ر̷̷ا̷̷م̷̷ی̷ :\n\n̷ا̷̷ع̷̷ت̷̷ب̷̷ا̷̷ر̷̷ ̷̷ا̷̷ی̷̷ن̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷ب̷̷ه̷̷ ̷̷پ̷̷ا̷̷ی̷̷ا̷̷ن̷̷ ̷̷ر̷̷س̷̷ی̷̷د̷̷ه̷̷ ̷̷ا̷̷س̷̷ت̷  !\n\n̷ل̷̷ط̷̷ف̷̷ا̷̷ ̷̷ه̷̷ر̷̷چ̷̷ه̷̷ ̷̷س̷̷ر̷̷ی̷̷ع̷̷ ̷̷ت̷̷ر̷̷ ̷̷ب̷̷ر̷̷ا̷̷ی̷̷ ̷̷ش̷̷ا̷̷ر̷̷ژ̷̷ ̷̷م̷̷ج̷̷د̷̷د̷̷ ̷̷ب̷̷ه̷̷ ̷̷پ̷̷ش̷̷ت̷̷ی̷̷ب̷̷ا̷̷ن̷̷ی̷̷ ̷̷ر̷̷ب̷̷ا̷̷ت̷̷ ̷̷م̷̷ر̷̷ا̷̷ج̷̷ع̷̷ه̷̷ ̷̷ف̷̷ر̷̷م̷̷ا̷̷ی̷̷ی̷̷د̷  !_', 1, 'md')
+            send(meld[2], 0, 1, '⚠️_ مدیران گرامی :\n\nاعتبار این گروه به پایان رسیده است !\n\nلطفا هرچه سریع تر برای شارژ مجدد به پشتیبانی ربات مراجعه فرمایید !_', 1, 'md')
           end
         end
         ----------------------------------------------------------------------------------------------
@@ -5859,9 +5859,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             if msg.chat_id_:match("^-100") then
               if tonumber(matches[2]) > 100 or tonumber(matches[2]) < 1 then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  pm = '> Pʟᴇᴀsᴇ ᴜsᴇ ᴀ ɴᴜᴍʙᴇʀ ɢʀᴇᴀᴛᴇʀ ᴛʜᴀɴ ₁ ᴀɴᴅ ʟᴇss ᴛʜᴀɴ ₁₀₀ !'
+                  pm = '> Please use a number greater than 1 and less than 100 !'
                 else
-                  pm = '>̷ ̷̷ل̷̷ط̷̷ف̷̷ا̷̷ ̷̷ا̷̷ز̷̷ ̷̷ع̷̷د̷̷د̷̷ی̷̷ ̷̷ب̷̷ز̷̷ر̷̷گ̷̷ت̷̷ر̷̷ ̷̷ا̷̷ز̷̷ ̷̷1̷̷ ̷̷و̷̷ ̷̷ک̷̷و̷̷چ̷̷ک̷̷ت̷̷ر̷̷ ̷̷ا̷̷ز̷̷ ̷̷1̷̷0̷̷0̷̷ ̷̷ا̷̷س̷̷ت̷̷ف̷̷ا̷̷د̷̷ه̷̷ ̷̷ک̷̷ن̷̷ی̷̷د̷ !'
+                  pm = '> لطفا از عددی بزرگتر از 1 و کوچکتر از 100 استفاده کنید !'
                 end
                 send(msg.chat_id_,0, 1, pm, 1, 'html')
               else
@@ -5873,17 +5873,17 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
                   limit_ = tonumber(matches[2])
                 }, delmsg, nil)
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  pm ='> *'..matches[2]..' ʀᴇᴄᴇɴᴛ ᴍᴇssᴀɢᴇ ʀᴇᴍᴏᴠᴇᴅ*!'
+                  pm ='> *'..matches[2]..' recent message removed*!'
                 else
-                  pm ='> '..matches[2]..'̷ ̷̷پ̷̷ی̷̷ا̷̷م̷̷ ̷̷ا̷̷خ̷̷ی̷̷ر̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ش̷̷د̷ !'
+                  pm ='> '..matches[2]..' پیام اخیر حذف شد !'
                 end
                 send(msg.chat_id_,0, 1, pm, 1, 'html')
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                pm ='> Tʜɪs ɪs ɴᴏᴛ ᴘᴏssɪʙʟᴇ ɪɴ ᴛʜᴇ ᴄᴏɴᴠᴇɴᴛɪᴏɴᴀʟ ɢʀᴏᴜᴘ⚠️!'
+                pm ='> This is not possible in the conventional group !'
               else
-                pm ='>⚠️̷ ̷̷د̷̷ر̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷م̷̷ع̷̷م̷̷و̷̷ل̷̷ی̷̷ ̷̷ا̷̷ی̷̷ن̷̷ ̷̷ا̷̷م̷̷ک̷̷ا̷̷ن̷̷ ̷̷و̷̷ج̷̷و̷̷د̷̷ ̷̷ن̷̷د̷̷ا̷̷ر̷̷د̷ !'
+                pm ='> در گروه معمولی این امکان وجود ندارد !'
               end
               send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
             end
@@ -5893,9 +5893,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             if msg.chat_id_:match("^-100") then
               if tonumber(matches[2]) > 100 or tonumber(matches[2]) < 1 then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  pm = '> Pʟᴇᴀsᴇ ᴜsᴇ ᴀ ɴᴜᴍʙᴇʀ ɢʀᴇᴀᴛᴇʀ ᴛʜᴀɴ ₁ ᴀɴᴅ ʟᴇss ᴛʜᴀɴ ₁₀₀ !'
+                  pm = '> Please use a number greater than 1 and less than 100 !'
                 else
-                  pm = '>̷ ̷̷ل̷̷ط̷̷ف̷̷ا̷̷ ̷̷ا̷̷ز̷̷ ̷̷ع̷̷د̷̷د̷̷ی̷̷ ̷̷ب̷̷ز̷̷ر̷̷گ̷̷ت̷̷ر̷̷ ̷̷ا̷̷ز̷̷ ̷̷1̷̷ ̷̷و̷̷ ̷̷ک̷̷و̷̷چ̷̷ک̷̷ت̷̷ر̷̷ ̷̷ا̷̷ز̷̷ ̷̷1̷̷0̷̷0̷̷ ̷̷ا̷̷س̷̷ت̷̷ف̷̷ا̷̷د̷̷ه̷̷ ̷̷ک̷̷ن̷̷ی̷̷د̷ !'
+                  pm = '> لطفا از عددی بزرگتر از 1 و کوچکتر از 100 استفاده کنید !'
                 end
                 send(msg.chat_id_,0, 1, pm, 1, 'html')
               else
@@ -5907,17 +5907,17 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
                   limit_ = tonumber(matches[2])
                 }, delmsg, nil)
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  pm ='> *'..matches[2]..' receɴт мeѕѕαɢe reмoved*!'
+                  pm ='> *'..matches[2]..' recent message removed*!'
                 else
-                  pm ='> '..matches[2]..'̷ ̷̷پ̷̷ی̷̷ا̷̷م̷̷ ̷̷ا̷̷خ̷̷ی̷̷ر̷̷ ̷̷ح̷̷ذ̷̷ف̷̷ ̷̷ش̷̷د̷ !'
+                  pm ='> '..matches[2]..' پیام اخیر حذف شد !'
                 end
                 send(msg.chat_id_,0, 1, pm, 1, 'html')
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                pm ='> Tнιѕ ιѕ ησт ρσѕѕιвℓє ιη тнє cσηνєηтισηαℓ gяσυρ⚠️'
+                pm ='> This is not possible in the conventional group !'
               else
-                pm ='>⚠️̷ ̷̷د̷̷ر̷̷ ̷̷گ̷̷ر̷̷و̷̷ه̷̷ ̷̷م̷̷ع̷̷م̷̷و̷̷ل̷̷ی̷̷ ̷̷ا̷̷ی̷̷ن̷̷ ̷̷ا̷̷م̷̷ک̷̷ا̷̷ن̷̷ ̷̷و̷̷ج̷̷و̷̷د̷̷ ̷̷ن̷̷د̷̷ا̷̷ر̷̷د̷̷ ̷!'
+                pm ='> در گروه معمولی این امکان وجود ندارد !'
               end
               send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
             end
@@ -5927,31 +5927,31 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
         if text:match("^[!/#][Mm]e$") then
           function get_me(extra,result,success)
             if is_leaderid(result.id_) then
-              ten = 'Cнιєƒ'
-              tfa = '̷م̷̷د̷̷ی̷̷ر̷̷ ̷̷ک̷ل'
+              ten = 'Chief'
+              tfa = 'مدیر کل'
             elseif is_sudoid(result.id_) then
-              ten = 'Sυɗσ'
-              tfa = '̷م̷̷د̷̷ی̷̷ر̷̷ ̷̷ر̷̷ب̷̷ا̷ت'
+              ten = 'Sudo'
+              tfa = 'مدیر ربات'
             elseif is_admin(result.id_) then
-              ten = 'Bσт A∂мιη'
-              tfa = '̷ا̷̷د̷̷م̷̷ی̷̷ن̷̷ ̷̷ر̷̷ب̷̷ا̷ت'
+              ten = 'Bot Admin'
+              tfa = 'ادمین ربات'
             elseif is_owner(result.id_, msg.chat_id_) then
-              ten = 'Owɴer'
-              tfa = '̷ص̷̷ا̷̷ح̷̷ب̷̷ ̷̷گ̷̷ر̷̷و̷ه'
+              ten = 'Owner'
+              tfa = 'صاحب گروه'
             elseif is_momod(result.id_, msg.chat_id_) then
-              ten = '*Gяσυρ A∂мιη*'
-              tfa = '̷م̷̷د̷̷ی̷̷ر̷̷ ̷̷گ̷̷ر̷̷و̷ه'
+              ten = '*Group Admin*'
+              tfa = 'مدیر گروه'
             else
-              ten = 'Meмвer'
-              tfa = '̷ک̷̷ا̷̷ر̷̷ب̷ر'
+              ten = 'Member'
+              tfa = 'کاربر'
             end
             if result.username_ then
               username = '@'..result.username_
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                username = 'Nơƭ Fơυɲɗ⚠️'
+                username = 'Not Found'
               else
-                username = '⚠️̷ی̷̷ا̷̷ف̷̷ت̷̷ ̷̷ن̷̷ش̷د'
+                username = 'یافت نشد'
               end
             end
             if result.last_name_ then
@@ -5960,9 +5960,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
               lastname = ''
             end
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '> Yσυя Nαмє : '..result.first_name_..' '..lastname..'\n> Yᴏᴜʀ Usᴇʀɴᴀᴍᴇ : '..username..'\n> Yoυr ID : '..result.id_..'\n> Yᴏᴜʀ Rᴀɴᴋ : '..ten, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> Your Name : '..result.first_name_..' '..lastname..'\n> Your Username : '..username..'\n> Your ID : '..result.id_..'\n> Your Rank : '..ten, 1, 'html')
             else
-              send(msg.chat_id_, msg.id_, 1, '>̷ ̷̷ن̷̷ا̷̷م̷̷ ̷̷ش̷̷م̷̷ا̷ : '..result.first_name_..' '..lastname..'\n>̷ ̷̷ی̷̷و̷̷ز̷̷ر̷̷ن̷̷ی̷̷م̷̷ ̷̷ش̷̷م̷̷ا̷ : '..username..'\n>̷ ̷̷ش̷̷ن̷̷ا̷̷س̷̷ه̷̷ ̷̷ش̷̷م̷̷ا̷ : '..result.id_..'\n>̷ ̷̷م̷̷ق̷̷ا̷̷م̷̷ ̷̷ش̷̷م̷̷ا̷ : '..tfa, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> نام شما : '..result.first_name_..' '..lastname..'\n> یوزرنیم شما : '..username..'\n> شناسه شما : '..result.id_..'\n> مقام شما : '..tfa, 1, 'html')
             end
           end
           getUser(msg.sender_user_id_,get_me)
@@ -5970,23 +5970,23 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
         if text:match("^اطلاعات من$") then
           function get_me(extra,result,success)
             if is_leaderid(result.id_) then
-              ten = 'Cнιeғ'
-              tfa = '̷م̷̷د̷̷ی̷̷ر̷̷ ̷̷ک̷ل'
+              ten = 'Chief'
+              tfa = 'مدیر کل'
             elseif is_sudoid(result.id_) then
-              ten = 'Sυɗσ'
-              tfa = '̷م̷̷د̷̷ی̷̷ر̷̷ ̷̷ر̷̷ب̷̷ا̷ت'
+              ten = 'Sudo'
+              tfa = 'مدیر ربات'
             elseif is_admin(result.id_) then
-              ten = 'Bσт A∂мιη'
-              tfa = '̷ا̷̷د̷̷م̷̷ی̷̷ن̷̷ ̷̷ر̷̷ب̷̷ا̷ت'
+              ten = 'Bot Admin'
+              tfa = 'ادمین ربات'
             elseif is_owner(result.id_, msg.chat_id_) then
-              ten = 'Oᴡɴᴇʀ'
-              tfa = '̷ص̷̷ا̷̷ح̷̷ب̷̷ ̷̷گ̷̷ر̷̷و̷ه'
+              ten = 'Owner'
+              tfa = 'صاحب گروه'
             elseif is_momod(result.id_, msg.chat_id_) then
-              ten = '*Gʀօʊք Aɖʍɨռ*'
-              tfa = '̷م̷̷د̷̷ی̷̷ر̷̷ ̷̷گ̷̷ر̷̷و̷ه'
+              ten = '*Group Admin*'
+              tfa = 'مدیر گروه'
             else
-              ten = 'Meмвer'
-              tfa = '̷ک̷̷ا̷̷ر̷̷ب̷ر'
+              ten = 'Member'
+              tfa = 'کاربر'
             end
             if result.username_ then
               username = '@'..result.username_
@@ -5994,13 +5994,13 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
               if database:get('lang:gp:'..msg.chat_id_) then
                 username = 'Not Found'
               else
-                username = '⚠️̷ی̷̷ا̷̷ف̷̷ت̷̷ ̷̷ن̷̷ش̷د'
+                username = 'یافت نشد'
               end
             end
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '> ᵞᵒᵘʳ ᴺᵃᵐᵉ : '..result.first_name_..'\n> ᵞᵒᵘʳ ᵁᶳᵉʳᶰᵃᵐᵉ : '..username..'\n> ᵞᵒᵘʳ ᴵᴰ : '..result.id_..'\n> Yøυя Rαиκ : '..ten, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> Your Name : '..result.first_name_..'\n> Your Username : '..username..'\n> Your ID : '..result.id_..'\n> Your Rank : '..ten, 1, 'html')
             else
-              send(msg.chat_id_, msg.id_, 1, '>̷ ̷̷ ̷̷ن̷̷ا̷̷م̷̷ ̷̷ش̷̷م̷̷ا̷ : '..result.first_name_..'\n>̷ ̷̷ی̷̷و̷̷ز̷̷ر̷̷ن̷̷ی̷̷م̷̷ ̷̷ش̷̷م̷̷ا̷ : '..username..'\n>̷ ̷̷ش̷̷ن̷̷ا̷̷س̷̷ه̷̷ ̷̷ش̷̷م̷̷ا̷ : '..result.id_..'\n>̷ ̷̷م̷̷ق̷̷ا̷̷م̷̷ ̷̷ش̷̷م̷̷ا̷ : '..tfa, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> نام شما : '..result.first_name_..'\n> یوزرنیم شما : '..username..'\n> شناسه شما : '..result.id_..'\n> مقام شما : '..tfa, 1, 'html')
             end
           end
           getUser(msg.sender_user_id_,get_me)
@@ -6011,9 +6011,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             local memb = {string.match(text, "^([!/#][Ww]hois) (.*)$")}
             function whois(extra,result,success)
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> ᴺᵃᵐᵉ :'..result.first_name_..'\n> ᵁᶳᵉʳᶰᵃᵐᵉ : @'..result.username_..'\n> ἿƉ : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> Name :'..result.first_name_..'\n> Username : @'..result.username_..'\n> ID : '..msg.sender_user_id_, 1, 'html')
               else
-                send(msg.chat_id_, msg.id_, 1, '>̷ ̷̷ن̷̷ا̷̷م̷ : '..result.first_name_..'\n> ̷ی̷̷ـ̷̷ـ̷̷و̷̷ز̷̷ر̷̷ن̷̷ی̷̷ـ̷̷ـ̷̷م̷  : @'..result.username_..'\n> ̠ش̠̠ن̠̠ا̠̠س̠̠ه̠̠ـ̠  : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> نام : '..result.first_name_..'\n> یوزرنیم : @'..result.username_..'\n> شناسه : '..msg.sender_user_id_, 1, 'html')
               end
             end
             getUser(memb[2],whois)
@@ -6022,9 +6022,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             local memb = {string.match(text, "^(اطلاعات) (.*)$")}
             function whois(extra,result,success)
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> ᴺᵃᵐᵉ :'..result.first_name_..'\n> ᵁᶳᵉʳᶰᵃᵐᵉ : @'..result.username_..'\n> ἿƉ : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> Name :'..result.first_name_..'\n> Username : @'..result.username_..'\n> ID : '..msg.sender_user_id_, 1, 'html')
               else
-                send(msg.chat_id_, msg.id_, 1, '>̷ ̷̷ن̷̷ا̷̷م̷ : '..result.first_name_..'\n> ̷ی̷̷ـ̷̷ـ̷̷و̷̷ز̷̷ر̷̷ن̷̷ی̷̷ـ̷̷ـ̷̷م̷  : @'..result.username_..'\n> ̠ش̠̠ن̠̠ا̠̠س̠̠ه̠̠ـ̠  : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> نام : '..result.first_name_..'\n> یوزرنیم : @'..result.username_..'\n> شناسه : '..msg.sender_user_id_, 1, 'html')
               end
             end
             getUser(memb[2],whois)
@@ -6036,7 +6036,7 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           if database:get('lang:gp:'..msg.chat_id_) then
             send(msg.chat_id_, msg.id_, 1, '> Plese forward your post : ', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, '> 🗯̤م̤̤ط̤̤ل̤̤ب̤̤ ̤̤خ̤̤و̤̤د̤̤ ̤̤ر̤̤ا̤̤ ̤̤ف̤̤ر̤̤و̤̤ر̤̤ا̤̤د̤̤ ̤̤ک̤̤ن̤̤ی̤د : ', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> لطفا مطلب خود را فروراد کنید : ', 1, 'md')
           end
         end
         ---------------------------------------Help Bot------------------------------------------------
