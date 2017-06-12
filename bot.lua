@@ -38,7 +38,7 @@ end
 
 function is_leaderid(user_id)
   local var = false
-  ifuser_id == tonumber(bot_owner) then
+  if user_id == tonumber(bot_owner) then
     var = true
   end
   return var
@@ -60,11 +60,11 @@ end
 function is_sudoid(user_id)
   local var = false
   for k,v in pairs(sudo_users) do
-    ifuser_id == v then
+    if user_id == v then
       var = true
     end
   end
-  ifuser_id == tonumber(bot_owner) then
+  if user_id == tonumber(bot_owner) then
     var = true
   end
   return var
@@ -73,16 +73,16 @@ end
 function is_admin(user_id)
   local var = false
   local hashsb =  'bot:admins:'
-  local admin = database:sismember(hashsb,user_id)
+  local admin = database:sismember(hashsb, user_id)
   if admin then
     var = true
   end
   for k,v in pairs(sudo_users) do
-    ifuser_id == v then
+    if user_id == v then
       var = true
     end
   end
-  ifuser_id == tonumber(bot_owner) then
+  if user_id == tonumber(bot_owner) then
     var = true
   end
   return var
@@ -91,9 +91,9 @@ end
 function is_owner(user_id, chat_id)
   local var = false
   local hash =  'bot:owners:'..chat_id
-  local owner = database:sismember(hash,user_id)
+  local owner = database:sismember(hash, user_id)
   local hashs =  'bot:admins:'
-  local admin = database:sismember(hashs,user_id)
+  local admin = database:sismember(hashs, user_id)
   if owner then
     var = true
   end
@@ -101,11 +101,11 @@ function is_owner(user_id, chat_id)
     var = true
   end
   for k,v in pairs(sudo_users) do
-    ifuser_id == v then
+    if user_id == v then
       var = true
     end
   end
-  ifuser_id == tonumber(bot_owner) then
+  if user_id == tonumber(bot_owner) then
     var = true
   end
   return var
@@ -114,11 +114,11 @@ end
 function is_momod(user_id, chat_id)
   local var = false
   local hash =  'bot:momod:'..chat_id
-  local momod = database:sismember(hash,user_id)
+  local momod = database:sismember(hash, user_id)
   local hashs =  'bot:admins:'
-  local admin = database:sismember(hashs,user_id)
+  local admin = database:sismember(hashs, user_id)
   local hashss =  'bot:owners:'..chat_id
-  local owner = database:sismember(hashss,user_id)
+  local owner = database:sismember(hashss, user_id)
   if momod then
     var = true
   end
@@ -129,11 +129,11 @@ function is_momod(user_id, chat_id)
     var = true
   end
   for k,v in pairs(sudo_users) do
-    ifuser_id == v then
+    if user_id == v then
       var = true
     end
   end
-  ifuser_id == tonumber(bot_owner) then
+  if user_id == tonumber(bot_owner) then
     var = true
   end
   return var
@@ -142,13 +142,13 @@ end
 function is_vipmem(user_id, chat_id)
   local var = false
   local hash =  'bot:momod:'..chat_id
-  local momod = database:sismember(hash,user_id)
+  local momod = database:sismember(hash, user_id)
   local hashs =  'bot:admins:'
-  local admin = database:sismember(hashs,user_id)
+  local admin = database:sismember(hashs, user_id)
   local hashss =  'bot:owners:'..chat_id
-  local owner = database:sismember(hashss,user_id)
+  local owner = database:sismember(hashss, user_id)
   local hashsss = 'bot:vipmem:'..chat_id
-  local vipmem = database:sismember(hashsss,user_id)
+  local vipmem = database:sismember(hashsss, user_id)
   if vipmem then
     var = true
   end
@@ -162,11 +162,11 @@ function is_vipmem(user_id, chat_id)
     var = true
   end
   for k,v in pairs(sudo_users) do
-    ifuser_id == v then
+    if user_id == v then
       var = true
     end
   end
-  ifuser_id == tonumber(bot_owner) then
+  if user_id == tonumber(bot_owner) then
     var = true
   end
   return var
@@ -191,7 +191,7 @@ end
 local function is_banned(user_id, chat_id)
   local var = false
   local hash = 'bot:banned:'..chat_id
-  local banned = database:sismember(hash,user_id)
+  local banned = database:sismember(hash, user_id)
   if banned then
     var = true
   end
@@ -201,7 +201,7 @@ end
 local function is_muted(user_id, chat_id)
   local var = false
   local hash = 'bot:muted:'..chat_id
-  local banned = database:sismember(hash,user_id)
+  local banned = database:sismember(hash, user_id)
   if banned then
     var = true
   end
@@ -211,7 +211,7 @@ end
 function is_gbanned(user_id)
   local var = false
   local hash = 'bot:gban:'
-  local gbanned = database:sismember(hash,user_id)
+  local gbanned = database:sismember(hash, user_id)
   if gbanned then
     var = true
   end
@@ -229,15 +229,15 @@ end
 function resolve_username(username,cb)
   tdcli_function ({
     ID = "SearchPublicChat",
-   username_ =username
+    username_ = username
   }, cb, nil)
 end
 -----------------------------------------------------------------------------------------------
-function changeChatMemberStatus(chat_id,user_id, status)
+function changeChatMemberStatus(chat_id, user_id, status)
   tdcli_function ({
     ID = "ChangeChatMemberStatus",
     chat_id_ = chat_id,
-   user_id_ =user_id,
+    user_id_ = user_id,
     status_ = {
       ID = "ChatMemberStatus" .. status
     },
@@ -256,11 +256,11 @@ function getInputFile(file)
   return infile
 end
 -----------------------------------------------------------------------------------------------
-function del_all_msgs(chat_id,user_id)
+function del_all_msgs(chat_id, user_id)
   tdcli_function ({
     ID = "DeleteMessagesFromUser",
     chat_id_ = chat_id,
-   user_id_ =user_id
+    user_id_ = user_id
   }, dl_cb, nil)
 end
 -----------------------------------------------------------------------------------------------
@@ -279,8 +279,8 @@ function getChatId(id)
   return chat
 end
 -----------------------------------------------------------------------------------------------
-function chat_leave(chat_id,user_id)
-  changeChatMemberStatus(chat_id,user_id, "Left")
+function chat_leave(chat_id, user_id)
+  changeChatMemberStatus(chat_id, user_id, "Left")
 end
 -----------------------------------------------------------------------------------------------
 function from_username(msg)
@@ -292,8 +292,8 @@ function from_username(msg)
     end
     return F
   end
-  localusername = getUser(msg.sender_user_id_,gfrom_user)
-  returnusername
+  local username = getUser(msg.sender_user_id_,gfrom_user)
+  return username
 end
 -----------------------------------------------------------------------------------------------
 function do_notify (user, msg)
@@ -301,8 +301,8 @@ function do_notify (user, msg)
   n:show ()
 end
 -----------------------------------------------------------------------------------------------
-function chat_kick(chat_id,user_id)
-  changeChatMemberStatus(chat_id,user_id, "Kicked")
+function chat_kick(chat_id, user_id)
+  changeChatMemberStatus(chat_id, user_id, "Kicked")
 end
 -----------------------------------------------------------------------------------------------
 function getParseMode(parse_mode)
@@ -326,7 +326,7 @@ function getMessage(chat_id, message_id,cb)
   }, cb, nil)
 end
 -----------------------------------------------------------------------------------------------
-function sendContact(chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, phone_number, first_name, last_name,user_id)
+function sendContact(chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, phone_number, first_name, last_name, user_id)
   tdcli_function ({
     ID = "SendMessage",
     chat_id_ = chat_id,
@@ -341,7 +341,7 @@ function sendContact(chat_id, reply_to_message_id, disable_notification, from_ba
         phone_number_ = phone_number,
         first_name_ = first_name,
         last_name_ = last_name,
-       user_id_ =user_id
+        user_id_ = user_id
       },
     },
   }, dl_cb, nil)
@@ -369,7 +369,7 @@ end
 function getUserFull(user_id,cb)
   tdcli_function ({
     ID = "GetUserFull",
-   user_id_ =user_id
+    user_id_ = user_id
   }, cb, nil)
 end
 -----------------------------------------------------------------------------------------------
@@ -453,11 +453,11 @@ function setphoto(chat_id, photo)
   }, dl_cb, nil)
 end
 -----------------------------------------------------------------------------------------------
-function add_user(chat_id,user_id, forward_limit)
+function add_user(chat_id, user_id, forward_limit)
   tdcli_function ({
     ID = "AddChatMember",
     chat_id_ = chat_id,
-   user_id_ = user_id,
+    user_id_ = user_id,
     forward_limit_ = forward_limit or 50
   }, dl_cb, nil)
 end
@@ -633,7 +633,7 @@ function tdcli_update_callback(data)
             chat_leave(msg.chat_id_, bot_id)
             database:del("lefting"..msg.chat_id_)
             local v = tonumber(bot_owner)
-            send(v, 0, 1," > ⭕️ ربات از گروه با مشخصات زیر خارج شد !\n 🔹نام گروه : "..chat.title_.."\n🔸آیدی گروه : "..msg.chat_id_, 1, 'html')
+            send(v, 0, 1," >  🔙 ربات از گروہ با مشـפֿـصات زیر פֿـارج شد〽️☭! \n#نام_گروه 🇮🇷: "..chat.title_.."\n#آیدی_گروه 🆔: "..msg.chat_id_, 1, 'html')
           end
         end
       end
@@ -883,16 +883,16 @@ function tdcli_update_callback(data)
     if database:get('bot:viewget'..msg.sender_user_id_) then
       if not msg.forward_info_ then
         if database:get('lang:gp:'..msg.chat_id_) then
-          send(msg.chat_id_, msg.id_, 1, 'Operation Error ! \n\n > Please re-submit the command and then view the number of hits to get forward more!', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '`Oᴘᴇʀᴀᴛɪᴏɴ اِرورEʀʀᴏʀ 🚯﹗` \n\n >` 🗯🎴Please re-submit the command and then view the number👁‍🗨 of hits to get forward more!`', 1, 'md')
         else
-          send(msg.chat_id_, msg.id_, 1, 'خطا در انجام عملیات !\n\n > لطفا دستور را مجدد ارسال کنید و سپس عمل مشاهده تعداد بازدید را با فوروارد مطلب دریافت کنید !', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '`🚷خطا در انجامERROr عملیات !`\n\n > `🗯🎴لطفا دستور را مجدد ارسال کنید و سپس عمل مشاهده تعداد بازدید 👁‍🗨را با فوروارد مطلب دریافت کنید` !', 1, 'md')
         end
         database:del('bot:viewget'..msg.sender_user_id_)
       else
         if database:get('lang:gp:'..msg.chat_id_) then
-          send(msg.chat_id_, msg.id_, 1, '> The more hits you : '..msg.views_..' seen', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '>📊 The more 👁‍🗨hits you : '..msg.views_..' seen📯', 1, 'md')
         else
-          send(msg.chat_id_, msg.id_, 1, '> میزان بازدید پست شما : '..msg.views_..' بازدید', 1, 'md')
+          send(msg.chat_id_, msg.id_, 1, '>📊 میزان بازدید 👁‍🗨پست شما: '..msg.views_..'📯 بازدید', 1, 'md')
         end
         database:del('bot:viewget'..msg.sender_user_id_)
       end
@@ -1145,9 +1145,9 @@ function tdcli_update_callback(data)
           text = database:get('welcome:'..msg.chat_id_)
         else
           if database:get('lang:gp:'..msg.chat_id_) then
-            text = 'Hi {firstname} Welcome To Group 🌹'
+            text = 'нı✌ {firstname} ➳🃏 Wεʟcσмε Tσ ➳ Gяσυρ🀄️ 👥✘'
           else
-            text = 'سلام {firstname} خوش اومدی 🌹'
+            text = 'سلاܢܢ 💕{firstname}  ⚜פֿـوش اومدی 🇮🇷'
           end
         end
         local text = text:gsub('{firstname}',(result.first_name_ or ''))
@@ -1686,9 +1686,9 @@ function tdcli_update_callback(data)
           local hash = "bot:group:link"..msg.chat_id_
           database:set(hash,glink)
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, 'Group link has been saved ✅', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '`⚜Group link has been saved 🇮🇷`', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, ' لینک گروه ثبت شد ✅', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, ' `لینک گروه ثبت شد 🇮🇷`', 1, 'md')
           end
         end
       end
@@ -1822,11 +1822,11 @@ function tdcli_update_callback(data)
       else
         ------------------------------------ With Pattern -------------------------------------------
         if is_momod(msg.sender_user_id_, msg.chat_id_) then
-          if text:match("^[!/#]on$") or text:match("^آنی$") then
+          if text:match("^[!/#]ping$") or text:match("^پینگ$") then
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '*Online...*', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '*🇮🇷ᴏɴʟɪɴᴇ...*', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, '😪🖕خفه تا سیکتو نزدم💦 ', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '`🔰رُبات هَمچّناטּ در حال مُدیریَت گُروہ مِیباشَد 🇮🇷`', 1, 'md')
             end
           end
         end
@@ -1844,15 +1844,15 @@ function tdcli_update_callback(data)
             local hash = 'bot:momod:'..msg.chat_id_
             if database:sismember(hash, result.sender_user_id_) then
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is now a moderator', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤Usᴇʀ 🇮🇷: '..result.sender_user_id_..'`🎴is now a moderator🃏`', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' هم اکنون مدیر است !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤ڪًـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..'`🎴هم اکنون مدیر است🃏` !', 1, 'md')
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' *promoted* to moderator', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤Usᴇʀ 🇮🇷: '..result.sender_user_id_..'🃏*ᴘʀᴏᴍᴏᴛᴇᴅ* ƬƠ ᴍᴏᴅᴇʀᴀᴛᴏʀ🇮🇷', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' به مدیریت ارتقا مقام یافت !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 👤ڪًـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' `☈🃏به مدیریت ارتقا مقام یافت🇮🇷` !', 1, 'md')
               end
               database:sadd(hash, result.sender_user_id_)
             end
@@ -1865,16 +1865,16 @@ function tdcli_update_callback(data)
           function promote_by_username(extra, result, success)
             if result.id_ then
               if database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User :'..result.id_..' *promoted* to moderator'
+                texts = '> 🔻Usᴇʀ 🔸:'..result.id_..'🌐*ᴘʀᴏᴍᴏᴛᴇᴅ* ƬƠ ᴍᴏᴅᴇʀᴀᴛᴏʀ🃏'
               else
-                texts = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' به مدیریت ارتقا مقام یافت !'
+                texts = '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.id_..'⚜ `بـہ مدیریت ارتقا مقام یافت🉐!`'
               end
               database:sadd('bot:momod:'..msg.chat_id_, result.id_)
             else
               if not database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User not found'
+                texts = '>⚠️ Usᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ'
               else
-                texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                texts = '>  ڪًـاربر یافت نشد ! ⚠️'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1885,9 +1885,9 @@ function tdcli_update_callback(data)
         if text:match("^[!/#][Pp]romote (%d+)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
           local ap = {string.match(text, "^([!/#][Pp]romote) (%d+)$")}
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' *promoted* to moderator', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..ap[2]..'🌐*ᴘʀᴏᴍᴏᴛᴇᴅ* ƬƠ ᴍᴏᴅᴇʀᴀᴛᴏʀ🃏', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' به مدیریت ارتقا مقام یافت !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..ap[2]..' ⚜ `بـہ مدیریت ارتقا مقام یافت🉐!`', 1, 'md')
           end
           database:sadd('bot:momod:'..msg.chat_id_, ap[2])
         end
@@ -1898,16 +1898,16 @@ function tdcli_update_callback(data)
             local hash = 'bot:momod:'..msg.chat_id_
             if not database:sismember(hash, result.sender_user_id_) then
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is not a moderator !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..'🚫 ɪs ɴᴏᴛ ᴀ ᴍᴏᴅᴇʀᴀᴛᴏʀ🌐﹗', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' مدیر نمیباشد !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' 🚫 مدیر نمیباشد〽️ !', 1, 'md')
               end
             else
               database:srem(hash, result.sender_user_id_)
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' was *removed* from moderator !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..' 〽️ᴡᴀs *reмoved*❌ ƒяσм ᴍᴏᴅᴇʀᴀᴛᴏʀ 🌐!', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' از مدیریت حذف شد !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' 〽️از مدیریت حذف❌ شد 🌐!', 1, 'md')
               end
             end
           end
@@ -1920,16 +1920,16 @@ function tdcli_update_callback(data)
           function demote_by_username(extra, result, success)
             if result.id_ then
               if database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User : '..result.id_..' was demoted'
+                texts = '> 🔻Usᴇʀ 🔸: '..result.id_..'〽️ ᴡᴀs ɗємσтєɗ❌'
               else
-                texts = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' عزل مقام شد'
+                texts = '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.id_..'〽️ عزل مقام شد❌'
               end
               database:srem(hash, result.id_)
             else
               if not database:get('lang:gp:'..msg.chat_id_) then
-                texts = '> User not found !'
+                texts = '>⚠️ Usᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ !'
               else
-                texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                texts = '>  ڪًـاربر یافت نشد ⚠️'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1941,9 +1941,9 @@ function tdcli_update_callback(data)
           local hash = 'bot:momod:'..msg.chat_id_
           local ap = {string.match(text, "^([!/#][Dd]emote) (%d+)$")}
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' was demoted !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..ap[2]..' 〽️ᴡᴀs ɗємσтєɗ❌ !', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' عزل مقام شد !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..ap[2]..' 〽️ عزل مقام شد❌ !', 1, 'md')
           end
           database:srem(hash, ap[2])
         end
@@ -1955,15 +1955,15 @@ function tdcli_update_callback(data)
               local hash = 'bot:vipmem:'..msg.chat_id_
               if database:sismember(hash, result.sender_user_id_) then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is now a VIP member !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..' is now a VIP member !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' هم اکنون عضو ویژه است !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' هم اکنون عضو ویژه است !', 1, 'md')
                 end
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' *promoted* to VIP member !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> 🔻Usᴇʀ 🔸: '..result.sender_user_id_..' *promoted* to VIP member !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' به عضو ویژه ارتقا مقام یافت !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '>👤ڪـاربر با شِناسِـہ 🇮🇷: '..result.sender_user_id_..' به عضو ویژه ارتقا مقام یافت !', 1, 'md')
                 end
                 database:sadd(hash, result.sender_user_id_)
               end
@@ -1978,14 +1978,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User :'..result.id_..' *promoted* to VIP member !'
                 else
-                  texts = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' به عضو ویژه ارتقا مقام یافت !'
+                  texts = '> کاربر با شناسه : '..result.id_..' به عضو ویژه ارتقا مقام یافت !'
                 end
                 database:sadd('bot:vipmem:'..msg.chat_id_, result.id_)
               else
                 if not database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User not found'
                 else
-                  texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  texts = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -1998,7 +1998,7 @@ function tdcli_update_callback(data)
             if database:get('lang:gp:'..msg.chat_id_) then
               send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' *promoted* to VIP member !', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' به عضو ویژه ارتقا مقام یافت !', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' به عضو ویژه ارتقا مقام یافت !', 1, 'md')
             end
             database:sadd('bot:vipmem:'..msg.chat_id_, ap[2])
           end
@@ -2011,14 +2011,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is not a VIP member !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' مدیر نمیباشد !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' مدیر نمیباشد !', 1, 'md')
                 end
               else
                 database:srem(hash, result.sender_user_id_)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' was *removed* from VIP member !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' از عضو ویژه حذف شد !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' از عضو ویژه حذف شد !', 1, 'md')
                 end
               end
             end
@@ -2033,14 +2033,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User : '..result.id_..' was demoted from VIP member !'
                 else
-                  texts = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' از عضو ویژه حذف شد !'
+                  texts = '> کاربر با شناسه : '..result.id_..' از عضو ویژه حذف شد !'
                 end
                 database:srem(hash, result.id_)
               else
                 if not database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User not found !'
                 else
-                  texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  texts = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, texts, 1, 'md')
@@ -2054,7 +2054,7 @@ function tdcli_update_callback(data)
             if database:get('lang:gp:'..msg.chat_id_) then
               send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' was demoted from VIP member !', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' از عضو ویژه شد !', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' از عضو ویژه شد !', 1, 'md')
             end
             database:srem(hash, ap[2])
           end
@@ -2072,9 +2072,9 @@ function tdcli_update_callback(data)
         if text:match("^[!/#][Mm]y username$") or text:match("^یوزرنیم من$") then
           function get_username(extra,result,success)
             if database:get('lang:gp:'..msg.chat_id_) then
-              text = '> 🔱Ƴσυя Uѕєяηαмє : {User}'
+              text = '> Your Username : {User}'
             else
-              text = '> یوزرنیم 🔹شما: {User}'
+              text = '> یوزرنیم شما : {User}'
             end
             local text = text:gsub('{User}',('@'..result.username_ or ''))
             send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
@@ -2099,7 +2099,7 @@ function tdcli_update_callback(data)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is already banned !', 1, 'md')
                   else
-                    send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' هم اکنون مسدود است !', 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' هم اکنون مسدود است !', 1, 'md')
                   end
                   chat_kick(result.chat_id_, result.sender_user_id_)
                 else
@@ -2107,7 +2107,7 @@ function tdcli_update_callback(data)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been banned !', 1, 'md')
                   else
-                    send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' مسدود گردید !', 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' مسدود گردید !', 1, 'md')
                   end
                   chat_kick(result.chat_id_, result.sender_user_id_)
                 end
@@ -2125,7 +2125,7 @@ function tdcli_update_callback(data)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     texts = '> User : '..result.id_..' has been banned !'
                   else
-                    texts = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' مسدود گردید !'
+                    texts = '> کاربر با شناسه : '..result.id_..' مسدود گردید !'
                   end
                   chat_kick(msg.chat_id_, result.id_)
                 end
@@ -2133,7 +2133,7 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User not found'
                 else
-                  texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  texts = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
@@ -2149,7 +2149,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been banned !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' مسدود گردید !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' مسدود گردید !', 1, 'md')
               end
             end
           end
@@ -2175,7 +2175,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> All messages from User : '..ass[2]..' has been deleted !', 1, 'html')
               else
-                send(msg.chat_id_, msg.id_, 1, '> تمامی پیام های ارسالی  👤کاربر با شناسـہ 〽️ : '..ass[2]..' حذف شد !', 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> تمامی پیام های ارسالی کاربر با شناسه : '..ass[2]..' حذف شد !', 1, 'html')
               end
             end
           end
@@ -2188,13 +2188,13 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> All messages from User : '..result.id_..' has been deleted !'
                 else
-                  text = '> تمامی پیام های ارسالی  👤کاربر با شناسـہ 〽️ : '..result.id_..' حذف شد !'
+                  text = '> تمامی پیام های ارسالی کاربر با شناسه : '..result.id_..' حذف شد !'
                 end
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> User not found !'
                 else
-                  text = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  text = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
@@ -2210,14 +2210,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is not banned !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' مسدود نیست !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' مسدود نیست !', 1, 'md')
                 end
               else
                 database:srem(hash, result.sender_user_id_)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been unbanned !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' آزاد شد !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' آزاد شد !', 1, 'md')
                 end
               end
             end
@@ -2232,21 +2232,21 @@ function tdcli_update_callback(data)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     send(msg.chat_id_, msg.id_, 1, '> User : '..result.id_..' is not banned !', 1, 'md')
                   else
-                    send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' مسدود نیست !', 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.id_..' مسدود نیست !', 1, 'md')
                   end
                 else
                   database:srem('bot:banned:'..msg.chat_id_, result.id_)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     text = '> User : '..result.id_..' has been unbanned !'
                   else
-                    text = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' آزاد شد !'
+                    text = '> کاربر با شناسه : '..result.id_..' آزاد شد !'
                   end
                 end
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> User not found !'
                 else
-                  text = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  text = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
@@ -2260,14 +2260,14 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' is not banned !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' مسدود نیست !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' مسدود نیست !', 1, 'md')
               end
             else
               database:srem('bot:banned:'..msg.chat_id_, ap[2])
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been unbanned !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' آزاد شد !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' آزاد شد !', 1, 'md')
               end
             end
           end
@@ -2281,7 +2281,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been globaly banned !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' به طور کلی مسدود سازی گردید !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' به طور کلی مسدود سازی گردید !', 1, 'md')
               end
             end
             getMessage(msg.chat_id_, msg.reply_to_message_id_,gban_by_reply)
@@ -2295,14 +2295,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> User : '..result.id_..' has been globaly banned !'
                 else
-                  text = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' به صورت کلی مسدود گردید !'
+                  text = '> کاربر با شناسه : '..result.id_..' به صورت کلی مسدود گردید !'
                 end
                 database:sadd(hash, result.id_)
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> User not found !'
                 else
-                  text = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  text = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
@@ -2316,7 +2316,7 @@ function tdcli_update_callback(data)
             if database:get('lang:gp:'..msg.chat_id_) then
               send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been globaly banned !', 1, 'md')
             else
-              send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' به صورت کلی مسدود گردید !', 1, 'md')
+              send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' به صورت کلی مسدود گردید !', 1, 'md')
             end
             database:set('bot:gban:'..ap[2],true)
             database:sadd(hash, ap[2])
@@ -2329,7 +2329,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been unbanned (Gban)!', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' آزادسازی شد !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' آزادسازی شد !', 1, 'md')
               end
               database:srem(hash, result.sender_user_id_)
             end
@@ -2344,14 +2344,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> User : '..result.id_..' has been unbanned (Gban) !'
                 else
-                  text = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' از لیست مسدودیت ربات آزاد شد !'
+                  text = '> کاربر با شناسه : '..result.id_..' از لیست مسدودیت ربات آزاد شد !'
                 end
                 database:srem(hash, result.id_)
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> User not found !'
                 else
-                  text = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  text = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
@@ -2366,7 +2366,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been unbanned !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' آزادسازی شد !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' آزادسازی شد !', 1, 'md')
               end
             end
           -----------------------------------------------------------------------------------------------
@@ -2378,14 +2378,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' is already muted !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' هم اکنون بی صدا است !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' هم اکنون بی صدا است !', 1, 'md')
                 end
               else
                 database:sadd(hash, result.sender_user_id_)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been muted !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' بی صدا گردید !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' بی صدا گردید !', 1, 'md')
                 end
               end
             end
@@ -2400,14 +2400,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User : '..result.id_..' has been muted !'
                 else
-                  texts = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' بی صدا گردید !'
+                  texts = '> کاربر با شناسه : '..result.id_..' بی صدا گردید !'
                 end
                 chat_kick(msg.chat_id_, result.id_)
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User not found !'
                 else
-                  texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  texts = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
@@ -2421,14 +2421,14 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' is already muted !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' هم اکنون بی صدا است !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' هم اکنون بی صدا است !', 1, 'md')
               end
             else
               database:sadd('bot:muted:'..msg.chat_id_, ap[2])
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been muted !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' بی صدا گردید !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' بی صدا گردید !', 1, 'md')
               end
             end
           end
@@ -2441,14 +2441,14 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' not muted !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' بی صدا نیست !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' بی صدا نیست !', 1, 'md')
                 end
               else
                 database:srem(hash, result.sender_user_id_)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been unmuted !', 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' از حالت بی صدا خارج گردید !', 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' از حالت بی صدا خارج گردید !', 1, 'md')
                 end
               end
             end
@@ -2463,21 +2463,21 @@ function tdcli_update_callback(data)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     send(msg.chat_id_, msg.id_, 1, '> User : '..result.id_..' is not muted !', 1, 'md')
                   else
-                    send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' بی صدا نیست !', 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.id_..' بی صدا نیست !', 1, 'md')
                   end
                 else
                   database:srem('bot:muted:'..msg.chat_id_, result.id_)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     text = '> User : '..result.id_..' has been unmuted !'
                   else
-                    text = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..' از حالت بی صدا خارج گردید !'
+                    text = '> کاربر با شناسه : '..result.id_..' از حالت بی صدا خارج گردید !'
                   end
                 end
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
                   text = '> User not found !'
                 else
-                  text = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  text = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
@@ -2491,14 +2491,14 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' is not muted !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' بی صدا نیست !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' بی صدا نیست !', 1, 'md')
               end
             else
               database:srem('bot:muted:'..msg.chat_id_, ap[2])
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been unmuted !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..' از حالت بی صدا خارج گردید !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' از حالت بی صدا خارج گردید !', 1, 'md')
               end
             end
           end
@@ -2540,7 +2540,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 texts = '> User not found !'
               else
-                texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                texts = '> کاربر یافت نشد !'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
@@ -2595,7 +2595,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 texts = '> User not found !'
               else
-                texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                texts = '> کاربر یافت نشد !'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
@@ -2650,7 +2650,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 texts = '> User not found !'
               else
-                texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                texts = '> کاربر یافت نشد !'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
@@ -2705,7 +2705,7 @@ function tdcli_update_callback(data)
               if database:get('lang:gp:'..msg.chat_id_) then
                 texts = '> User not found !'
               else
-                texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                texts = '> کاربر یافت نشد !'
               end
             end
             send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
@@ -3181,7 +3181,7 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, '> User : '..result.sender_user_id_..' has been kicked !', 1, 'html')
                 else
-                  send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..result.sender_user_id_..' اخراج شد !', 1, 'html')
+                  send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..result.sender_user_id_..' اخراج شد !', 1, 'html')
                 end
                 chat_kick(result.chat_id_, result.sender_user_id_)
               end
@@ -3197,7 +3197,7 @@ function tdcli_update_callback(data)
                   if database:get('lang:gp:'..msg.chat_id_) then
                     texts = '> User : '..result.id_..' has been kicked !'
                   else
-                    texts = '>  👤کاربر با شناسـہ 〽️ : '..result.id_..'🚷  اـפֿـراج گردیــد 🌐!'
+                    texts = '> کاربر با شناسه : '..result.id_..' اخراج گردید !'
                   end
                   chat_kick(msg.chat_id_, result.id_)
                 end
@@ -3205,7 +3205,7 @@ function tdcli_update_callback(data)
                 if database:get('lang:gp:'..msg.chat_id_) then
                   texts = '> User not found'
                 else
-                  texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  texts = '> کاربر یافت نشد !'
                 end
               end
               send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
@@ -3218,9 +3218,9 @@ function tdcli_update_callback(data)
             if not is_momod(ap[2], msg.chat_id_) then
               chat_kick(msg.chat_id_, ap[2])
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '>user : '..ap[2]..' has been kicked !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> User : '..ap[2]..' has been kicked !', 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, '>  👤کاربر با شناسـہ 〽️ : '..ap[2]..'🚷  اـפֿـراج گردیــد 🌐!', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> کاربر با شناسه : '..ap[2]..' اخراج گردید !', 1, 'md')
               end
             end
           end
@@ -3286,9 +3286,9 @@ function tdcli_update_callback(data)
                 add_user(msg.chat_id_, result.id_, 5)
               else
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  texts = '>user not found !'
+                  texts = '> User not found !'
                 else
-                  texts = '>  کاربر یــاـ؋ـت نشد⚠️!'
+                  texts = '> کاربر یافت نشد !'
                 end
                 send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
               end
@@ -3306,81 +3306,81 @@ function tdcli_update_callback(data)
           return ""
         else
           if text:match("^[!/#][Ii]d$") then
-            localuser_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
+            local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
             local function getproen(extra, result, success)
               if database:get('getidstatus'..msg.chat_id_) == "Photo" then
                 if result.photos_[0] then
                   if database:get('lang:gp:'..msg.chat_id_) then
-                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> ➿Yøυя ID : '..msg.sender_user_id_..'\n> 🚸Nυмвєя σƒ мєѕѕαgєѕ : '..user_msgs,msg.id_,msg.id_)
+                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> Your ID : '..msg.sender_user_id_..'\n> Number of messages : '..user_msgs,msg.id_,msg.id_)
                   else
-                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> ➿ شناسـہ شما  : '..msg.sender_user_id_..'\n> 📊 تعداد پیــام هایـ ارسالیـ شما : '..user_msgs,msg.id_,msg.id_)
+                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> شناسه شما : '..msg.sender_user_id_..'\n> تعداد پیام های ارسالی شما : '..user_msgs,msg.id_,msg.id_)
                   end
                 else
                   if database:get('lang:gp:'..msg.chat_id_) then
-                    send(msg.chat_id_, msg.id_, 1, "> Yoυ doɴ'т нαve proғιle pнoтo✳️ !\n\n> ➿Yøυя ID : "..msg.sender_user_id_.."\n> 〽️Nυмвєя σƒ мєѕѕαgєѕ  : "..user_msgs, 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, "> You don't have profile photo !\n\n> Your ID : "..msg.sender_user_id_.."\n> Number of messages  : "..user_msgs, 1, 'md')
                   else
-                    send(msg.chat_id_, msg.id_, 1, "> شما عکس پروفایل ندارید !\n\n> ➿ شناسـہ شما  : "..msg.sender_user_id_.."\n> 📊 تعداد پیــام هایـ ارسالیـ شما : "..user_msgs, 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, "> شما عکس پروفایل ندارید !\n\n> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
                   end
                 end
               end
               if database:get('getidstatus'..msg.chat_id_) == "Simple" then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, "> ➿Yøυя ID : "..msg.sender_user_id_.."\n> 🚸Nυмвєя σƒ мєѕѕαgєѕ : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> Your ID : "..msg.sender_user_id_.."\n> Number of messages : "..user_msgs, 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, "> ➿ شناسـہ شما  : "..msg.sender_user_id_.."\n> 📊 تعداد پیــام هایـ ارسالیـ شما : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
                 end
               end
               if not database:get('getidstatus'..msg.chat_id_) then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, "> ➿Yøυя ID : "..msg.sender_user_id_.."\n> 🚸Nυмвєя σƒ мєѕѕαgєѕ : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> Your ID : "..msg.sender_user_id_.."\n> Number of messages : "..user_msgs, 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, "> ➿ شناسـہ شما  : "..msg.sender_user_id_.."\n> 📊 تعداد پیــام هایـ ارسالیـ شما : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
                 end
               end
             end
             tdcli_function ({
               ID = "GetUserProfilePhotos",
-             user_id_ = msg.sender_user_id_,
+              user_id_ = msg.sender_user_id_,
               offset_ = 0,
               limit_ = 1
             }, getproen, nil)
           end
           if text:match("^آیدی$") then
-            localuser_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
+            local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
             local function getprofa(extra, result, success)
               if database:get('getidstatus'..msg.chat_id_) == "Photo" then
                 if result.photos_[0] then
                   if database:get('lang:gp:'..msg.chat_id_) then
-                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> ➿Yøυя ID : '..msg.sender_user_id_..'\n> 🚸Nυмвєя σƒ мєѕѕαgєѕ : '..user_msgs,msg.id_,msg.id_)
+                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> Your ID : '..msg.sender_user_id_..'\n> Number of messages : '..user_msgs,msg.id_,msg.id_)
                   else
-                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> ➿ شناسـہ شما  : '..msg.sender_user_id_..'\n> 📊 تعداد پیــام هایـ ارسالیـ شما : '..user_msgs,msg.id_,msg.id_)
+                    sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_,'> شناسه شما : '..msg.sender_user_id_..'\n> تعداد پیام های ارسالی شما : '..user_msgs,msg.id_,msg.id_)
                   end
                 else
                   if database:get('lang:gp:'..msg.chat_id_) then
-                    send(msg.chat_id_, msg.id_, 1, "> Yoυ doɴ'т нαve proғιle pнoтo✳️ !\n\n> ➿Yøυя ID : "..msg.sender_user_id_.."\n> 〽️Nυмвєя σƒ мєѕѕαgєѕ  : "..user_msgs, 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, "> You don't have profile photo !\n\n> Your ID : "..msg.sender_user_id_.."\n> Number of messages  : "..user_msgs, 1, 'md')
                   else
-                    send(msg.chat_id_, msg.id_, 1, "> شما عکس پروفایل ندارید !\n\n> ➿ شناسـہ شما  : "..msg.sender_user_id_.."\n> 📊 تعداد پیــام هایـ ارسالیـ شما : "..user_msgs, 1, 'md')
+                    send(msg.chat_id_, msg.id_, 1, "> شما عکس پروفایل ندارید !\n\n> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
                   end
                 end
               end
               if database:get('getidstatus'..msg.chat_id_) == "Simple" then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, "> ➿Yøυя ID : "..msg.sender_user_id_.."\n> 🚸Nυмвєя σƒ мєѕѕαgєѕ : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> Your ID : "..msg.sender_user_id_.."\n> Number of messages : "..user_msgs, 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, "> ➿ شناسـہ شما  : "..msg.sender_user_id_.."\n> 📊 تعداد پیــام هایـ ارسالیـ شما : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
                 end
               end
               if not database:get('getidstatus'..msg.chat_id_) then
                 if database:get('lang:gp:'..msg.chat_id_) then
-                  send(msg.chat_id_, msg.id_, 1, "> ➿Yøυя ID : "..msg.sender_user_id_.."\n> 🚸Nυмвєя σƒ мєѕѕαgєѕ : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> Your ID : "..msg.sender_user_id_.."\n> Number of messages : "..user_msgs, 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, "> ➿ شناسـہ شما  : "..msg.sender_user_id_.."\n> 📊 تعداد پیــام هایـ ارسالیـ شما : "..user_msgs, 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> شناسه شما : "..msg.sender_user_id_.."\n> تعداد پیام های ارسالی شما : "..user_msgs, 1, 'md')
                 end
               end
             end
             tdcli_function ({
               ID = "GetUserProfilePhotos",
-             user_id_ = msg.sender_user_id_,
+              user_id_ = msg.sender_user_id_,
               offset_ = 0,
               limit_ = 1
             }, getprofa, nil)
@@ -3563,7 +3563,7 @@ end
           end
           tdcli_function ({
             ID = "GetUserProfilePhotos",
-           user_id_ = msg.sender_user_id_,
+            user_id_ = msg.sender_user_id_,
             offset_ = 0,
             limit_ = pronumb[2]
           }, gproen, nil)
@@ -3690,7 +3690,7 @@ end
           end
           tdcli_function ({
             ID = "GetUserProfilePhotos",
-           user_id_ = msg.sender_user_id_,
+            user_id_ = msg.sender_user_id_,
             offset_ = 0,
             limit_ = pronumb[2]
           }, gprofa, nil)
@@ -4084,7 +4084,7 @@ end
           if text:match("^[!/#][Ff]ilter (.*)$") or text:match("^فیلتر (.*)$") then
             local filters = {string.match(text, "^([!/#][Ff]ilter) (.*)$")}
             local filterss = {string.match(text, "^(فیلتر) (.*)$")}
-            local Nαмe🔸 = string.sub(filters[2] or filterss[2], 1, 50)
+            local name = string.sub(filters[2] or filterss[2], 1, 50)
             local hash = 'bot:filters:'..msg.chat_id_
             database:hset(hash, name,'newword')
             if database:get('lang:gp:'..msg.chat_id_) then
@@ -4099,14 +4099,14 @@ end
           if text:match("^[!/#][Uu]nfilter (.*)$") or text:match("^حذف فیلتر (.*)$") then
             local rws = {string.match(text, "^([!/#][Uu]nfilter) (.*)$")}
             local rwss = {string.match(text, "^(حذف فیلتر) (.*)$")}
-            local Nαмe🔸 = string.sub(rws[2] or rwss[2], 1, 50)
+            local name = string.sub(rws[2] or rwss[2], 1, 50)
             local cti = msg.chat_id_
             local hash = 'bot:filters:'..msg.chat_id_
             if not database:hget(hash, name)then
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, "> Word : ["..name.."] is not in filterlist !", 1, 'md')
               else
-                send(msg.chat_id_, msg.id_, 1, "> کلمه : ["..name.."] در لیست  یــاـ؋ـت نشد 🚸 !", 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, "> کلمه : ["..name.."] در لیست یافت نشد !", 1, 'md')
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
@@ -4123,7 +4123,7 @@ end
           if text:match("^[!/#][Ff]ree (.*)$") or text:match("^مجاز (.*)$") then
             local filters = {string.match(text, "^([!/#][Ff]ree) (.*)$")}
             local filterss = {string.match(text, "^(مجاز) (.*)$")}
-            local Nαмe🔸 = string.sub(filters[2] or filterss[2], 1, 50)
+            local name = string.sub(filters[2] or filterss[2], 1, 50)
             local hash = 'bot:freewords:'..msg.chat_id_
             database:hset(hash, name,'newword')
             if database:get('lang:gp:'..msg.chat_id_) then
@@ -4138,14 +4138,14 @@ end
           if text:match("^[!/#][Uu]nfree (.*)$") or text:match("^حذف مجاز (.*)$") then
             local rws = {string.match(text, "^([!/#][Uu]nfree) (.*)$")}
             local rwss = {string.match(text, "^(حذف مجاز) (.*)$")}
-            local Nαмe🔸 = string.sub(rws[2] or rwss[2], 1, 50)
+            local name = string.sub(rws[2] or rwss[2], 1, 50)
             local cti = msg.chat_id_
             local hash = 'bot:freewords:'..msg.chat_id_
             if not database:hget(hash, name)then
               if database:get('lang:gp:'..msg.chat_id_) then
                 send(msg.chat_id_, msg.id_, 1, "> Caption : ["..name.."] is not in freelist !", 1, 'html')
               else
-                send(msg.chat_id_, msg.id_, 1, "> عنوان : ["..name.."] در لیست  یــاـ؋ـت نشد 🚸 !", 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, "> عنوان : ["..name.."] در لیست یافت نشد !", 1, 'html')
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
@@ -4170,7 +4170,7 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
         -----------------------------------------------------------------------------------------------
         if text:match("^[/!#][Ss]tats$") or text:match("^وضعیت ربات$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
           local gps = database:scard("bot:groups")
-          localusers = database:scard("bot:userss")
+          local users = database:scard("bot:userss")
           local allmgs = database:get("bot:allmsgs")
           if database:get('autoleave') == "On" then
             autoleaveen = "Active"
@@ -4208,8 +4208,8 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           database:del("bot:groups")
         end
         ------------------------------------------------------------------------------
-        if text:match("^[!/#][Nn]amegp$") or text:match("^دریافت   ناҐ 🔹 گروه$") and is_momod(msg.sender_user_id_, msg.chat_id_) then
-          send(msg.chat_id_, msg.id_, 1, '>   ناҐ 🔹 گروه : '..chat.title_, 1, 'md')
+        if text:match("^[!/#][Nn]amegp$") or text:match("^دریافت نام گروه$") and is_momod(msg.sender_user_id_, msg.chat_id_) then
+          send(msg.chat_id_, msg.id_, 1, '> نام گروه : '..chat.title_, 1, 'md')
         end
         -----------------------------------------------------------------------------------------------
         if text:match("^[!/#][Rr]esmsg$") or text:match("^شروع مجدد شمارش پیام دریافتی$") and is_sudo(msg) then
@@ -5226,7 +5226,7 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             if txt[2] == 'mutelist' or txts[2] == 'لیست افراد بی صدا' then
               database:del('bot:muted:'..msg.chat_id_)
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> Mutedusers list has been cleared !', 1, 'md')
+                send(msg.chat_id_, msg.id_, 1, '> Muted users list has been cleared !', 1, 'md')
               else
                 send(msg.chat_id_, msg.id_, 1, '> لیست افراد بی صدا پاکسازی شد !', 1, 'md')
               end
@@ -5566,14 +5566,14 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 14433047824, 'Sphero', 'TC', 228572542)
         end
         -----------------------------------------------------------------------------------------------
-        if text:match("^[!/#][Ss]etname (.*)$") or text:match("^تنظیم   ناҐ 🔹 گروه (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+        if text:match("^[!/#][Ss]etname (.*)$") or text:match("^تنظیم نام گروه (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
           local txt = {string.match(text, "^([!/#][Ss]etname) (.*)$")}
-          local txt = {string.match(text, "^(تنظیم   ناҐ 🔹 گروه) (.*)$")}
+          local txt = {string.match(text, "^(تنظیم نام گروه) (.*)$")}
           changetitle(msg.chat_id_, txt[2])
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, '> Group Nαмe🔸 has been changed !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> Group name has been changed !', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, '>   ناҐ 🔹 گروه تغییر یافت !', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> نام گروه تغییر یافت !', 1, 'md')
           end
         end
         -----------------------------------------------------------------------------------------------
@@ -5601,7 +5601,7 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           function unit(extra,result,success)
             local v = tonumber(bot_owner)
             send(msg.chat_id_, msg.id_, 1, '> این گروه به صورت نامحدود شارژ شد !', 1, 'md')
-            send(v, 0, 1,'> همکار '..result.first_name_..' با شناسه : '..msg.sender_user_id_..' گروه با   ناҐ 🔹 '..chat.title_..' را به صورت نامحدود شارژ کرد !', 1, 'md')
+            send(v, 0, 1,'> همکار '..result.first_name_..' با شناسه : '..msg.sender_user_id_..' گروه با نام '..chat.title_..' را به صورت نامحدود شارژ کرد !', 1, 'md')
             database:set("bot:charge:"..msg.chat_id_,true)
             database:set("bot:enable:"..msg.chat_id_,true)
           end
@@ -5672,7 +5672,7 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
 				             if database:get('lang:gp:'..msg.chat_id_) then
                   send(msg.chat_id_, msg.id_, 1, "> Message pinned the former was not found !", 1, 'md')
                 else
-                  send(msg.chat_id_, msg.id_, 1, "> پیام سنجاق شده سابق  یــاـ؋ـت نشد 🚸  !", 1, 'md')
+                  send(msg.chat_id_, msg.id_, 1, "> پیام سنجاق شده سابق یافت نشد  !", 1, 'md')
                 end
             end
           end
@@ -5788,19 +5788,19 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
           local hash =  'sudo:data:'..txt[2]
           local list = database:smembers(hash)
           if tonumber(txt[2]) == 181612899 then
-            Nαмe🔸 = "محمد"
+            name = "محمد"
           elseif tonumber(txt[2]) == 192191034 then
-            Nαмe🔸 = "احسان"
+            name = "احسان"
           elseif tonumber(txt[2]) == 222751735 then
-            Nαмe🔸 = "محمد رضا"
+            name = "محمد رضا"
           elseif tonumber(txt[2]) == 258220821 then
-            Nαмe🔸 = "دانیال"
+            name = "دانیال"
           elseif tonumber(txt[2]) == 272376346 then
-            Nαмe🔸 = "علیرضا"
+            name = "علیرضا"
           elseif tonumber(txt[2]) == 228572542 then
-            Nαмe🔸 = "سجاد مومن"
+            name = "سجاد مومن"
           else
-            Nαмe🔸 = "ناشناس"
+            name = "ناشناس"
             --elseif txt[2] ==
             --name =
             --elseif txt[2] ==
@@ -5810,12 +5810,12 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             --elseif txt[2] ==
             --name =
           end
-          local text = " > اطلاعات همکار : \n\n   ناҐ 🔹 : "..name.."\n\n  گروه های اضافه شده توسط این فرد :\n\n"
+          local text = " > اطلاعات همکار : \n\n نام : "..name.."\n\n  گروه های اضافه شده توسط این فرد :\n\n"
           for k,v in pairs(list) do
             text = text..'\n'..k.." : "..v.."\n"
           end
           if #list == 0 then
-            text = "> اطلاعات همکار : \n\n   ناҐ 🔹 : "..name.." \n\n تا به حال گروهی به ربات اضافه نکرده است "
+            text = "> اطلاعات همکار : \n\n نام : "..name.." \n\n تا به حال گروهی به ربات اضافه نکرده است "
           end
           send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
         end
@@ -5881,9 +5881,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                pm ='> 🚫Tнιѕ ιѕ ησт ρσѕѕιвℓє ιη тнє cσηνєηтισηαℓ gяσυρ!'
+                pm ='> This is not possible in the conventional group !'
               else
-                pm ='>🚫در گروہ معمولیـ ایــن امکان وجود ندارد ! '
+                pm ='> در گروه معمولی این امکان وجود ندارد !'
               end
               send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
             end
@@ -5915,9 +5915,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
               end
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-                pm ='> 🚫Tнιѕ ιѕ ησт ρσѕѕιвℓє ιη тнє cσηνєηтισηαℓ gяσυρ!'
+                pm ='> This is not possible in the conventional group !'
               else
-                pm ='>🚫در گروہ معمولیـ ایــن امکان وجود ندارد ! '
+                pm ='> در گروه معمولی این امکان وجود ندارد !'
               end
               send(msg.chat_id_, msg.id_, 1, pm, 1, 'html')
             end
@@ -5927,31 +5927,31 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
         if text:match("^[!/#][Mm]e$") then
           function get_me(extra,result,success)
             if is_leaderid(result.id_) then
-              ten = 'Cнιєƒ'
+              ten = 'Chief'
               tfa = 'مدیر کل'
             elseif is_sudoid(result.id_) then
-              ten = 'Sυ∂σ'
+              ten = 'Sudo'
               tfa = 'مدیر ربات'
             elseif is_admin(result.id_) then
-              ten = 'Bσт A∂мιη'
+              ten = 'Bot Admin'
               tfa = 'ادمین ربات'
             elseif is_owner(result.id_, msg.chat_id_) then
-              ten = 'Owɴer'
+              ten = 'Owner'
               tfa = 'صاحب گروه'
             elseif is_momod(result.id_, msg.chat_id_) then
-              ten = '*Gяσυρ A∂мιη*'
+              ten = '*Group Admin*'
               tfa = 'مدیر گروه'
             else
-              ten = 'Mємвєя'
+              ten = 'Member'
               tfa = 'کاربر'
             end
             if result.username_ then
-             username = '@'..result.username_
+              username = '@'..result.username_
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-               username = 'Not Found'
+                username = 'Not Found'
               else
-               username = ' یــاـ؋ـت نشد 🚸'
+                username = 'یافت نشد'
               end
             end
             if result.last_name_ then
@@ -5960,9 +5960,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
               lastname = ''
             end
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '> Your Nαмe🔸 : '..result.first_name_..' '..lastname..'\n> 🔱Ƴσυя Uѕєяηαмє : '..username..'\n> ➿Yøυя ID : '..result.id_..'\n> Your Rank : '..ten, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> Your Name : '..result.first_name_..' '..lastname..'\n> Your Username : '..username..'\n> Your ID : '..result.id_..'\n> Your Rank : '..ten, 1, 'html')
             else
-              send(msg.chat_id_, msg.id_, 1, '>   ناҐ 🔹 شما : '..result.first_name_..' '..lastname..'\n> یوزرنیم 🔹شما: '..username..'\n> ➿ شناسـہ شما  : '..result.id_..'\n> مقام شما : '..tfa, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> نام شما : '..result.first_name_..' '..lastname..'\n> یوزرنیم شما : '..username..'\n> شناسه شما : '..result.id_..'\n> مقام شما : '..tfa, 1, 'html')
             end
           end
           getUser(msg.sender_user_id_,get_me)
@@ -5989,18 +5989,18 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
               tfa = 'کاربر'
             end
             if result.username_ then
-             username = '@'..result.username_
+              username = '@'..result.username_
             else
               if database:get('lang:gp:'..msg.chat_id_) then
-               username = 'Not Found'
+                username = 'Not Found'
               else
-               username = ' یــاـ؋ـت نشد 🚸'
+                username = 'یافت نشد'
               end
             end
             if database:get('lang:gp:'..msg.chat_id_) then
-              send(msg.chat_id_, msg.id_, 1, '> Your Nαмe🔸 : '..result.first_name_..'\n> 🔱Ƴσυя Uѕєяηαмє : '..username..'\n> ➿Yøυя ID : '..result.id_..'\n> Your Rank : '..ten, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> Your Name : '..result.first_name_..'\n> Your Username : '..username..'\n> Your ID : '..result.id_..'\n> Your Rank : '..ten, 1, 'html')
             else
-              send(msg.chat_id_, msg.id_, 1, '>   ناҐ 🔹 شما : '..result.first_name_..'\n> یوزرنیم 🔹شما: '..username..'\n> ➿ شناسـہ شما  : '..result.id_..'\n> مقام شما : '..tfa, 1, 'html')
+              send(msg.chat_id_, msg.id_, 1, '> نام شما : '..result.first_name_..'\n> یوزرنیم شما : '..username..'\n> شناسه شما : '..result.id_..'\n> مقام شما : '..tfa, 1, 'html')
             end
           end
           getUser(msg.sender_user_id_,get_me)
@@ -6011,9 +6011,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             local memb = {string.match(text, "^([!/#][Ww]hois) (.*)$")}
             function whois(extra,result,success)
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> Nαмe🔸 :'..result.first_name_..'\n>username : @'..result.username_..'\n> ID : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> Name :'..result.first_name_..'\n> Username : @'..result.username_..'\n> ID : '..msg.sender_user_id_, 1, 'html')
               else
-                send(msg.chat_id_, msg.id_, 1, '>   ناҐ 🔹 : '..result.first_name_..'\n> یوزرنیم : @'..result.username_..'\n> شناسه : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> نام : '..result.first_name_..'\n> یوزرنیم : @'..result.username_..'\n> شناسه : '..msg.sender_user_id_, 1, 'html')
               end
             end
             getUser(memb[2],whois)
@@ -6022,9 +6022,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
             local memb = {string.match(text, "^(اطلاعات) (.*)$")}
             function whois(extra,result,success)
               if database:get('lang:gp:'..msg.chat_id_) then
-                send(msg.chat_id_, msg.id_, 1, '> Nαмe🔸 :'..result.first_name_..'\n>username : @'..result.username_..'\n> ID : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> Name :'..result.first_name_..'\n> Username : @'..result.username_..'\n> ID : '..msg.sender_user_id_, 1, 'html')
               else
-                send(msg.chat_id_, msg.id_, 1, '>   ناҐ 🔹 : '..result.first_name_..'\n> یوزرنیم : @'..result.username_..'\n> شناسه : '..msg.sender_user_id_, 1, 'html')
+                send(msg.chat_id_, msg.id_, 1, '> نام : '..result.first_name_..'\n> یوزرنیم : @'..result.username_..'\n> شناسه : '..msg.sender_user_id_, 1, 'html')
               end
             end
             getUser(memb[2],whois)
@@ -6034,9 +6034,9 @@ if text:match("^[!/#][Bb]roadcast (.*)$") and is_admin(msg.sender_user_id_, msg.
         if text:match("^[!/#][Gg]view$") or text:match("^میزان بازدید$") then
           database:set('bot:viewget'..msg.sender_user_id_,true)
           if database:get('lang:gp:'..msg.chat_id_) then
-            send(msg.chat_id_, msg.id_, 1, '> ƤƖєѕє fσяωαяɗ уσυя ρσѕт : ', 1, 'md')
+            send(msg.chat_id_, msg.id_, 1, '> Plese forward your post : ', 1, 'md')
           else
-            send(msg.chat_id_, msg.id_, 1, '>  لطـ؋ـا مطلب פֿـود را ؋ـروراد کنیــد : ', 1,  'md')
+            send(msg.chat_id_, msg.id_, 1, '> لطفا مطلب خود را فروراد کنید : ', 1, 'md')
           end
         end
         ---------------------------------------Help Bot------------------------------------------------
